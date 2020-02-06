@@ -1,0 +1,21 @@
+{
+  "name": "@keeex/eslint-config",
+  "version": "0.1.0",
+  "description": "Common eslint configuration",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "ssh2@dev-machine.keeex:keeex/tools/eslint-config"
+  },
+  "author": "KeeeX SAS",
+  "contributors": [
+    {
+      "name": "Gabriel Paul \"Cley Faye\" Risterucci",
+      "email": "gabriel@keeex.net"
+    }
+  ],
+  "license": "SEE LICENSE IN LICENSE.js",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}
