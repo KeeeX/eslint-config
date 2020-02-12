@@ -5,6 +5,27 @@ const {
   maxStatements,
 } = require("./common");
 
+/**
+ * Allow one letter lowercase and one letter prefixed with _
+ */
+const allowedIdentifiersGen = function *() {
+  for (const prefix of [
+    "",
+    "_",
+  ]) {
+    for (let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); ++i) {
+      yield `${prefix}${String.fromCharCode(i)}`;
+    }
+  }
+  for (const exceptionName of [
+    "id",
+    "db",
+    "Op",
+  ]) {
+    yield exceptionName;
+  }
+};
+
 module.exports = {
   extendsBase: ["eslint:recommended"],
   rules: {
@@ -197,10 +218,7 @@ module.exports = {
       {
         "min": 3,
         "max": 30,
-        "exceptions": [
-          "i",
-          "x",
-        ],
+        "exceptions": [...allowedIdentifiersGen()],
       },
     ],
     "implicit-arrow-linebreak": ["error"],
