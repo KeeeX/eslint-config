@@ -1,6 +1,6 @@
 {
   "name": "@keeex/eslint-config",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Common eslint configuration",
   "main": "src/index.js",
   "repository": {
