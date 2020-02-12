@@ -2,6 +2,7 @@ const cfgBase = require("./config/base");
 const cfgJSX = require("./config/jsx");
 const cfgReactNative = require("./config/reactnative");
 const cfgTypescript = require("./config/typescript");
+const cfgPromise = require("./config/promise");
 
 const defaultConfigBase = {
   env: {
@@ -149,7 +150,6 @@ const addParserOptions = (
   presetParserOptions,
   presetConfig,
 ) => {
-  console.log("ppo=", presetParserOptions);
   const newParserOptions = applyConfig(presetParserOptions, presetConfig);
   if (!newParserOptions) {
     return;
@@ -209,6 +209,7 @@ const setParser = (
  */
 const presets = {
   "base": cfgBase,
+  "promise": cfgPromise,
   "jsx": cfgJSX,
   "reactnative": cfgReactNative,
   "typescript": cfgTypescript,
@@ -268,6 +269,9 @@ module.exports = (
   const config = eslintConfig || {};
   if (config.base === undefined) {
     config.base = true;
+  }
+  if (config.promise === undefined) {
+    config.promise = true;
   }
   mergeAllPresets(result, config);
   return result;

@@ -15,6 +15,7 @@ const eslintConfig = require("@keeex/eslint-config");
 module.exports = eslintConfig(
   {
     base: true,
+    promise: true,
     jsx: true,
     reactnative: true,
     typescript: "./tsconfig.json",
@@ -62,6 +63,9 @@ module.exports = {
 When specifying a base configuration, top-level properties will override these defaults, and automatic rules will in turn inject themselves in top-level.
 This mean that if you specify an `overrides` top-level property in the second argument of eslintConfig(), the default `overrides` value will not be used, but if a later rule (for typescript for example) have to populate `overrides` it will extend whatever the current value is.
 
+### Promises
+Some extra rules for promises can be used by setting `promise` to true (enabled by default).
+
 ### TypeScript
 If `typescript` is set to true, only basic typescript rules are enforced.
 Instead, it is advised to provide the path to the typescript configuration file (typically `tsconfig.json`), in which case rules that requires typing informations are enabled.
@@ -80,3 +84,4 @@ Depend on `eslint`.
 If typescript is enabled, `@typescript-eslint/eslint-plugin`, `@typescript-eslint/parser` must be installed.
 If React/JSX is enabled, `eslint-plugin-react` must be installed.
 If React Native is enabled, `eslint-plugin-react-native` must be installed.
+Promise support requires `eslint-plugin-promise`.
