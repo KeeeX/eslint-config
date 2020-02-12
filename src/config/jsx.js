@@ -1,15 +1,17 @@
 const {jsxIndent} = require("./common");
 
 module.exports = {
+  settings: (presetConfig) => {
+    const version = typeof presetConfig === "string"
+      ? presetConfig
+      : "detect";
+    return {"react": {version}};
+  },
   extendsBase: ["plugin:react/recommended"],
   rules: {
     "react/button-has-type": ["error"],
     "react/default-props-match-prop-types": ["warn"],
-    "react/destructuring-assignment": [
-      "warn",
-      "always",
-      {"ignoreClassFields": true},
-    ],
+    "react/destructuring-assignment": ["off"],
     "react/display-name": [
       "warn",
       {"ignoreTranspilerName": true},
@@ -45,12 +47,12 @@ module.exports = {
     "react/require-default-props": ["warn"],
     "react/self-closing-comp": ["warn"],
     "react/sort-comp": ["warn"],
-    "react/static-property-placement": ["error"],
+    "react/static-property-placement": ["off"],
     "react/style-prop-object": ["error"],
     "react/void-dom-elements-no-children": ["error"],
     "react/jsx-boolean-value": ["error"],
     "react/jsx-closing-bracket-location": ["warn"],
-    "react/jsx-closing-tag-location": ["warn"],
+    "react/jsx-closing-tag-location": ["off"],
     "react/jsx-curly-newline": ["warn"],
     "react/jsx-curly-spacing": ["error"],
     "react/jsx-equals-spacing": ["error"],
