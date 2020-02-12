@@ -2,7 +2,6 @@ const cfgBase = require("./config/base");
 const cfgJSX = require("./config/jsx");
 const cfgReactNative = require("./config/reactnative");
 const cfgTypescript = require("./config/typescript");
-const cfgTypescriptTypes = require("./config/typescript_types");
 
 const defaultConfigBase = {
   env: {
@@ -24,16 +23,53 @@ const defaultConfigBase = {
   ],
 };
 
+/**
+ * Get an override config section
+ */
+const getOverride = (
+  config,
+  overrideList,
+) => {
+  if (config.overrides === undefined) {
+    config.overrides = [];
+  }
+  const overrideListJSON = JSON.stringify(overrideList);
+  const existingEntry = config.overrides.find(
+    (entry) => {
+      const entryFilesAsJson = JSON.stringify(entry.files);
+      return entryFilesAsJson === overrideListJSON;
+    },
+  );
+  if (!existingEntry) {
+    const result = {files: [...overrideList]};
+    config.overrides.push(result);
+    return result;
+  }
+  return existingEntry;
+};
+
+/**
+ * Apply a preset configuration to a preset object
+ */
+const applyConfig = (source, config) => typeof source === "function"
+  ? source(config)
+  : source;
+
 /** Add a plugin to the plugins list */
 const addPlugins = (
   config,
-  newPlugins,
+  presetPlugins,
+  presetConfig,
 ) => {
-  if (!config.plugins) {
-    config.plugins = [...newPlugins];
+  const newPlugins = applyConfig(presetPlugins, presetConfig);
+  if (!newPlugins) {
     return;
   }
-  newPlugins.forEach((newPlugin) => {
+  if (!config.plugins) {
+    config.plugins = [...presetPlugins];
+    return;
+  }
+  presetPlugins.forEach((newPlugin) => {
     if (config.plugins.includes(newPlugin)) {
       return;
     }
@@ -41,42 +77,62 @@ const addPlugins = (
   });
 };
 
-/** Add an entry to the extends list */
+/**
+ * Add an entry to the extends list
+ */
 const addExtends = (
   config,
-  newExtends,
+  presetExtends,
+  presetConfig,
 ) => {
+  const newExtends = applyConfig(presetExtends, presetConfig);
+  if (!newExtends) {
+    return;
+  }
   if (!config.extends) {
     config.extends = [...newExtends];
     return;
   }
-  newExtends.forEach((newExtend) => {
-    if (config.extends.includes(newExtend)) {
+  presetExtends.forEach((finalExtend) => {
+    if (config.extends.includes(finalExtend)) {
       return;
     }
-    config.extends.push(newExtend);
+    config.extends.push(finalExtend);
   });
 };
 
+/**
+ * Add an env to the envs list
+ */
 const addEnvs = (
   config,
-  envs,
+  presetEnvs,
+  presetConfig,
 ) => {
+  const newEnvs = applyConfig(presetEnvs, presetConfig);
+  if (!newEnvs) {
+    return;
+  }
   if (!config.env) {
-    config.env = {...envs};
+    config.env = {...newEnvs};
     return;
   }
   config.env = {
     ...config.env,
-    ...envs,
+    ...newEnvs,
   };
 };
 
 /** Add rules to a config */
 const addRules = (
   config,
-  newRules,
+  presetRules,
+  presetConfig,
 ) => {
+  const newRules = applyConfig(presetRules, presetConfig);
+  if (!newRules) {
+    return;
+  }
   if (!config.rules) {
     config.rules = {...newRules};
     return;
@@ -90,98 +146,115 @@ const addRules = (
 /** Add parser options */
 const addParserOptions = (
   config,
-  options,
+  presetParserOptions,
+  presetConfig,
 ) => {
+  console.log("ppo=", presetParserOptions);
+  const newParserOptions = applyConfig(presetParserOptions, presetConfig);
+  if (!newParserOptions) {
+    return;
+  }
   if (!config.parserOptions) {
-    config.parserOptions = {...options};
+    config.parserOptions = {...newParserOptions};
     return;
   }
   config.parserOptions = {
     ...config.parserOptions,
-    ...options,
+    ...newParserOptions,
   };
 };
 
+/**
+ * Add settings entries
+ */
 const addSettings = (
   config,
-  section,
-  settings,
+  presetSettings,
+  presetConfig,
 ) => {
+  const newSettings = typeof presetSettings === "function"
+    ? presetSettings(presetConfig)
+    : presetSettings;
+  if (!newSettings) {
+    return;
+  }
   if (!config.settings) {
-    config.settings = {[section]: {...settings}};
-    return;
+    config.settings = {};
   }
-  if (!config.settings[section]) {
-    config.settings[section] = {...settings};
-    return;
-  }
-  config.settings[section] = {
-    ...config.settings[section],
-    ...settings,
-  };
+  Object.keys(newSettings).forEach((sectionName) => {
+    config.settings[sectionName] = {
+      ...(config.settings[sectionName] || {}),
+      ...newSettings[sectionName],
+    };
+  });
 };
 
-/** Merge basic configuration into eslint config */
-const mergeBase = (
+/**
+ * Change the parser
+ */
+const setParser = (
   config,
-  baseOptions,
+  presetParser,
+  presetConfig,
 ) => {
-  if (baseOptions === false) {
+  const newParser = applyConfig(presetParser, presetConfig);
+  if (!newParser) {
     return;
   }
-  addExtends(config, cfgBase.extendsBase);
-  addRules(config, cfgBase.rules);
+  config.parser = newParser;
 };
 
-const mergeJSX = (
-  config,
-  jsxOptions,
-) => {
-  if (!jsxOptions) {
-    return;
-  }
-  const version = typeof jsxOptions === "string"
-    ? jsxOptions
-    : "detect";
-  addSettings(
-    config,
-    "react",
-    {version},
-  );
-  addExtends(config, cfgJSX.extendsBase);
-  addRules(config, cfgJSX.rules);
+/**
+ * List of available presets
+ */
+const presets = {
+  "base": cfgBase,
+  "jsx": cfgJSX,
+  "reactnative": cfgReactNative,
+  "typescript": cfgTypescript,
 };
 
-const mergeReactNative = (
+/**
+ * Merge entries from a preset
+ */
+const mergePreset = (
   config,
-  reactNativeOptions,
+  presetDef,
+  presetConfig,
 ) => {
-  if (!reactNativeOptions) {
-    return;
+  setParser(config, presetDef.parser, presetConfig);
+  addParserOptions(config, presetDef.parserOptions, presetConfig);
+  addSettings(config, presetDef.settings, presetConfig);
+  addEnvs(config, presetDef.env, presetConfig);
+  addPlugins(config, presetDef.plugins, presetConfig);
+  addExtends(config, presetDef.extendsBase, presetConfig);
+  addRules(config, presetDef.rules, presetConfig);
+  if (presetDef.overrides) {
+    presetDef.overrides.forEach((presetOverride) => {
+      const overrideConfig = getOverride(config, presetOverride.files);
+      mergePreset(overrideConfig, presetOverride, presetConfig);
+    });
   }
-  addPlugins(config, cfgReactNative.plugins);
-  addEnvs(config, cfgReactNative.env);
-  addRules(config, cfgJSX.rules);
 };
 
-const mergeTypescript = (
+/**
+ * Merge all presets
+ */
+const mergeAllPresets = (
   config,
-  typescriptOptions,
+  options,
 ) => {
-  if (!typescriptOptions) {
-    return;
-  }
-  const projectFile = typeof typescriptOptions === "string"
-    ? typescriptOptions
-    : null;
-  config.parser = cfgTypescript.parser;
-  addExtends(config, cfgTypescript.extendsBase);
-  addRules(config, cfgTypescript.rules);
-  if (projectFile) {
-    addParserOptions(config, {project: projectFile});
-    addExtends(config, cfgTypescriptTypes.extendsBase);
-    addRules(config, cfgTypescriptTypes.rules);
-  }
+  Object.keys(presets).forEach((presetName) => {
+    const presetConfig = options[presetName];
+    if (!presetConfig) {
+      return;
+    }
+    mergePreset(
+      config,
+      presets[presetName],
+      presetConfig,
+    );
+  });
 };
 
 module.exports = (
@@ -193,9 +266,6 @@ module.exports = (
     ...(baseConfig || {}),
   };
   const config = eslintConfig || {};
-  mergeBase(result, config.base);
-  mergeJSX(result, config.jsx);
-  mergeReactNative(result, config.reactnative);
-  mergeTypescript(result, config.typescript);
+  mergeAllPresets(result, config);
   return result;
 };
