@@ -1,3 +1,4 @@
+// This file is merged into typescript.js on use
 module.exports = {
   extendsBase:
     ["plugin:@typescript-eslint/recommended-requiring-type-checking"],
