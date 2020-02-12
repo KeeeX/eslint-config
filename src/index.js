@@ -266,6 +266,9 @@ module.exports = (
     ...(baseConfig || {}),
   };
   const config = eslintConfig || {};
+  if (config.base === undefined) {
+    config.base = true;
+  }
   mergeAllPresets(result, config);
   return result;
 };
