@@ -13,10 +13,15 @@ const allowedIdentifiersGen = function *() {
     "",
     "_",
   ]) {
-    for (let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); ++i) {
+    for (
+      let i = "a".charCodeAt(0);
+      i <= "z".charCodeAt(0);
+      ++i
+    ) {
       yield `${prefix}${String.fromCharCode(i)}`;
     }
   }
+
   for (const exceptionName of [
     "id",
     "db",
@@ -50,11 +55,15 @@ module.exports = {
       "warn",
       {"requireStringLiterals": false},
     ],
+    "nonblock-statement-body-position": ["error"],
     "accessor-pairs": ["error"],
     "array-callback-return": ["warn"],
     "class-methods-use-this": ["warn"],
     "complexity": ["warn"],
-    "curly": ["error"],
+    "curly": [
+      "error",
+      "multi-line",
+    ],
     "default-param-last": ["error"],
     "dot-location": [
       "error",
