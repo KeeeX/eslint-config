@@ -21,6 +21,7 @@ const allowedIdentifiersGen = function *() {
     "id",
     "db",
     "Op",
+    "_L",
   ]) {
     yield exceptionName;
   }
