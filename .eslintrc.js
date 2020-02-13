@@ -1,3 +1,3 @@
 const eslintConfig = require(".");
 
-module.exports = eslintConfig();
+module.exports = eslintConfig({promise: false});
