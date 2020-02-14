@@ -90,7 +90,7 @@ const addExtends = (
     config.extends = [...newExtends];
     return;
   }
-  presetExtends.forEach((finalExtend) => {
+  newExtends.forEach((finalExtend) => {
     if (config.extends.includes(finalExtend)) return;
 
     config.extends.push(finalExtend);
