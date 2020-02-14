@@ -51,7 +51,10 @@ module.exports = {
     "react/style-prop-object": ["error"],
     "react/void-dom-elements-no-children": ["error"],
     "react/jsx-boolean-value": ["error"],
-    "react/jsx-closing-bracket-location": ["warn"],
+    "react/jsx-closing-bracket-location": [
+      "warn",
+      "line-aligned",
+    ],
     "react/jsx-closing-tag-location": ["off"],
     "react/jsx-curly-newline": ["warn"],
     "react/jsx-curly-spacing": ["error"],
