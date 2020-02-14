@@ -149,15 +149,12 @@ module.exports = {
       ],
       parser: "@typescript-eslint/parser",
       parserOptions: (presetOptions) => {
-        console.log("PO=", presetOptions);
         const projectFile = typeof presetOptions === "string"
           ? presetOptions
           : null;
         if (projectFile) {
-          console.log("OK");
           return {project: projectFile};
         }
-        console.log("PROUT");
         return null;
       },
       extendsBase: (presetOptions) => {

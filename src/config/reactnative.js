@@ -11,11 +11,7 @@ module.exports = {
     "react-native/no-color-literals": ["warn"],
     "react-native/no-raw-text": [
       "error",
-      {
-        "skip": [
-          "Localize",
-        ],
-      },
+      {"skip": ["Localize"]},
     ],
     "react-native/no-single-element-style-arrays": ["warn"],
   },

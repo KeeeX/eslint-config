@@ -31,9 +31,8 @@ const getOverride = (
   config,
   overrideList,
 ) => {
-  if (config.overrides === undefined) {
-    config.overrides = [];
-  }
+  if (config.overrides === undefined) config.overrides = [];
+
   const overrideListJSON = JSON.stringify(overrideList);
   const existingEntry = config.overrides.find(
     (entry) => {
@@ -63,17 +62,15 @@ const addPlugins = (
   presetConfig,
 ) => {
   const newPlugins = applyConfig(presetPlugins, presetConfig);
-  if (!newPlugins) {
-    return;
-  }
+  if (!newPlugins) return;
+
   if (!config.plugins) {
     config.plugins = [...presetPlugins];
     return;
   }
   presetPlugins.forEach((newPlugin) => {
-    if (config.plugins.includes(newPlugin)) {
-      return;
-    }
+    if (config.plugins.includes(newPlugin)) return;
+
     config.plugins.push(newPlugin);
   });
 };
@@ -87,17 +84,15 @@ const addExtends = (
   presetConfig,
 ) => {
   const newExtends = applyConfig(presetExtends, presetConfig);
-  if (!newExtends) {
-    return;
-  }
+  if (!newExtends) return;
+
   if (!config.extends) {
     config.extends = [...newExtends];
     return;
   }
   presetExtends.forEach((finalExtend) => {
-    if (config.extends.includes(finalExtend)) {
-      return;
-    }
+    if (config.extends.includes(finalExtend)) return;
+
     config.extends.push(finalExtend);
   });
 };
@@ -111,9 +106,8 @@ const addEnvs = (
   presetConfig,
 ) => {
   const newEnvs = applyConfig(presetEnvs, presetConfig);
-  if (!newEnvs) {
-    return;
-  }
+  if (!newEnvs) return;
+
   if (!config.env) {
     config.env = {...newEnvs};
     return;
@@ -131,9 +125,8 @@ const addRules = (
   presetConfig,
 ) => {
   const newRules = applyConfig(presetRules, presetConfig);
-  if (!newRules) {
-    return;
-  }
+  if (!newRules) return;
+
   if (!config.rules) {
     config.rules = {...newRules};
     return;
@@ -151,9 +144,8 @@ const addParserOptions = (
   presetConfig,
 ) => {
   const newParserOptions = applyConfig(presetParserOptions, presetConfig);
-  if (!newParserOptions) {
-    return;
-  }
+  if (!newParserOptions) return;
+
   if (!config.parserOptions) {
     config.parserOptions = {...newParserOptions};
     return;
@@ -175,12 +167,10 @@ const addSettings = (
   const newSettings = typeof presetSettings === "function"
     ? presetSettings(presetConfig)
     : presetSettings;
-  if (!newSettings) {
-    return;
-  }
-  if (!config.settings) {
-    config.settings = {};
-  }
+  if (!newSettings) return;
+
+  if (!config.settings) config.settings = {};
+
   Object.keys(newSettings).forEach((sectionName) => {
     config.settings[sectionName] = {
       ...(config.settings[sectionName] || {}),
@@ -198,9 +188,8 @@ const setParser = (
   presetConfig,
 ) => {
   const newParser = applyConfig(presetParser, presetConfig);
-  if (!newParser) {
-    return;
-  }
+  if (!newParser) return;
+
   config.parser = newParser;
 };
 
@@ -247,9 +236,8 @@ const mergeAllPresets = (
 ) => {
   Object.keys(presets).forEach((presetName) => {
     const presetConfig = options[presetName];
-    if (!presetConfig) {
-      return;
-    }
+    if (!presetConfig) return;
+
     mergePreset(
       config,
       presets[presetName],
@@ -267,12 +255,10 @@ module.exports = (
     ...(baseConfig || {}),
   };
   const config = eslintConfig || {};
-  if (config.base === undefined) {
-    config.base = true;
-  }
-  if (config.promise === undefined) {
-    config.promise = true;
-  }
+  if (config.base === undefined) config.base = true;
+
+  if (config.promise === undefined) config.promise = true;
+
   mergeAllPresets(result, config);
   return result;
 };
