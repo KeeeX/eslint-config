@@ -58,7 +58,10 @@ module.exports = {
     "nonblock-statement-body-position": ["error"],
     "accessor-pairs": ["error"],
     "array-callback-return": ["warn"],
-    "class-methods-use-this": ["warn"],
+    "class-methods-use-this": [
+      "warn",
+      {exceptMethods: ["render"]},
+    ],
     "complexity": ["warn"],
     "curly": [
       "error",
