@@ -250,7 +250,11 @@ module.exports = {
     "key-spacing": ["error"],
     "keyword-spacing": ["error"],
     "linebreak-style": ["error"],
-    "lines-between-class-members": ["error"],
+    "lines-between-class-members": [
+      "error",
+      "always",
+      {exceptAfterSingleLine: true},
+    ],
     "max-depth": [
       "error",
       maxBlockDepth,
