@@ -23,10 +23,10 @@ const allowedIdentifiersGen = function *() {
   }
 
   for (const exceptionName of [
-    "id",
-    "db",
-    "Op",
-    "_L",
+    "id", // Common identifier
+    "db", // database
+    "Op", // constants from sequelize
+    "up", // sequelize migrations, also a word
   ]) {
     yield exceptionName;
   }
