@@ -261,7 +261,12 @@ module.exports = {
     ],
     "max-len": [
       "error",
-      {"ignoreUrls": true},
+      {
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true,
+      },
     ],
     "max-lines": [
       "error",
