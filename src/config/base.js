@@ -354,7 +354,10 @@ module.exports = {
     "arrow-body-style": ["error"],
     "arrow-parens": ["error"],
     "arrow-spacing": ["error"],
-    "generator-star-spacing": ["error"],
+    "generator-star-spacing": [
+      "error",
+      "after",
+    ],
     "no-duplicate-imports": ["error"],
     "no-useless-computed-key": ["error"],
     "no-useless-constructor": ["error"],
