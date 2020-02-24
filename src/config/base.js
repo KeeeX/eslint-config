@@ -352,7 +352,10 @@ module.exports = {
     "template-tag-spacing": ["error"],
     "unicode-bom": ["error"],
     "arrow-body-style": ["error"],
-    "arrow-parens": ["error"],
+    "arrow-parens": [
+      "error",
+      "as-needed",
+    ],
     "arrow-spacing": ["error"],
     "generator-star-spacing": [
       "error",
