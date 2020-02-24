@@ -171,7 +171,7 @@ module.exports = {
     "no-undef-init": ["error"],
     "no-unused-vars": [
       "warn",
-      {"varsIgnorePattern": "^_.*"},
+      {"argsIgnorePattern": "^_.*"},
     ],
     "no-use-before-define": ["error"],
     "callback-return": ["warn"],
