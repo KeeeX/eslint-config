@@ -1,7 +1,7 @@
 const {jsxIndent} = require("./common");
 
 module.exports = {
-  settings: (presetConfig) => {
+  settings: presetConfig => {
     const version = typeof presetConfig === "string"
       ? presetConfig
       : "detect";

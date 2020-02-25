@@ -7,7 +7,7 @@ const {
 /**
  * Check if types-based rules can be used
  */
-const useTypes = (presetOptions) => typeof presetOptions === "string";
+const useTypes = presetOptions => typeof presetOptions === "string";
 
 const rulesBase = {
   "@typescript-eslint/array-type": [
@@ -148,7 +148,7 @@ module.exports = {
         "*.tsx",
       ],
       parser: "@typescript-eslint/parser",
-      parserOptions: (presetOptions) => {
+      parserOptions: presetOptions => {
         const projectFile = typeof presetOptions === "string"
           ? presetOptions
           : null;
@@ -157,7 +157,7 @@ module.exports = {
         }
         return null;
       },
-      extendsBase: (presetOptions) => {
+      extendsBase: presetOptions => {
         const typescriptBase = [
           "plugin:@typescript-eslint/eslint-recommended",
           "plugin:@typescript-eslint/recommended",
@@ -171,7 +171,7 @@ module.exports = {
         }
         return typescriptBase;
       },
-      rules: (presetOptions) => {
+      rules: presetOptions => {
         if (useTypes(presetOptions)) {
           return {
             ...rulesBase,

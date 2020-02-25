@@ -35,7 +35,7 @@ const getOverride = (
 
   const overrideListJSON = JSON.stringify(overrideList);
   const existingEntry = config.overrides.find(
-    (entry) => {
+    entry => {
       const entryFilesAsJson = JSON.stringify(entry.files);
       return entryFilesAsJson === overrideListJSON;
     },
@@ -68,7 +68,7 @@ const addPlugins = (
     config.plugins = [...presetPlugins];
     return;
   }
-  presetPlugins.forEach((newPlugin) => {
+  presetPlugins.forEach(newPlugin => {
     if (config.plugins.includes(newPlugin)) return;
 
     config.plugins.push(newPlugin);
@@ -90,7 +90,7 @@ const addExtends = (
     config.extends = [...newExtends];
     return;
   }
-  newExtends.forEach((finalExtend) => {
+  newExtends.forEach(finalExtend => {
     if (config.extends.includes(finalExtend)) return;
 
     config.extends.push(finalExtend);
@@ -171,7 +171,7 @@ const addSettings = (
 
   if (!config.settings) config.settings = {};
 
-  Object.keys(newSettings).forEach((sectionName) => {
+  Object.keys(newSettings).forEach(sectionName => {
     config.settings[sectionName] = {
       ...(config.settings[sectionName] || {}),
       ...newSettings[sectionName],
@@ -220,7 +220,7 @@ const mergePreset = (
   addExtends(config, presetDef.extendsBase, presetConfig);
   addRules(config, presetDef.rules, presetConfig);
   if (presetDef.overrides) {
-    presetDef.overrides.forEach((presetOverride) => {
+    presetDef.overrides.forEach(presetOverride => {
       const overrideConfig = getOverride(config, presetOverride.files);
       mergePreset(overrideConfig, presetOverride, presetConfig);
     });
@@ -234,7 +234,7 @@ const mergeAllPresets = (
   config,
   options,
 ) => {
-  Object.keys(presets).forEach((presetName) => {
+  Object.keys(presets).forEach(presetName => {
     const presetConfig = options[presetName];
     if (!presetConfig) return;
 
