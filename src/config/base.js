@@ -157,18 +157,12 @@ module.exports = {
     "no-process-exit": ["error"],
     "array-bracket-newline": [
       "error",
-      {
-        "multiline": true,
-        "minItems": 2,
-      },
+      {"multiline": true},
     ],
     "array-bracket-spacing": ["error"],
     "array-element-newline": [
       "error",
-      {
-        "multiline": true,
-        "minItems": 2,
-      },
+      {"multiline": true},
     ],
     "block-spacing": [
       "error",
