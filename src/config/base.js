@@ -144,7 +144,13 @@ module.exports = {
       {exceptAfterSingleLine: true},
     ],
     "max-depth": ["error", maxBlockDepth],
-    "max-len": ["error", {"ignoreUrls": true}],
+    "max-len": [
+      "error",
+      {
+        "ignoreComments": true,
+        "ignoreUrls": true,
+      },
+    ],
     "max-lines": [
       "error",
       {
