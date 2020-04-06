@@ -13,15 +13,6 @@ const defaultConfigBase = {
     ecmaVersion: 2018,
     sourceType: "module",
   },
-  overrides: [
-    {
-      files: [
-        "webres/**/*.js",
-        "webres/**/*.ts",
-      ],
-      env: {browser: true},
-    },
-  ],
 };
 
 /**
