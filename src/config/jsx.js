@@ -36,6 +36,21 @@ module.exports = {
     "react/no-redundant-should-component-update": ["error"],
     "react/no-this-in-sfc": ["error"],
     "react/no-typos": ["error"],
+    "react/no-unescaped-entities": [
+      "error",
+      {
+        forbid: [
+          {
+            char: ">",
+            alternatives: ["&gt;"],
+          },
+          {
+            char: "}",
+            alternatives: ["&#125;"],
+          },
+        ],
+      },
+    ],
     "react/no-unsafe": [
       "error",
       {"checkAliases": true},
