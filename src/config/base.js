@@ -50,7 +50,13 @@ module.exports = {
     "no-labels": ["error"],
     "no-lone-blocks": ["warn"],
     "no-loop-func": ["error"],
-    "no-magic-numbers": ["error", {"ignore": [0, 1, -1]}],
+    "no-magic-numbers": [
+      "error",
+      {
+        "ignore": [0, 1, -1],
+        "ignoreArrayIndexes": true,
+      },
+    ],
     "no-multi-spaces": ["error"],
     "no-multi-str": ["error"],
     "no-new-func": ["error"],
@@ -147,12 +153,14 @@ module.exports = {
     "max-len": [
       "error",
       {
+        "code": 100,
         "ignoreComments": true,
         "ignoreUrls": true,
+        "ignoreStrings": true,
       },
     ],
     "max-lines": [
-      "error",
+      "warning",
       {
         "max": 1000,
         "skipBlankLines": true,
