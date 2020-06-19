@@ -19,9 +19,9 @@ const rulesBase = {
   ],
   "brace-style": "off",
   "@typescript-eslint/brace-style": ["error"],
-  "@typescript-eslint/class-name-casing": [
+  "@typescript-eslint/naming-convention": [
     "error",
-    {"allowUnderscorePrefix": true},
+    {"leadingUnderscore": "allow"},
   ],
   "comma-spacing": "off",
   "@typescript-eslint/comma-spacing": ["error"],
@@ -46,13 +46,6 @@ const rulesBase = {
   "@typescript-eslint/indent": [
     "error",
     indentDepth,
-  ],
-  "@typescript-eslint/member-naming": [
-    "error",
-    {
-      "private": "^_",
-      "protected": "^__",
-    },
   ],
   "@typescript-eslint/member-ordering": ["error"],
   "no-array-constructor": "off",
@@ -108,7 +101,7 @@ const rulesBase = {
     },
   ],
   "@typescript-eslint/no-unnecessary-boolean-literal-compare": ["error"],
-  "@typescript-eslint/no-untyped-public-signature": ["error"],
+  "@typescript-eslint/explicit-module-boundary-types": ["error"],
   "no-unused-expressions": "off",
   "@typescript-eslint/no-unused-expressions": [
     "error",
