@@ -160,7 +160,7 @@ module.exports = {
       },
     ],
     "max-lines": [
-      "warning",
+      "warn",
       {
         "max": 1000,
         "skipBlankLines": true,
