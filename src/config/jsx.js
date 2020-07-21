@@ -91,7 +91,7 @@ module.exports = {
     ],
     "react/jsx-max-props-per-line": [
       "warn",
-      {"multiline": true},
+      {"when": "multiline"},
     ],
     "react/jsx-no-bind": ["warn"],
     "react/jsx-no-script-url": ["error"],
