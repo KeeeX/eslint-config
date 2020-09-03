@@ -47,14 +47,14 @@ const rulesBase = {
     "error",
     indentDepth,
   ],
-  "@typescript-eslint/member-ordering": ["error"],
+  "@typescript-eslint/member-ordering": ["warn"],
   "no-array-constructor": "off",
   "@typescript-eslint/no-array-constructor": ["warn"],
   "@typescript-eslint/no-dupe-class-members": ["error"],
   "@typescript-eslint/no-dynamic-delete": ["error"],
   "no-empty-function": "off",
   "@typescript-eslint/no-empty-function": [
-    "error",
+    "warn",
     {
       "allow": [
         "arrowFunctions",
@@ -64,7 +64,7 @@ const rulesBase = {
     },
   ],
   "@typescript-eslint/no-empty-interface": [
-    "error",
+    "warn",
     {"allowSingleExtends": true},
   ],
   "@typescript-eslint/no-explicit-any": ["error"],
@@ -86,6 +86,8 @@ const rulesBase = {
         1,
         -1,
       ],
+      "ignoreDefaultValues": true,
+      "ignoreArrayIndexes": true,
     },
   ],
   "@typescript-eslint/no-non-null-asserted-optional-chain": ["error"],
@@ -112,11 +114,11 @@ const rulesBase = {
   ],
   "no-unused-vars": "off",
   "@typescript-eslint/no-unused-vars": [
-    "error",
+    "warn",
     {"varsIgnorePattern": "^_.*"},
   ],
   "no-useless-constructor": "off",
-  "@typescript-eslint/no-useless-constructor": ["error"],
+  "@typescript-eslint/no-useless-constructor": ["warn"],
   "@typescript-eslint/prefer-as-const": ["error"],
   "@typescript-eslint/prefer-for-of": ["error"],
   "@typescript-eslint/prefer-optional-chain": ["warn"],

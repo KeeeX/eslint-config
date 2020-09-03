@@ -3,7 +3,7 @@ module.exports = {
   extendsBase:
     ["plugin:@typescript-eslint/recommended-requiring-type-checking"],
   rules: {
-    "@typescript-eslint/naming-convention": ["error"],
+    "@typescript-eslint/naming-convention": ["warn"],
     "@typescript-eslint/no-floating-promises": ["error"],
     "no-implied-eval": "off",
     "@typescript-eslint/no-implied-eval": ["error"],

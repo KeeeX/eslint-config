@@ -55,7 +55,7 @@ module.exports = {
       "error",
       {"checkAliases": true},
     ],
-    "react/no-unused-prop-types": ["error"],
+    "react/no-unused-prop-types": ["warn"],
     "react/no-unused-state": ["warn"],
     "react/no-will-update-set-state": ["error"],
     "react/prefer-es6-class": ["warn"],
@@ -99,7 +99,7 @@ module.exports = {
     "react/jsx-pascal-case": ["error"],
     "react/jsx-props-no-multi-spaces": ["error"],
     "react/jsx-tag-spacing": [
-      "error",
+      "warn",
       {"beforeClosing": "never"},
     ],
   },
