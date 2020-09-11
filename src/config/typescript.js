@@ -90,6 +90,8 @@ const rulesBase = {
       "ignoreArrayIndexes": true,
     },
   ],
+  "no-shadow": "off",
+  "@typescript-eslint/no-shadow": ["warn"],
   "@typescript-eslint/no-non-null-asserted-optional-chain": ["error"],
   "@typescript-eslint/no-parameter-properties": ["error"],
   "@typescript-eslint/no-require-imports": ["error"],
