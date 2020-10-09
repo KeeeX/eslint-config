@@ -3,6 +3,9 @@
   "description": "Common eslint configuration",
   "version": "1.0.4",
   "main": "src/index.js",
+  "files": [
+    "src/**/*.js"
+  ],
   "repository": {
     "type": "git",
     "url": "ssh2@dev-machine.keeex:keeex/tools/eslint-config"
