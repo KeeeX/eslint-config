@@ -19,10 +19,7 @@ const rulesBase = {
   ],
   "brace-style": "off",
   "@typescript-eslint/brace-style": ["error"],
-  "@typescript-eslint/naming-convention": [
-    "error",
-    {"leadingUnderscore": "allow"},
-  ],
+  "@typescript-eslint/naming-convention": ["error"],
   "comma-spacing": "off",
   "@typescript-eslint/comma-spacing": ["error"],
   "@typescript-eslint/consistent-type-assertions": [
@@ -105,7 +102,6 @@ const rulesBase = {
     },
   ],
   "@typescript-eslint/no-unnecessary-boolean-literal-compare": ["error"],
-  "@typescript-eslint/explicit-module-boundary-types": ["error"],
   "no-unused-expressions": "off",
   "@typescript-eslint/no-unused-expressions": [
     "error",
