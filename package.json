@@ -19,6 +19,6 @@
   ],
   "license": "SEE LICENSE IN LICENSE.js",
   "devDependencies": {
-    "eslint": "^7.6.0"
+    "eslint": "^7.11.0"
   }
 }
