@@ -132,7 +132,6 @@ const rulesBase = {
   "@typescript-eslint/unified-signatures": ["error"],
 };
 
-
 module.exports = {
   overrides: [
     {
@@ -176,4 +175,3 @@ module.exports = {
     },
   ],
 };
-
