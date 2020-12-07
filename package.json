@@ -8,7 +8,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "ssh2@dev-machine.keeex:keeex/tools/eslint-config"
+    "url": "https://github.com/KeeeX/eslint-config.git"
   },
   "author": "KeeeX SAS",
   "contributors": [
@@ -22,7 +22,6 @@
     "eslint": "^7.15.0"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org",
     "access": "public"
   }
 }
