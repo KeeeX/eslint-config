@@ -183,7 +183,7 @@ module.exports = {
     "no-lonely-if": ["warn"],
     "no-mixed-operators": ["warn"],
     "no-multi-assign": ["error"],
-    "no-multiple-empty-lines": ["error"],
+    "no-multiple-empty-lines": ["error", {max: 1, maxBOF: 0, maxEOF: 0}],
     "no-negated-condition": ["warn"],
     "no-nested-ternary": ["error"],
     "no-new-object": ["error"],
