@@ -1,4 +1,3 @@
-/* @licence
 Copyright 2020 KeeeX SAS
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -18,23 +17,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
-
-module.exports = {
-  plugins: [
-    "react",
-    "react-native",
-  ],
-  env: {"react-native/react-native": true},
-  rules: {
-    "react-native/no-unused-styles": ["warn"],
-    "react-native/split-platform-components": ["warn"],
-    "react-native/no-inline-styles": ["warn"],
-    "react-native/no-color-literals": ["warn"],
-    "react-native/no-raw-text": [
-      "error",
-      {"skip": ["Localize"]},
-    ],
-    "react-native/no-single-element-style-arrays": ["warn"],
-  },
-};
