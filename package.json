@@ -20,6 +20,9 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^7.15.0"
-  }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   }
 }
