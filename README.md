@@ -110,4 +110,3 @@ Promise support requires `eslint-plugin-promise`.
 
 These dependencies are not hard-set in `package.json` because not all projects
 will require them.
-
