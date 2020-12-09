@@ -230,7 +230,14 @@ module.exports = {
     "semi-spacing": ["error"],
     "semi-style": ["error"],
     "space-before-blocks": ["error"],
-    "space-before-function-paren": ["error", "never"],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "always",
+      },
+    ],
     "space-in-parens": ["error"],
     "space-infix-ops": ["error"],
     "space-unary-ops": [

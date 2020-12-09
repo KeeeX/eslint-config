@@ -149,7 +149,11 @@ const rulesBase = {
   "space-before-function-paren": "off",
   "@typescript-eslint/space-before-function-paren": [
     "error",
-    "never",
+    {
+      "anonymous": "never",
+      "named": "never",
+      "asyncArrow": "always",
+    },
   ],
   "@typescript-eslint/unified-signatures": ["error"],
 };
