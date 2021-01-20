@@ -22,6 +22,7 @@ SOFTWARE.
 
 const cfgBase = require("./config/base");
 const cfgJSX = require("./config/jsx");
+const cfgReactHooks = require("./config/reacthooks");
 const cfgReactNative = require("./config/reactnative");
 const cfgTypescript = require("./config/typescript");
 const cfgPromise = require("./config/promise");
@@ -213,6 +214,7 @@ const presets = {
   "base": cfgBase,
   "promise": cfgPromise,
   "jsx": cfgJSX,
+  "reacthooks": cfgReactHooks,
   "reactnative": cfgReactNative,
   "typescript": cfgTypescript,
 };
