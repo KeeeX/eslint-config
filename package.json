@@ -21,6 +21,22 @@
   "devDependencies": {
     "eslint": "^7.15.0"
   },
+  "peerDependencies": {
+    "eslint": "7.x",
+    "@typescript-eslint/eslint-plugin": "4.x",
+    "@typescript-eslint/parser": "4.x",
+    "eslint-plugin-react": "7.x",
+    "eslint-plugin-promise": "4.x",
+    "eslint-plugin-react-native": "3.x"
+  },
+  "peerDependenciesMeta": {
+    "eslint": {"optional":false},
+    "@typescript-eslint/eslint-plugin": {"optional":true},
+    "@typescript-eslint/parser": {"optional":true},
+    "eslint-plugin-react": {"optional":true},
+    "eslint-plugin-promise": {"optional":true},
+    "eslint-plugin-react-native": {"optional":true}
+  },
   "publishConfig": {
     "access": "public"
   }

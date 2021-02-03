@@ -112,6 +112,3 @@ If React/JSX is enabled, `eslint-plugin-react` must be installed.
 If React Hooks is enabled, `eslint-plugin-react-hooks` must be installed.
 If React Native is enabled, `eslint-plugin-react-native` must be installed.
 Promise support requires `eslint-plugin-promise`.
-
-These dependencies are not hard-set in `package.json` because not all projects
-will require them.
