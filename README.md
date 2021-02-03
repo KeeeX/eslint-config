@@ -20,6 +20,7 @@ module.exports = eslintConfig(
     base: true,
     promise: true,
     jsx: true,
+    reacthooks: true,
     reactnative: true,
     typescript: "./tsconfig.json",
   },
@@ -33,8 +34,8 @@ module.exports = eslintConfig(
 ```
 
 The first argument is the configurations to pull-in. `base` is the generic
-JavaScript options, `jsx` add rules for React and JSX, `typescript` add rules
-for TypeScript.
+JavaScript options, `jsx` add rules for React and JSX, `reacthook` add rules for
+React hooks and `typescript` add rules for TypeScript.
 For TypeScript, you can specify the name of your TypeScript configuration file,
 in which case more rules will be enabled.
 
@@ -95,6 +96,9 @@ It is also possible to pass a string indicating the expected React version.
 If not specified, will set to "detect" and use the version installed in the
 project.
 
+### React Hooks
+To enable some more rules for React Hooks, set `reacthooks` to true,
+
 ### React Native
 To enable some more rules for React Native, set `reactnative` to true.
 
@@ -105,8 +109,6 @@ Depend on `eslint`.
 If typescript is enabled, `@typescript-eslint/eslint-plugin`,
 `@typescript-eslint/parser` must be installed.
 If React/JSX is enabled, `eslint-plugin-react` must be installed.
+If React Hooks is enabled, `eslint-plugin-react-hooks` must be installed.
 If React Native is enabled, `eslint-plugin-react-native` must be installed.
 Promise support requires `eslint-plugin-promise`.
-
-These dependencies are not hard-set in `package.json` because not all projects
-will require them.
