@@ -28,7 +28,8 @@
     "eslint-plugin-react": "7.x",
     "eslint-plugin-promise": "4.x",
     "eslint-plugin-react-native": "3.x",
-    "eslint-plugin-react-hooks": "4.x"
+    "eslint-plugin-react-hooks": "4.x",
+    "eslint-plugin-mocha": "8.x"
   },
   "peerDependenciesMeta": {
     "eslint": {
@@ -50,6 +51,9 @@
       "optional": true
     },
     "eslint-plugin-react-hooks": {
+      "optional": true
+    },
+    "eslint-plugin-mocha": {
       "optional": true
     }
   },
