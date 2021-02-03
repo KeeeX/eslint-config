@@ -27,7 +27,8 @@
     "@typescript-eslint/parser": "4.x",
     "eslint-plugin-react": "7.x",
     "eslint-plugin-promise": "4.x",
-    "eslint-plugin-react-native": "3.x"
+    "eslint-plugin-react-native": "3.x",
+    "eslint-plugin-react-hooks": "4.x"
   },
   "peerDependenciesMeta": {
     "eslint": {"optional":false},
@@ -35,7 +36,8 @@
     "@typescript-eslint/parser": {"optional":true},
     "eslint-plugin-react": {"optional":true},
     "eslint-plugin-promise": {"optional":true},
-    "eslint-plugin-react-native": {"optional":true}
+    "eslint-plugin-react-native": {"optional":true},
+    "eslint-plugin-react-hooks": {"optional":true}
   },
   "publishConfig": {
     "access": "public"
