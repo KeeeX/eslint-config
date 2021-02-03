@@ -26,6 +26,7 @@ const cfgReactHooks = require("./config/reacthooks");
 const cfgReactNative = require("./config/reactnative");
 const cfgTypescript = require("./config/typescript");
 const cfgPromise = require("./config/promise");
+const cfgMocha = require("./config/mocha");
 
 const defaultConfigBase = {
   env: {
@@ -217,7 +218,19 @@ const presets = {
   "reacthooks": cfgReactHooks,
   "reactnative": cfgReactNative,
   "typescript": cfgTypescript,
+  "mocha": cfgMocha,
 };
+
+// Forced order is needed because some rules override previous rules
+const presetsOrder = [
+  "base",
+  "promise",
+  "jsx",
+  "reactnative",
+  "reacthooks",
+  "typescript",
+  "mocha",
+];
 
 /**
  * Merge entries from a preset
@@ -226,6 +239,7 @@ const mergePreset = (
   config,
   presetDef,
   presetConfig,
+  allOptions,
 ) => {
   setParser(config, presetDef.parser, presetConfig);
   addParserOptions(config, presetDef.parserOptions, presetConfig);
@@ -235,9 +249,12 @@ const mergePreset = (
   addExtends(config, presetDef.extendsBase, presetConfig);
   addRules(config, presetDef.rules, presetConfig);
   if (presetDef.overrides) {
-    presetDef.overrides.forEach(presetOverride => {
+    const actualOverrides = (typeof presetDef.overrides === "function")
+      ? presetDef.overrides(presetConfig, allOptions)
+      : presetDef.overrides;
+    actualOverrides.forEach(presetOverride => {
       const overrideConfig = getOverride(config, presetOverride.files);
-      mergePreset(overrideConfig, presetOverride, presetConfig);
+      mergePreset(overrideConfig, presetOverride, presetConfig, allOptions);
     });
   }
 };
@@ -249,7 +266,7 @@ const mergeAllPresets = (
   config,
   options,
 ) => {
-  Object.keys(presets).forEach(presetName => {
+  presetsOrder.forEach(presetName => {
     const presetConfig = options[presetName];
     if (!presetConfig) return;
 
@@ -257,6 +274,7 @@ const mergeAllPresets = (
       config,
       presets[presetName],
       presetConfig,
+      options,
     );
   });
 };

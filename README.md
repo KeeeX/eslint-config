@@ -102,6 +102,33 @@ To enable some more rules for React Hooks, set `reacthooks` to true,
 ### React Native
 To enable some more rules for React Native, set `reactnative` to true.
 
+### Mocha testsuite
+To enable mocha-specific rules, as well as loosen some regular rules for
+testing, set `mocha` to true.
+Fine-tuned control is possible by providing an object instead of true with
+the following properties:
+
+```JavaScript
+{
+  fileFilter: [
+    "**/*.test.ts",
+    "**/*.test.js",
+    "**/testutils.ts",
+    "**/testutils.js",
+    "tests/**/*.ts",
+    "tests/**/*.js",
+    "test/**/*.ts",
+    "test/**/*.js",
+  ],
+  expectHelper: true,
+}
+```
+
+All value optional, default values are the ones specified above.
+`fileFilter` is the overrides files definition to apply the test settings to.
+`expectHelper` relax some `eslint` rules to handle the use of expect-like
+assertions in test files.
+
 Dependencies
 ------------
 
@@ -112,3 +139,4 @@ If React/JSX is enabled, `eslint-plugin-react` must be installed.
 If React Hooks is enabled, `eslint-plugin-react-hooks` must be installed.
 If React Native is enabled, `eslint-plugin-react-native` must be installed.
 Promise support requires `eslint-plugin-promise`.
+If mocha is used as the testsuite, `eslint-plugin-mocha` must be installed.
