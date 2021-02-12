@@ -23,6 +23,7 @@ module.exports = eslintConfig(
     reacthooks: true,
     reactnative: true,
     typescript: "./tsconfig.json",
+    mocha: true,
   },
   {
     env: {
