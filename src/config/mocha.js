@@ -41,6 +41,7 @@ module.exports = {
     }
     const mochaOverride = {
       files: config.fileFilter,
+      env: {mocha: true},
       extendsBase: ["plugin:mocha/recommended"],
       rules: {
         "mocha/handle-done-callback": ["error", {"ignoreSkipped": true}],
