@@ -1,7 +1,7 @@
 {
   "name": "@keeex/eslint-config",
   "description": "Common eslint configuration",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "main": "src/index.js",
   "files": [
     "src/**/*.js"
@@ -29,7 +29,7 @@
     "eslint-plugin-promise": "5.x",
     "eslint-plugin-react-native": "3.x",
     "eslint-plugin-react-hooks": "4.x",
-    "eslint-plugin-mocha": "8.x"
+    "eslint-plugin-mocha": "9.x"
   },
   "peerDependenciesMeta": {
     "eslint": {
