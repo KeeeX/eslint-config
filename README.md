@@ -20,6 +20,7 @@ module.exports = eslintConfig(
     base: true,
     promise: true,
     jsx: true,
+    import: true,
     reacthooks: true,
     reactnative: true,
     typescript: "./tsconfig.json",
@@ -85,6 +86,10 @@ configuration function.
 Some extra rules for promises can be used by setting `promise` to true (enabled
 by default).
 
+### Imports
+Some extra rules for formatting and ordering imports can be used by setting
+`import` to true (enabled by default).
+
 ### TypeScript
 If `typescript` is set to true, only basic typescript rules are enforced.
 Instead, it is advised to provide the path to the typescript configuration file
@@ -141,3 +146,4 @@ If React Hooks is enabled, `eslint-plugin-react-hooks` must be installed.
 If React Native is enabled, `eslint-plugin-react-native` must be installed.
 Promise support requires `eslint-plugin-promise`.
 If mocha is used as the testsuite, `eslint-plugin-mocha` must be installed.
+Import support requires `eslint-plugin-import`.
