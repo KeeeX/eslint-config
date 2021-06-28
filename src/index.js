@@ -1,32 +1,11 @@
-/* @licence
-Copyright 2020 KeeeX SAS
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do
-so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
-
-const cfgBase = require("./config/base");
-const cfgJSX = require("./config/jsx");
-const cfgReactHooks = require("./config/reacthooks");
-const cfgReactNative = require("./config/reactnative");
-const cfgTypescript = require("./config/typescript");
-const cfgPromise = require("./config/promise");
-const cfgMocha = require("./config/mocha");
+const cfgBase = require("./config/base.js");
+const cfgJSX = require("./config/jsx.js");
+const cfgImport = require("./config/import.js");
+const cfgReactHooks = require("./config/reacthooks.js");
+const cfgReactNative = require("./config/reactnative.js");
+const cfgTypescript = require("./config/typescript.js");
+const cfgPromise = require("./config/promise.js");
+const cfgMocha = require("./config/mocha.js");
 
 const defaultConfigBase = {
   env: {
@@ -66,8 +45,8 @@ const getOverride = (
 /**
  * Apply a preset configuration to a preset object
  */
-const applyConfig = (source, config) => typeof source === "function"
-  ? source(config)
+const applyConfig = (source, config, allOptions) => typeof source === "function"
+  ? source(config, allOptions)
   : source;
 
 /** Add a plugin to the plugins list */
@@ -97,8 +76,9 @@ const addExtends = (
   config,
   presetExtends,
   presetConfig,
+  allOptions,
 ) => {
-  const newExtends = applyConfig(presetExtends, presetConfig);
+  const newExtends = applyConfig(presetExtends, presetConfig, allOptions);
   if (!newExtends) return;
 
   if (!config.extends) {
@@ -215,6 +195,7 @@ const presets = {
   "base": cfgBase,
   "promise": cfgPromise,
   "jsx": cfgJSX,
+  "import": cfgImport,
   "reacthooks": cfgReactHooks,
   "reactnative": cfgReactNative,
   "typescript": cfgTypescript,
@@ -226,6 +207,7 @@ const presetsOrder = [
   "base",
   "promise",
   "jsx",
+  "import",
   "reactnative",
   "reacthooks",
   "typescript",
@@ -246,8 +228,8 @@ const mergePreset = (
   addSettings(config, presetDef.settings, presetConfig);
   addEnvs(config, presetDef.env, presetConfig);
   addPlugins(config, presetDef.plugins, presetConfig);
-  addExtends(config, presetDef.extendsBase, presetConfig);
-  addRules(config, presetDef.rules, presetConfig);
+  addExtends(config, presetDef.extendsBase, presetConfig, allOptions);
+  addRules(config, presetDef.rules, presetConfig, allOptions);
   if (presetDef.overrides) {
     const actualOverrides = (typeof presetDef.overrides === "function")
       ? presetDef.overrides(presetConfig, allOptions)
@@ -289,8 +271,8 @@ module.exports = (
   };
   const config = eslintConfig || {};
   if (config.base === undefined) config.base = true;
-
   if (config.promise === undefined) config.promise = true;
+  if (config.import === undefined) config.import = true;
 
   mergeAllPresets(result, config);
   return result;
