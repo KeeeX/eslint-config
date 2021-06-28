@@ -22,6 +22,7 @@ SOFTWARE.
 
 const cfgBase = require("./config/base");
 const cfgJSX = require("./config/jsx");
+const cfgImport = require("./config/import");
 const cfgReactHooks = require("./config/reacthooks");
 const cfgReactNative = require("./config/reactnative");
 const cfgTypescript = require("./config/typescript");
@@ -66,8 +67,8 @@ const getOverride = (
 /**
  * Apply a preset configuration to a preset object
  */
-const applyConfig = (source, config) => typeof source === "function"
-  ? source(config)
+const applyConfig = (source, config, allOptions) => typeof source === "function"
+  ? source(config, allOptions)
   : source;
 
 /** Add a plugin to the plugins list */
@@ -97,8 +98,9 @@ const addExtends = (
   config,
   presetExtends,
   presetConfig,
+  allOptions,
 ) => {
-  const newExtends = applyConfig(presetExtends, presetConfig);
+  const newExtends = applyConfig(presetExtends, presetConfig, allOptions);
   if (!newExtends) return;
 
   if (!config.extends) {
@@ -215,6 +217,7 @@ const presets = {
   "base": cfgBase,
   "promise": cfgPromise,
   "jsx": cfgJSX,
+  "import": cfgImport,
   "reacthooks": cfgReactHooks,
   "reactnative": cfgReactNative,
   "typescript": cfgTypescript,
@@ -226,6 +229,7 @@ const presetsOrder = [
   "base",
   "promise",
   "jsx",
+  "import",
   "reactnative",
   "reacthooks",
   "typescript",
@@ -246,8 +250,8 @@ const mergePreset = (
   addSettings(config, presetDef.settings, presetConfig);
   addEnvs(config, presetDef.env, presetConfig);
   addPlugins(config, presetDef.plugins, presetConfig);
-  addExtends(config, presetDef.extendsBase, presetConfig);
-  addRules(config, presetDef.rules, presetConfig);
+  addExtends(config, presetDef.extendsBase, presetConfig, allOptions);
+  addRules(config, presetDef.rules, presetConfig, allOptions);
   if (presetDef.overrides) {
     const actualOverrides = (typeof presetDef.overrides === "function")
       ? presetDef.overrides(presetConfig, allOptions)
@@ -289,8 +293,8 @@ module.exports = (
   };
   const config = eslintConfig || {};
   if (config.base === undefined) config.base = true;
-
   if (config.promise === undefined) config.promise = true;
+  if (config.import === undefined) config.import = true;
 
   mergeAllPresets(result, config);
   return result;
