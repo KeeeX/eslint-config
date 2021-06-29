@@ -3,7 +3,7 @@ module.exports = {
   extendsBase: (presetConfig, allOptions) => {
     const result = ["plugin:promise/recommended"];
     if (allOptions.typescript) {
-      result.push(["plugin:import/typescrypt"]);
+      result.push("plugin:import/typescript");
     }
     return result;
   },
