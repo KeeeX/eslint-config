@@ -21,5 +21,7 @@ module.exports = {
     "@typescript-eslint/switch-exhaustiveness-check": ["warn"],
     "require-await": "off",
     "@typescript-eslint/require-await": ["warn"],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
   },
 };
