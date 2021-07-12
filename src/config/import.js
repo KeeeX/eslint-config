@@ -29,15 +29,7 @@ module.exports = {
     "import/no-amd": "error",
     "import/no-import-module-exports": "error",
     "import/first": "error",
-    "import/extensions": [
-      "error",
-      {
-        pattern: {
-          "js": "always",
-          "json": "always",
-        },
-      },
-    ],
+    "import/extensions": ["error", "always"],
     "import/order": "warn",
     "import/newline-after-import": "warn",
     "import/no-named-default": "error",
