@@ -61,7 +61,24 @@ module.exports = {
     "react/prefer-es6-class": ["warn"],
     "react/require-default-props": ["warn"],
     "react/self-closing-comp": ["warn"],
-    "react/sort-comp": ["warn"],
+    "react/sort-comp": [
+      "warn",
+      {
+        "order": [
+          "static-methods",
+          "lifecycle",
+          "rendering",
+          "everything-else",
+          "rendering",
+        ],
+        groups: {
+          rendering: [
+            "/^render.+$/",
+            "render",
+          ],
+        },
+      },
+    ],
     "react/static-property-placement": ["off"],
     "react/style-prop-object": ["error"],
     "react/void-dom-elements-no-children": ["error"],
