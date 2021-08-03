@@ -89,6 +89,17 @@ by default).
 ### Imports
 Some extra rules for formatting and ordering imports can be used by setting
 `import` to true (enabled by default).
+It is possible to pass an object with the following properties instead of `true`:
+
+```JavaScript
+{
+  detectImportCycle: true,
+}
+```
+
+All properties are `true` by default.
+Import cycle can be either `false` to disable it, `true` to enable it with a default depth of 3, or
+any number to control the maximum depth of the scan.
 
 ### TypeScript
 If `typescript` is set to true, only basic typescript rules are enforced.
