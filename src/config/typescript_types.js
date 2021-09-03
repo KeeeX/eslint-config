@@ -23,5 +23,9 @@ module.exports = {
     "@typescript-eslint/require-await": ["warn"],
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/unbound-method": [
+      "error",
+      {ignoreStatics: true},
+    ],
   },
 };
