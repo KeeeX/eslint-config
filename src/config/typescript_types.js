@@ -25,7 +25,7 @@ module.exports = {
     "@typescript-eslint/no-use-before-define": ["error"],
     "@typescript-eslint/unbound-method": [
       "error",
-      {ignoreStatics: true},
+      {ignoreStatic: true},
     ],
   },
 };
