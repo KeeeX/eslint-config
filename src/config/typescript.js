@@ -99,6 +99,7 @@ const rulesBase = {
       "allowAliases": "always",
       "allowCallbacks": "always",
       "allowMappedTypes": "always",
+      "allowGenerics": "always",
     },
   ],
   "@typescript-eslint/no-unnecessary-boolean-literal-compare": ["error"],
