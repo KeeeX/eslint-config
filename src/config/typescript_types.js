@@ -12,7 +12,6 @@ module.exports = {
     "@typescript-eslint/no-unnecessary-condition": ["error"],
     "@typescript-eslint/no-unnecessary-qualifier": ["error"],
     "@typescript-eslint/no-unnecessary-type-arguments": ["warn"],
-    "@typescript-eslint/no-unused-vars-experimental": ["warn"],
     "@typescript-eslint/prefer-nullish-coalescing": ["warn"],
     "@typescript-eslint/restrict-plus-operands": [
       "error",
