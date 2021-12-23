@@ -28,7 +28,7 @@ module.exports = eslintConfig(
   },
   {
     env: {
-      es6: true,
+      es2021: true,
       node: true,
     },
   },
@@ -51,11 +51,11 @@ The default configuration is:
 module.exports = {
   parser: "@typescript-eslint/parser", // only when typescript is enabled
   env: {
-    es6: true,
+    es2021: true,
     node: true,
   },
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: "latest",
     sourceType: "module",
     project: "./tsconfig.json", // only for typescript
   },

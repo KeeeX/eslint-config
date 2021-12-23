@@ -9,11 +9,11 @@ const cfgMocha = require("./config/mocha.js");
 
 const defaultConfigBase = {
   env: {
-    es6: true,
+    es2021: true,
     node: true,
   },
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: "latest",
     sourceType: "module",
   },
 };
