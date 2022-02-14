@@ -28,11 +28,11 @@
     "@typescript-eslint/parser": "5.x",
     "eslint": "8.x",
     "eslint-plugin-import": "2.x",
-    "eslint-plugin-mocha": "9.x",
+    "eslint-plugin-mocha": "10.x",
     "eslint-plugin-promise": "6.x",
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "4.x",
-    "eslint-plugin-react-native": "3.x"
+    "eslint-plugin-react-native": "4.x"
   },
   "peerDependenciesMeta": {
     "eslint": {
