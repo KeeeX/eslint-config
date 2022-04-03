@@ -138,19 +138,6 @@ const rulesBase = {
 };
 
 module.exports = {
-  settings: (presetConfig, allOptions) => {
-    if (useTypes(presetConfig) && allOptions["import"]) {
-      return {
-        "import/parsers": {"@typescript-eslint/parser": [".ts", ".tsx"]},
-        "import/resolver": {
-          "typescript": {
-            alwaysTryTypes: true,
-            project: presetConfig,
-          },
-        },
-      };
-    }
-  },
   overrides: [
     {
       files: [
@@ -186,14 +173,16 @@ module.exports = {
         ];
       },
       rules: (presetOptions, allOptions) => {
+        // There seem to be no way for now to have import understand that ".js" imports should refer
+        // to ".ts" files.
+        // Either it complains about needing the ".ts" suffix (which is wrong) or it enforces having
+        // an extension, but doesn't actually resolve the file (since we disable the ts-specific
+        // resolver).
+        // If this change in the future, restore full ts-resolver support from import plugin.
         const importOverride = allOptions.import
           ? {
             "import/no-unresolved": "off",
-            "import/extensions": [
-              "error",
-              "always",
-              {"ts": "never"},
-            ],
+            "import/no-cycle": "off",
           }
           : undefined;
         const typesOverride = useTypes(presetOptions)
