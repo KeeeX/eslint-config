@@ -118,8 +118,9 @@ const addRules = (
   config,
   presetRules,
   presetConfig,
+  allOptions,
 ) => {
-  const newRules = applyConfig(presetRules, presetConfig);
+  const newRules = applyConfig(presetRules, presetConfig, allOptions);
   if (!newRules) return;
 
   if (!config.rules) {
@@ -158,9 +159,10 @@ const addSettings = (
   config,
   presetSettings,
   presetConfig,
+  allOptions,
 ) => {
   const newSettings = typeof presetSettings === "function"
-    ? presetSettings(presetConfig)
+    ? presetSettings(presetConfig, allOptions)
     : presetSettings;
   if (!newSettings) return;
 
@@ -225,7 +227,7 @@ const mergePreset = (
 ) => {
   setParser(config, presetDef.parser, presetConfig);
   addParserOptions(config, presetDef.parserOptions, presetConfig);
-  addSettings(config, presetDef.settings, presetConfig);
+  addSettings(config, presetDef.settings, presetConfig, allOptions);
   addEnvs(config, presetDef.env, presetConfig);
   addPlugins(config, presetDef.plugins, presetConfig);
   addExtends(config, presetDef.extendsBase, presetConfig, allOptions);

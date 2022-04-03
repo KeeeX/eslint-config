@@ -138,6 +138,19 @@ const rulesBase = {
 };
 
 module.exports = {
+  settings: (presetConfig, allOptions) => {
+    if (useTypes(presetConfig) && allOptions["import"]) {
+      return {
+        "import/parsers": {"@typescript-eslint/parser": [".ts", ".tsx"]},
+        "import/resolver": {
+          "typescript": {
+            alwaysTryTypes: true,
+            project: presetConfig,
+          },
+        },
+      };
+    }
+  },
   overrides: [
     {
       files: [
@@ -154,28 +167,43 @@ module.exports = {
         }
         return null;
       },
-      extendsBase: presetOptions => {
+      extendsBase: (presetOptions, allOptions) => {
         const typescriptBase = [
           "plugin:@typescript-eslint/eslint-recommended",
           "plugin:@typescript-eslint/recommended",
           "plugin:@typescript-eslint/recommended-requiring-type-checking",
         ];
-        if (useTypes(presetOptions)) {
-          return [
-            ...typescriptBase,
-            ...extendsBaseType,
-          ];
-        }
-        return typescriptBase;
+        const typeExtends = useTypes(presetOptions)
+          ? extendsBaseType
+          : [];
+        const importExtends = allOptions["import"]
+          ? ["plugin:import/typescript"]
+          : [];
+        return [
+          ...typescriptBase,
+          ...typeExtends,
+          ...importExtends,
+        ];
       },
-      rules: presetOptions => {
-        if (useTypes(presetOptions)) {
-          return {
-            ...rulesBase,
-            ...rulesType,
-          };
-        }
-        return rulesBase;
+      rules: (presetOptions, allOptions) => {
+        const importOverride = allOptions.import
+          ? {
+            "import/no-unresolved": "off",
+            "import/extensions": [
+              "error",
+              "always",
+              {"ts": "never"},
+            ],
+          }
+          : undefined;
+        const typesOverride = useTypes(presetOptions)
+          ? rulesType
+          : undefined;
+        return {
+          ...rulesBase,
+          ...typesOverride,
+          ...importOverride,
+        };
       },
     },
   ],

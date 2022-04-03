@@ -32,7 +32,8 @@
     "eslint-plugin-promise": "6.x",
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "4.x",
-    "eslint-plugin-react-native": "4.x"
+    "eslint-plugin-react-native": "4.x",
+    "eslint-import-resolver-typescript": "2.x"
   },
   "peerDependenciesMeta": {
     "eslint": {
@@ -60,6 +61,9 @@
       "optional": true
     },
     "eslint-plugin-mocha": {
+      "optional": true
+    },
+    "eslint-import-resolver-typescript": {
       "optional": true
     }
   },

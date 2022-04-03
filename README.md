@@ -158,3 +158,5 @@ If React Native is enabled, `eslint-plugin-react-native` must be installed.
 Promise support requires `eslint-plugin-promise`.
 If mocha is used as the testsuite, `eslint-plugin-mocha` must be installed.
 Import support requires `eslint-plugin-import`.
+
+If both import and typescript is used, `eslint-import-resolver-typescript` is needed.

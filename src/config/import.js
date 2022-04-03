@@ -27,13 +27,7 @@ const DEFAULT_CYCLE_DEPTH = 3;
 
 module.exports = {
   plugins: ["import"],
-  extendsBase: (presetConfig, allOptions) => {
-    const result = ["plugin:import/recommended"];
-    if (allOptions.typescript) {
-      result.push("plugin:import/typescript");
-    }
-    return result;
-  },
+  extendsBase: ["plugin:import/recommended"],
   rules: presetConfig => {
     let importDepth;
     if (
