@@ -44,7 +44,109 @@ const rulesBase = {
     "error",
     indentDepth,
   ],
-  "@typescript-eslint/member-ordering": ["warn"],
+  "@typescript-eslint/member-ordering": [
+    "warn",
+    {
+      "default": [
+        // Index signature
+        "signature",
+
+        // Fields
+        "public-static-field",
+        "protected-static-field",
+        "private-static-field",
+
+        "public-decorated-field",
+        "protected-decorated-field",
+        "private-decorated-field",
+
+        "public-instance-field",
+        "protected-instance-field",
+        "private-instance-field",
+
+        "public-abstract-field",
+        "protected-abstract-field",
+        "private-abstract-field",
+
+        "public-field",
+        "protected-field",
+        "private-field",
+
+        "static-field",
+        "instance-field",
+        "abstract-field",
+
+        "decorated-field",
+
+        "field",
+
+        // Constructors
+        "public-constructor",
+        "protected-constructor",
+        "private-constructor",
+
+        "constructor",
+
+        // Getters/Setters
+        ["public-static-get", "public-static-set"],
+        ["protected-static-get", "protected-static-set"],
+        ["private-static-get", "private-static-set"],
+
+        ["public-decorated-get", "public-decorated-set"],
+        ["protected-decorated-get", "protected-decorated-set"],
+        ["private-decorated-get", "private-decorated-set"],
+
+        ["public-instance-get", "public-instance-set"],
+        ["protected-instance-get", "protected-instance-set"],
+        ["private-instance-get", "private-instance-set"],
+
+        ["public-abstract-get", "public-abstract-set"],
+        ["protected-abstract-get", "protected-abstract-set"],
+        ["private-abstract-get", "private-abstract-set"],
+
+        ["public-get", "public-set"],
+        ["protected-get", "protected-set"],
+        ["private-get", "private-set"],
+
+        ["static-get", "static-set"],
+        ["instance-get", "instance-set"],
+        ["abstract-get", "abstract-set"],
+
+        ["decorated-get", "decorated-set"],
+
+        ["get", "set"],
+
+        // Methods
+        "public-static-method",
+        "protected-static-method",
+        "private-static-method",
+
+        "public-decorated-method",
+        "protected-decorated-method",
+        "private-decorated-method",
+
+        "public-instance-method",
+        "protected-instance-method",
+        "private-instance-method",
+
+        "public-abstract-method",
+        "protected-abstract-method",
+        "private-abstract-method",
+
+        "public-method",
+        "protected-method",
+        "private-method",
+
+        "static-method",
+        "instance-method",
+        "abstract-method",
+
+        "decorated-method",
+
+        "method",
+      ],
+    },
+  ],
   "no-array-constructor": "off",
   "@typescript-eslint/no-array-constructor": ["warn"],
   "@typescript-eslint/no-dupe-class-members": ["error"],
