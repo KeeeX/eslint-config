@@ -138,6 +138,7 @@ the following properties:
     "test/**/*.js",
   ],
   expectHelper: true,
+  chai: true,
 }
 ```
 
@@ -157,6 +158,7 @@ If React Hooks is enabled, `eslint-plugin-react-hooks` must be installed.
 If React Native is enabled, `eslint-plugin-react-native` must be installed.
 Promise support requires `eslint-plugin-promise`.
 If mocha is used as the testsuite, `eslint-plugin-mocha` must be installed.
+If chai is used with mocha, `eslint-plugin-chai-friendly` must be installed.
 Import support requires `eslint-plugin-import`.
 
 If both import and typescript is used, `eslint-import-resolver-typescript` is needed.

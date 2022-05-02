@@ -8,8 +8,13 @@ module.exports = {
         "tests/**/*.js",
         "test/**/*.ts",
         "test/**/*.js",
+        "**/tests/**/*.ts",
+        "**/tests/**/*.js",
+        "**/test/**/*.ts",
+        "**/test/**/*.js",
       ],
       expectHelper: true,
+      mocha: true,
     };
     if (typeof presetConfig === "object") {
       config = {
@@ -17,10 +22,12 @@ module.exports = {
         ...presetConfig,
       };
     }
+    const extendsBase = ["plugin:mocha/recommended"];
+    if (config.chai) extendsBase.push("plugin:chai-friendly/recommended");
     const mochaOverride = {
       files: config.fileFilter,
       env: {mocha: true},
-      extendsBase: ["plugin:mocha/recommended"],
+      extendsBase,
       rules: {
         "mocha/handle-done-callback": ["error", {"ignoreSkipped": true}],
         "mocha/no-mocha-arrows": "off",
