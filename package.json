@@ -29,6 +29,7 @@
     "eslint": "8.x",
     "eslint-plugin-import": "2.x",
     "eslint-plugin-mocha": "10.x",
+    "eslint-plugin-chai-friendly": "0.x",
     "eslint-plugin-promise": "6.x",
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "4.x",
@@ -55,6 +56,9 @@
       "optional": true
     },
     "eslint-plugin-react-native": {
+      "optional": true
+    },
+    "eslint-plugin-chai-friendly": {
       "optional": true
     },
     "eslint-plugin-react-hooks": {
