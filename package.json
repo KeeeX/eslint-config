@@ -6,6 +6,10 @@
   "files": [
     "src/**/*.js"
   ],
+  "scripts": {
+    "check": "npx eslint .",
+    "test": "echo No test for this project"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/KeeeX/eslint-config.git"
