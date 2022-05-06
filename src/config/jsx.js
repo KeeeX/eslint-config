@@ -65,7 +65,10 @@ module.exports = {
       "warn",
       {
         "order": [
+          "static-variables",
           "static-methods",
+          "instance-variables",
+          "constructor",
           "lifecycle",
           "rendering",
           "everything-else",
