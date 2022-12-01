@@ -11,7 +11,7 @@ pipeline {
         }
         stage("Configure NPM for deployment") {
             steps {
-                sh("ln -s ${NPMRC_CONFIG} .npmrc")
+                sh('ln -s ${NPMRC_CONFIG} .npmrc')
             }
         }
         stage("Publish") {
