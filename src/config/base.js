@@ -171,6 +171,7 @@ module.exports = {
       "warn",
       {
         "skipBlankLines": true,
+        "skipComments": true,
         "IIFEs": true,
       },
     ],
