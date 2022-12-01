@@ -19,10 +19,10 @@ pipeline {
                 sh("npm publish")
             }
         }
-        stage("Cleanup") {
-            steps {
-                sh("rm .npmrc")
-            }
+    }
+    post {
+        awlays {
+            sh("rm .npmrc")
         }
     }
 }
