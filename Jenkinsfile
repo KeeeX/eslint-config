@@ -21,7 +21,7 @@ pipeline {
         }
     }
     post {
-        awlays {
+        always {
             sh("rm .npmrc")
         }
     }
