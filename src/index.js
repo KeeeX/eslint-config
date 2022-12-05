@@ -55,15 +55,16 @@ const addPlugins = (
   config,
   presetPlugins,
   presetConfig,
+  allOptions,
 ) => {
-  const newPlugins = applyConfig(presetPlugins, presetConfig);
+  const newPlugins = applyConfig(presetPlugins, presetConfig, allOptions);
   if (!newPlugins) return;
 
   if (!config.plugins) {
-    config.plugins = [...presetPlugins];
+    config.plugins = [...newPlugins];
     return;
   }
-  presetPlugins.forEach(newPlugin => {
+  newPlugins.forEach(newPlugin => {
     if (config.plugins.includes(newPlugin)) return;
 
     config.plugins.push(newPlugin);
@@ -232,7 +233,7 @@ const mergePreset = (
   addParserOptions(config, presetDef.parserOptions, presetConfig);
   addSettings(config, presetDef.settings, presetConfig, allOptions);
   addEnvs(config, presetDef.env, presetConfig);
-  addPlugins(config, presetDef.plugins, presetConfig);
+  addPlugins(config, presetDef.plugins, presetConfig, allOptions);
   addExtends(config, presetDef.extendsBase, presetConfig, allOptions);
   addRules(config, presetDef.rules, presetConfig, allOptions);
   if (presetDef.overrides) {
@@ -278,6 +279,7 @@ module.exports = (
   if (config.base === undefined) config.base = true;
   if (config.promise === undefined) config.promise = true;
   if (config.import === undefined) config.import = true;
+  if (config.deprecation === undefined) config.deprecation = true;
 
   mergeAllPresets(result, config);
   return result;
