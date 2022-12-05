@@ -8,6 +8,12 @@ const {
  * Check if types-based rules can be used
  */
 const useTypes = presetOptions => typeof presetOptions === "string";
+const useDeprecation = (presetOptions, allOptions) => {
+  if (!useTypes(presetOptions)) return false;
+  const deprecationKey = "deprecation";
+  if (!(deprecationKey in allOptions)) return true;
+  return allOptions[deprecationKey] === true;
+};
 
 const rulesBase = {
   "@typescript-eslint/array-type": [
@@ -287,10 +293,14 @@ module.exports = {
         const typesOverride = useTypes(presetOptions)
           ? rulesType
           : undefined;
+        const deprecationOverride = useDeprecation(presetOptions, allOptions)
+          ? {"deprecation/deprecation": "warn"}
+          : undefined;
         return {
           ...rulesBase,
           ...typesOverride,
           ...importOverride,
+          ...deprecationOverride,
         };
       },
     },

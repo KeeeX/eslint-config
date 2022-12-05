@@ -4,6 +4,7 @@ const cfgImport = require("./config/import.js");
 const cfgReactHooks = require("./config/reacthooks.js");
 const cfgReactNative = require("./config/reactnative.js");
 const cfgTypescript = require("./config/typescript.js");
+const cfgDeprecation = require("./config/deprecation.js");
 const cfgPromise = require("./config/promise.js");
 const cfgMocha = require("./config/mocha.js");
 
@@ -201,6 +202,7 @@ const presets = {
   "reacthooks": cfgReactHooks,
   "reactnative": cfgReactNative,
   "typescript": cfgTypescript,
+  "deprecation": cfgDeprecation,
   "mocha": cfgMocha,
 };
 
@@ -213,6 +215,7 @@ const presetsOrder = [
   "reactnative",
   "reacthooks",
   "typescript",
+  "deprecation",
   "mocha",
 ];
 

@@ -24,6 +24,7 @@ module.exports = eslintConfig(
     reacthooks: true,
     reactnative: true,
     typescript: "./tsconfig.json",
+    deprecation: true,
     mocha: true,
   },
   {
@@ -106,6 +107,10 @@ If `typescript` is set to true, only basic typescript rules are enforced.
 Instead, it is advised to provide the path to the typescript configuration file
 (typically `tsconfig.json`), in which case rules that requires typing
 informations are enabled.
+
+### Deprecation
+Warn when using deprecated calls/properties.
+This only work with TypeScript enabled with project types.
 
 ### React/JSX
 To improve handling of React/JSX, set `jsx` to true.
