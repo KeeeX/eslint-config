@@ -158,6 +158,7 @@ Dependencies
 Depend on `eslint`.
 If typescript is enabled, `@typescript-eslint/eslint-plugin`,
 `@typescript-eslint/parser` must be installed.
+If deprecation is enabled, `eslint-plugin-deprecation` must be installed.
 If React/JSX is enabled, `eslint-plugin-react` must be installed.
 If React Hooks is enabled, `eslint-plugin-react-hooks` must be installed.
 If React Native is enabled, `eslint-plugin-react-native` must be installed.
