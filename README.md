@@ -24,6 +24,7 @@ module.exports = eslintConfig(
     reacthooks: true,
     reactnative: true,
     typescript: "./tsconfig.json",
+    deprecation: true,
     mocha: true,
   },
   {
@@ -107,6 +108,10 @@ Instead, it is advised to provide the path to the typescript configuration file
 (typically `tsconfig.json`), in which case rules that requires typing
 informations are enabled.
 
+### Deprecation
+Warn when using deprecated calls/properties.
+This only work with TypeScript enabled with project types.
+
 ### React/JSX
 To improve handling of React/JSX, set `jsx` to true.
 It is also possible to pass a string indicating the expected React version.
@@ -153,6 +158,7 @@ Dependencies
 Depend on `eslint`.
 If typescript is enabled, `@typescript-eslint/eslint-plugin`,
 `@typescript-eslint/parser` must be installed.
+If deprecation is enabled, `eslint-plugin-deprecation` must be installed.
 If React/JSX is enabled, `eslint-plugin-react` must be installed.
 If React Hooks is enabled, `eslint-plugin-react-hooks` must be installed.
 If React Native is enabled, `eslint-plugin-react-native` must be installed.
