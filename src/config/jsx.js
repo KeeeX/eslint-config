@@ -8,6 +8,7 @@ module.exports = {
     return {"react": {version}};
   },
   extendsBase: ["plugin:react/recommended"],
+  parserOptions: {"ecmaFeatures": {jsx: true}},
   rules: {
     "react/button-has-type": ["error"],
     "react/default-props-match-prop-types": ["warn"],

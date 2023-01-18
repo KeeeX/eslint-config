@@ -56,7 +56,6 @@ module.exports = {
         "ignore": [0, 1, -1],
         "ignoreArrayIndexes": true,
         "ignoreDefaultValues": true,
-        "ignoreDefaultValues": true,
         "ignoreClassFieldInitialValues": true,
       },
     ],
