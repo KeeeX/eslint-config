@@ -190,7 +190,6 @@ const rulesBase = {
       ],
       "ignoreDefaultValues": true,
       "ignoreArrayIndexes": true,
-      "ignoreDefaultValues": true,
       "ignoreClassFieldInitialValues": true,
     },
   ],
