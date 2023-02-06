@@ -49,6 +49,13 @@ const rulesBase = {
   "@typescript-eslint/indent": [
     "error",
     indentDepth,
+    {
+      "FunctionDeclaration": {"parameters": "first"},
+      "FunctionExpression": {"parameters": "first"},
+      "CallExpression": {"arguments": "first"},
+      "ArrayExpression": "first",
+      "ignoreComments": true,
+    },
   ],
   "@typescript-eslint/member-ordering": [
     "warn",
