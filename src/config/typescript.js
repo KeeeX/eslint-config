@@ -15,6 +15,12 @@ const useDeprecation = (presetOptions, allOptions) => {
   return allOptions[deprecationKey] === true;
 };
 
+const useTSDoc = allOptions => {
+  const tsdocOptions = allOptions.tsdoc;
+  if (tsdocOptions !== undefined && tsdocOptions === false) return false;
+  return true;
+};
+
 const rulesBase = {
   "@typescript-eslint/array-type": [
     "error",
@@ -285,6 +291,9 @@ module.exports = {
           ...importExtends,
         ];
       },
+      plugins: (presetOptions, allOptions) => {
+        if (useTSDoc(allOptions)) return ["eslint-plugin-tsdoc"];
+      },
       rules: (presetOptions, allOptions) => {
         // There seem to be no way for now to have import understand that ".js" imports should refer
         // to ".ts" files.
@@ -304,8 +313,12 @@ module.exports = {
         const deprecationOverride = useDeprecation(presetOptions, allOptions)
           ? {"deprecation/deprecation": "warn"}
           : undefined;
+        const tsdoc = useTSDoc(allOptions)
+          ? {"tsdoc/syntax": "warn"}
+          : undefined;
         return {
           ...rulesBase,
+          ...tsdoc,
           ...typesOverride,
           ...importOverride,
           ...deprecationOverride,

@@ -24,6 +24,7 @@ module.exports = eslintConfig(
     reacthooks: true,
     reactnative: true,
     typescript: "./tsconfig.json",
+    tsdoc: true,
     deprecation: true,
     mocha: true,
   },
@@ -108,6 +109,10 @@ Instead, it is advised to provide the path to the typescript configuration file
 (typically `tsconfig.json`), in which case rules that requires typing
 informations are enabled.
 
+### TSDoc
+For TypeScript projects, the `eslint-plugin-tsdoc` is enabled by default.
+To disable it, use the `tsdoc` config property set to `false`.
+
 ### Deprecation
 Warn when using deprecated calls/properties.
 This only work with TypeScript enabled with project types.
@@ -157,7 +162,7 @@ Dependencies
 
 Depend on `eslint`.
 If typescript is enabled, `@typescript-eslint/eslint-plugin`,
-`@typescript-eslint/parser` must be installed.
+`@typescript-eslint/parser`, `eslint-plugin-tsdoc` must be installed.
 If deprecation is enabled, `eslint-plugin-deprecation` must be installed.
 If React/JSX is enabled, `eslint-plugin-react` must be installed.
 If React Hooks is enabled, `eslint-plugin-react-hooks` must be installed.
