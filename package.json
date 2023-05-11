@@ -1,7 +1,7 @@
 {
   "name": "@keeex/eslint-config",
   "description": "Common eslint configuration",
-  "version": "1.9.3",
+  "version": "1.10.0",
   "main": "src/index.js",
   "files": [
     "src/**/*.js"
@@ -23,7 +23,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^8.32.0",
+    "eslint": "^8.40.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-promise": "^6.1.1"
   },
@@ -39,7 +39,8 @@
     "eslint-plugin-promise": "6.x",
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "4.x",
-    "eslint-plugin-react-native": "4.x"
+    "eslint-plugin-react-native": "4.x",
+    "eslint-plugin-tsdoc": "0.x"
   },
   "peerDependenciesMeta": {
     "eslint": {
@@ -49,6 +50,9 @@
       "optional": true
     },
     "@typescript-eslint/parser": {
+      "optional": true
+    },
+    "eslint-plugin-tsdoc": {
       "optional": true
     },
     "eslint-plugin-react": {
