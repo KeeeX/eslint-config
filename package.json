@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "check": "npx eslint .",
+    "prepublishOnly": "publish_check.sh",
     "test": "echo No test for this project"
   },
   "repository": {
