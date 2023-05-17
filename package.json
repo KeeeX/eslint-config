@@ -1,13 +1,14 @@
 {
   "name": "@keeex/eslint-config",
   "description": "Common eslint configuration",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "main": "src/index.js",
   "files": [
     "src/**/*.js"
   ],
   "scripts": {
     "check": "npx eslint .",
+    "prepublishOnly": "publish_check.sh",
     "test": "echo No test for this project"
   },
   "repository": {
