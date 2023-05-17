@@ -219,6 +219,7 @@ const rulesBase = {
       "allowCallbacks": "always",
       "allowMappedTypes": "always",
       "allowGenerics": "always",
+      "allowConditionalTypes": "always",
     },
   ],
   "@typescript-eslint/no-unnecessary-boolean-literal-compare": ["error"],
