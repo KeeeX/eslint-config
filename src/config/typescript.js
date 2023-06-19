@@ -44,6 +44,7 @@ const rulesBase = {
     "error",
     indentDepth,
   ],
+  "@typescript-eslint/member-delimiter-style": ["warn"],
   "@typescript-eslint/member-ordering": [
     "warn",
     {
