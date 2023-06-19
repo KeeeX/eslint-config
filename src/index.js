@@ -4,6 +4,7 @@ const cfgImport = require("./config/import.js");
 const cfgReactHooks = require("./config/reacthooks.js");
 const cfgReactNative = require("./config/reactnative.js");
 const cfgTypescript = require("./config/typescript.js");
+const cfgDeprecation = require("./config/deprecation.js");
 const cfgPromise = require("./config/promise.js");
 const cfgMocha = require("./config/mocha.js");
 
@@ -54,15 +55,16 @@ const addPlugins = (
   config,
   presetPlugins,
   presetConfig,
+  allOptions,
 ) => {
-  const newPlugins = applyConfig(presetPlugins, presetConfig);
+  const newPlugins = applyConfig(presetPlugins, presetConfig, allOptions);
   if (!newPlugins) return;
 
   if (!config.plugins) {
-    config.plugins = [...presetPlugins];
+    config.plugins = [...newPlugins];
     return;
   }
-  presetPlugins.forEach(newPlugin => {
+  newPlugins.forEach(newPlugin => {
     if (config.plugins.includes(newPlugin)) return;
 
     config.plugins.push(newPlugin);
@@ -201,6 +203,7 @@ const presets = {
   "reacthooks": cfgReactHooks,
   "reactnative": cfgReactNative,
   "typescript": cfgTypescript,
+  "deprecation": cfgDeprecation,
   "mocha": cfgMocha,
 };
 
@@ -213,6 +216,7 @@ const presetsOrder = [
   "reactnative",
   "reacthooks",
   "typescript",
+  "deprecation",
   "mocha",
 ];
 
@@ -229,7 +233,7 @@ const mergePreset = (
   addParserOptions(config, presetDef.parserOptions, presetConfig);
   addSettings(config, presetDef.settings, presetConfig, allOptions);
   addEnvs(config, presetDef.env, presetConfig);
-  addPlugins(config, presetDef.plugins, presetConfig);
+  addPlugins(config, presetDef.plugins, presetConfig, allOptions);
   addExtends(config, presetDef.extendsBase, presetConfig, allOptions);
   addRules(config, presetDef.rules, presetConfig, allOptions);
   if (presetDef.overrides) {
@@ -275,6 +279,7 @@ module.exports = (
   if (config.base === undefined) config.base = true;
   if (config.promise === undefined) config.promise = true;
   if (config.import === undefined) config.import = true;
+  if (config.deprecation === undefined) config.deprecation = true;
 
   mergeAllPresets(result, config);
   return result;

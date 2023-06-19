@@ -8,6 +8,18 @@ const {
  * Check if types-based rules can be used
  */
 const useTypes = presetOptions => typeof presetOptions === "string";
+const useDeprecation = (presetOptions, allOptions) => {
+  if (!useTypes(presetOptions)) return false;
+  const deprecationKey = "deprecation";
+  if (!(deprecationKey in allOptions)) return true;
+  return allOptions[deprecationKey] === true;
+};
+
+const useTSDoc = allOptions => {
+  const tsdocOptions = allOptions.tsdoc;
+  if (tsdocOptions !== undefined && tsdocOptions === false) return false;
+  return true;
+};
 
 const rulesBase = {
   "@typescript-eslint/array-type": [
@@ -43,6 +55,13 @@ const rulesBase = {
   "@typescript-eslint/indent": [
     "error",
     indentDepth,
+    {
+      "FunctionDeclaration": {"parameters": "first"},
+      "FunctionExpression": {"parameters": "first"},
+      "CallExpression": {"arguments": "first"},
+      "ArrayExpression": "first",
+      "ignoreComments": true,
+    },
   ],
   "@typescript-eslint/member-delimiter-style": ["warn"],
   "@typescript-eslint/member-ordering": [
@@ -195,6 +214,7 @@ const rulesBase = {
       ],
       "ignoreDefaultValues": true,
       "ignoreArrayIndexes": true,
+      "ignoreClassFieldInitialValues": true,
     },
   ],
   "no-shadow": "off",
@@ -210,6 +230,7 @@ const rulesBase = {
       "allowCallbacks": "always",
       "allowMappedTypes": "always",
       "allowGenerics": "always",
+      "allowConditionalTypes": "always",
     },
   ],
   "@typescript-eslint/no-unnecessary-boolean-literal-compare": ["error"],
@@ -282,6 +303,9 @@ module.exports = {
           ...importExtends,
         ];
       },
+      plugins: (presetOptions, allOptions) => {
+        if (useTSDoc(allOptions)) return ["eslint-plugin-tsdoc"];
+      },
       rules: (presetOptions, allOptions) => {
         // There seem to be no way for now to have import understand that ".js" imports should refer
         // to ".ts" files.
@@ -298,10 +322,18 @@ module.exports = {
         const typesOverride = useTypes(presetOptions)
           ? rulesType
           : undefined;
+        const deprecationOverride = useDeprecation(presetOptions, allOptions)
+          ? {"deprecation/deprecation": "warn"}
+          : undefined;
+        const tsdoc = useTSDoc(allOptions)
+          ? {"tsdoc/syntax": "warn"}
+          : undefined;
         return {
           ...rulesBase,
+          ...tsdoc,
           ...typesOverride,
           ...importOverride,
+          ...deprecationOverride,
         };
       },
     },

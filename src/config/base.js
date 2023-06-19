@@ -56,6 +56,7 @@ module.exports = {
         "ignore": [0, 1, -1],
         "ignoreArrayIndexes": true,
         "ignoreDefaultValues": true,
+        "ignoreClassFieldInitialValues": true,
       },
     ],
     "no-multi-spaces": ["error"],
@@ -171,6 +172,7 @@ module.exports = {
       "warn",
       {
         "skipBlankLines": true,
+        "skipComments": true,
         "IIFEs": true,
       },
     ],
