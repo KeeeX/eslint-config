@@ -13,10 +13,7 @@ module.exports = {
     "@typescript-eslint/no-unnecessary-qualifier": ["error"],
     "@typescript-eslint/no-unnecessary-type-arguments": ["warn"],
     "@typescript-eslint/prefer-nullish-coalescing": ["warn"],
-    "@typescript-eslint/restrict-plus-operands": [
-      "error",
-      {"checkCompoundAssignments": true},
-    ],
+    "@typescript-eslint/restrict-plus-operands": ["error"],
     "@typescript-eslint/switch-exhaustiveness-check": ["warn"],
     "require-await": "off",
     "@typescript-eslint/require-await": ["warn"],
