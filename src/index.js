@@ -7,6 +7,7 @@ const cfgTypescript = require("./config/typescript.js");
 const cfgDeprecation = require("./config/deprecation.js");
 const cfgPromise = require("./config/promise.js");
 const cfgMocha = require("./config/mocha.js");
+const {dependencyReportKey} = require("./consts.js");
 
 const defaultConfigBase = {
   env: {
@@ -46,8 +47,8 @@ const getOverride = (
 /**
  * Apply a preset configuration to a preset object
  */
-const applyConfig = (source, config, allOptions) => typeof source === "function"
-  ? source(config, allOptions)
+const applyConfig = (source, config, allOptions, dependencies) => typeof source === "function"
+  ? source(config, allOptions, dependencies)
   : source;
 
 /** Add a plugin to the plugins list */
@@ -56,8 +57,9 @@ const addPlugins = (
   presetPlugins,
   presetConfig,
   allOptions,
+  dependencies,
 ) => {
-  const newPlugins = applyConfig(presetPlugins, presetConfig, allOptions);
+  const newPlugins = applyConfig(presetPlugins, presetConfig, allOptions, dependencies);
   if (!newPlugins) return;
 
   if (!config.plugins) {
@@ -79,8 +81,9 @@ const addExtends = (
   presetExtends,
   presetConfig,
   allOptions,
+  dependencies,
 ) => {
-  const newExtends = applyConfig(presetExtends, presetConfig, allOptions);
+  const newExtends = applyConfig(presetExtends, presetConfig, allOptions, dependencies);
   if (!newExtends) return;
 
   if (!config.extends) {
@@ -101,8 +104,9 @@ const addEnvs = (
   config,
   presetEnvs,
   presetConfig,
+  dependencies,
 ) => {
-  const newEnvs = applyConfig(presetEnvs, presetConfig);
+  const newEnvs = applyConfig(presetEnvs, presetConfig, undefined, dependencies);
   if (!newEnvs) return;
 
   if (!config.env) {
@@ -121,8 +125,9 @@ const addRules = (
   presetRules,
   presetConfig,
   allOptions,
+  dependencies,
 ) => {
-  const newRules = applyConfig(presetRules, presetConfig, allOptions);
+  const newRules = applyConfig(presetRules, presetConfig, allOptions, dependencies);
   if (!newRules) return;
 
   if (!config.rules) {
@@ -140,8 +145,9 @@ const addParserOptions = (
   config,
   presetParserOptions,
   presetConfig,
+  dependencies,
 ) => {
-  const newParserOptions = applyConfig(presetParserOptions, presetConfig);
+  const newParserOptions = applyConfig(presetParserOptions, presetConfig, undefined, dependencies);
   if (!newParserOptions) return;
 
   if (!config.parserOptions) {
@@ -162,9 +168,10 @@ const addSettings = (
   presetSettings,
   presetConfig,
   allOptions,
+  dependencies,
 ) => {
   const newSettings = typeof presetSettings === "function"
-    ? presetSettings(presetConfig, allOptions)
+    ? presetSettings(presetConfig, allOptions, dependencies)
     : presetSettings;
   if (!newSettings) return;
 
@@ -185,8 +192,9 @@ const setParser = (
   config,
   presetParser,
   presetConfig,
+  dependencies,
 ) => {
-  const newParser = applyConfig(presetParser, presetConfig);
+  const newParser = applyConfig(presetParser, presetConfig, undefined, dependencies);
   if (!newParser) return;
 
   config.parser = newParser;
@@ -221,28 +229,34 @@ const presetsOrder = [
 ];
 
 /**
- * Merge entries from a preset
+ * Merge entries from a preset.
+ *
+ * `dependencies` is an optiona Set<string> where the preset can add its required dependencies.
  */
 const mergePreset = (
   config,
   presetDef,
   presetConfig,
   allOptions,
+  dependencies,
 ) => {
-  setParser(config, presetDef.parser, presetConfig);
-  addParserOptions(config, presetDef.parserOptions, presetConfig);
-  addSettings(config, presetDef.settings, presetConfig, allOptions);
-  addEnvs(config, presetDef.env, presetConfig);
-  addPlugins(config, presetDef.plugins, presetConfig, allOptions);
-  addExtends(config, presetDef.extendsBase, presetConfig, allOptions);
-  addRules(config, presetDef.rules, presetConfig, allOptions);
+  if (dependencies && presetDef.dependencies) {
+    for (const dependency of presetDef.dependencies) dependencies.add(dependency);
+  }
+  setParser(config, presetDef.parser, presetConfig, dependencies);
+  addParserOptions(config, presetDef.parserOptions, presetConfig, dependencies);
+  addSettings(config, presetDef.settings, presetConfig, allOptions, dependencies);
+  addEnvs(config, presetDef.env, presetConfig, dependencies);
+  addPlugins(config, presetDef.plugins, presetConfig, allOptions, dependencies);
+  addExtends(config, presetDef.extendsBase, presetConfig, allOptions, dependencies);
+  addRules(config, presetDef.rules, presetConfig, allOptions, dependencies);
   if (presetDef.overrides) {
     const actualOverrides = (typeof presetDef.overrides === "function")
-      ? presetDef.overrides(presetConfig, allOptions)
+      ? presetDef.overrides(presetConfig, allOptions, dependencies)
       : presetDef.overrides;
     actualOverrides.forEach(presetOverride => {
       const overrideConfig = getOverride(config, presetOverride.files);
-      mergePreset(overrideConfig, presetOverride, presetConfig, allOptions);
+      mergePreset(overrideConfig, presetOverride, presetConfig, allOptions, dependencies);
     });
   }
 };
@@ -253,6 +267,7 @@ const mergePreset = (
 const mergeAllPresets = (
   config,
   options,
+  dependencies,
 ) => {
   presetsOrder.forEach(presetName => {
     const presetConfig = options[presetName];
@@ -263,9 +278,13 @@ const mergeAllPresets = (
       presets[presetName],
       presetConfig,
       options,
+      dependencies,
     );
   });
 };
+
+// eslint-disable-next-line no-process-env
+const addDependencies = () => process.env[dependencyReportKey] === "1";
 
 module.exports = (
   eslintConfig,
@@ -280,7 +299,8 @@ module.exports = (
   if (config.promise === undefined) config.promise = true;
   if (config.import === undefined) config.import = true;
   if (config.deprecation === undefined) config.deprecation = true;
-
-  mergeAllPresets(result, config);
+  const dependencies = addDependencies() ? new Set() : undefined;
+  mergeAllPresets(result, config, dependencies);
+  if (dependencies) return dependencies;
   return result;
 };

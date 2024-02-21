@@ -1,4 +1,5 @@
 module.exports = {
+  dependencies: ["eslint-plugin-mocha"],
   overrides: (presetConfig, allOptions) => {
     let config = {
       fileFilter: [
@@ -23,7 +24,6 @@ module.exports = {
       };
     }
     const extendsBase = ["plugin:mocha/recommended"];
-    if (config.chai) extendsBase.push("plugin:chai-friendly/recommended");
     const mochaOverride = {
       files: config.fileFilter,
       env: {mocha: true},
@@ -33,6 +33,7 @@ module.exports = {
         "mocha/no-mocha-arrows": "off",
         "prefer-arrow-callback": "off",
         "mocha/prefer-arrow-callback": ["warn", {"allowUnboundThis": false}],
+        "func-names": "off",
       },
     };
     if (config.expectHelper) {

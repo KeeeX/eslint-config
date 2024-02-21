@@ -1,11 +1,14 @@
 {
   "name": "@keeex/eslint-config",
   "description": "Common eslint configuration",
-  "version": "1.11.6",
+  "version": "1.12.0",
   "main": "src/index.js",
   "files": [
     "src/**/*.js"
   ],
+  "bin": {
+    "eslint-depcheck": "src/bin/eslint-depcheck.js"
+  },
   "scripts": {
     "check": "npx eslint .",
     "prepublishOnly": "publish_check.sh",
@@ -25,17 +28,15 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^8.56.0",
-    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-i": "^2.29.1",
     "eslint-plugin-promise": "^6.1.1"
   },
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": "6.x||7.x",
     "@typescript-eslint/parser": "6.x||7.x",
     "eslint": "8.x",
-    "eslint-import-resolver-typescript": "2.x||3.x",
-    "eslint-plugin-chai-friendly": "0.x",
     "eslint-plugin-deprecation": "1.x||2.x",
-    "eslint-plugin-import": "2.x",
+    "eslint-plugin-i": "^2.29.1",
     "eslint-plugin-mocha": "10.x",
     "eslint-plugin-promise": "6.x",
     "eslint-plugin-react": "7.x",
@@ -62,13 +63,10 @@
     "eslint-plugin-promise": {
       "optional": true
     },
-    "eslint-plugin-import": {
+    "eslint-plugin-i": {
       "optional": true
     },
     "eslint-plugin-react-native": {
-      "optional": true
-    },
-    "eslint-plugin-chai-friendly": {
       "optional": true
     },
     "eslint-plugin-deprecation": {
@@ -78,9 +76,6 @@
       "optional": true
     },
     "eslint-plugin-mocha": {
-      "optional": true
-    },
-    "eslint-import-resolver-typescript": {
       "optional": true
     }
   },

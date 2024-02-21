@@ -1,4 +1,5 @@
 module.exports = {
+  dependencies: ["eslint-plugin-promise"],
   plugins: ["promise"],
   extendsBase: ["plugin:promise/recommended"],
   rules: {

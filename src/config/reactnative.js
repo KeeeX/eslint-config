@@ -1,4 +1,5 @@
 module.exports = {
+  dependencies: ["eslint-plugin-react-native"],
   plugins: [
     "react",
     "react-native",

@@ -269,6 +269,7 @@ const rulesBase = {
 };
 
 module.exports = {
+  dependencies: ["@typescript-eslint/eslint-plugin", "@typescript-eslint/parser"],
   overrides: [
     {
       files: [
@@ -295,7 +296,7 @@ module.exports = {
           ? extendsBaseType
           : [];
         const importExtends = allOptions["import"]
-          ? ["plugin:import/typescript"]
+          ? ["plugin:i/typescript"]
           : [];
         return [
           ...typescriptBase,
@@ -303,8 +304,11 @@ module.exports = {
           ...importExtends,
         ];
       },
-      plugins: (presetOptions, allOptions) => {
-        if (useTSDoc(allOptions)) return ["eslint-plugin-tsdoc"];
+      plugins: (presetOptions, allOptions, dependencies) => {
+        if (useTSDoc(allOptions)) {
+          if (dependencies) dependencies.add("eslint-plugin-tsdoc");
+          return ["eslint-plugin-tsdoc"];
+        }
       },
       rules: (presetOptions, allOptions) => {
         // There seem to be no way for now to have import understand that ".js" imports should refer
@@ -315,8 +319,9 @@ module.exports = {
         // If this change in the future, restore full ts-resolver support from import plugin.
         const importOverride = allOptions.import
           ? {
-            "import/no-unresolved": "off",
-            "import/no-cycle": "off",
+            "i/no-unresolved": "off",
+            "i/no-cycle": "off",
+            "i/named": "off",
           }
           : undefined;
         const typesOverride = useTypes(presetOptions)
@@ -324,6 +329,9 @@ module.exports = {
           : undefined;
         const deprecationOverride = useDeprecation(presetOptions, allOptions)
           ? {"deprecation/deprecation": "warn"}
+          : undefined;
+        const reactOverride = allOptions.jsx
+          ? {"react/sort-comp": "off"}
           : undefined;
         const tsdoc = useTSDoc(allOptions)
           ? {"tsdoc/syntax": "warn"}
@@ -333,6 +341,7 @@ module.exports = {
           ...tsdoc,
           ...typesOverride,
           ...importOverride,
+          ...reactOverride,
           ...deprecationOverride,
         };
       },
