@@ -40,7 +40,7 @@ const runOn = (pkgJson, eslintConfigPath) => {
   console.log("Reading current configuration");
   // eslint-disable-next-line no-process-env
   process.env[dependencyReportKey] = "1";
-  // eslint-disable-next-line global-require, import/no-dynamic-require
+  // eslint-disable-next-line global-require, i/no-dynamic-require
   const requiredDependencies = require(eslintConfigPath);
   const report = {};
   console.log("Checking dependencies status");
