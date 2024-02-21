@@ -1,4 +1,5 @@
 module.exports = {
+  dependencies: ["eslint-plugin-mocha"],
   overrides: (presetConfig, allOptions) => {
     let config = {
       fileFilter: [

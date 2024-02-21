@@ -1,6 +1,7 @@
 const {jsxIndent} = require("./common.js");
 
 module.exports = {
+  dependencies: ["eslint-plugin-react"],
   settings: presetConfig => {
     const version = typeof presetConfig === "string"
       ? presetConfig

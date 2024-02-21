@@ -6,6 +6,9 @@
   "files": [
     "src/**/*.js"
   ],
+  "bin": {
+    "eslint-depcheck": "src/bin/eslint-depcheck.js"
+  },
   "scripts": {
     "check": "npx eslint .",
     "prepublishOnly": "publish_check.sh",
@@ -25,6 +28,7 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^8.56.0",
+    "eslint-plugin-i": "^2.29.1",
     "eslint-plugin-promise": "^6.1.1"
   },
   "peerDependencies": {

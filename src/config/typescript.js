@@ -269,6 +269,7 @@ const rulesBase = {
 };
 
 module.exports = {
+  dependencies: ["@typescript-eslint/eslint-plugin", "@typescript-eslint/parser"],
   overrides: [
     {
       files: [
@@ -303,8 +304,11 @@ module.exports = {
           ...importExtends,
         ];
       },
-      plugins: (presetOptions, allOptions) => {
-        if (useTSDoc(allOptions)) return ["eslint-plugin-tsdoc"];
+      plugins: (presetOptions, allOptions, dependencies) => {
+        if (useTSDoc(allOptions)) {
+          if (dependencies) dependencies.add("eslint-plugin-tsdoc");
+          return ["eslint-plugin-tsdoc"];
+        }
       },
       rules: (presetOptions, allOptions) => {
         // There seem to be no way for now to have import understand that ".js" imports should refer

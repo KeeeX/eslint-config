@@ -31,6 +31,7 @@ const DEFAULT_CYCLE_DEPTH = 3;
 
 module.exports = {
   plugins: ["i"],
+  dependencies: ["eslint-plugin-i"],
   rules: presetConfig => {
     let importDepth;
     if (

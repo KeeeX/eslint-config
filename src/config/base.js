@@ -6,6 +6,7 @@ const {
 } = require("./common.js");
 
 module.exports = {
+  dependencies: ["eslint"],
   extendsBase: ["eslint:recommended"],
   rules: {
     "no-console": ["warn"],
