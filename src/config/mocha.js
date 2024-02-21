@@ -33,6 +33,7 @@ module.exports = {
         "mocha/no-mocha-arrows": "off",
         "prefer-arrow-callback": "off",
         "mocha/prefer-arrow-callback": ["warn", {"allowUnboundThis": false}],
+        "func-names": "off",
       },
     };
     if (config.expectHelper) {
