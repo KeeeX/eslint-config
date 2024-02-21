@@ -326,6 +326,9 @@ module.exports = {
         const deprecationOverride = useDeprecation(presetOptions, allOptions)
           ? {"deprecation/deprecation": "warn"}
           : undefined;
+        const reactOverride = allOptions.jsx
+          ? {"react/sort-comp": "off"}
+          : undefined;
         const tsdoc = useTSDoc(allOptions)
           ? {"tsdoc/syntax": "warn"}
           : undefined;
@@ -334,6 +337,7 @@ module.exports = {
           ...tsdoc,
           ...typesOverride,
           ...importOverride,
+          ...reactOverride,
           ...deprecationOverride,
         };
       },
