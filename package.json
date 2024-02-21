@@ -25,7 +25,6 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^8.56.0",
-    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-promise": "^6.1.1"
   },
   "peerDependencies": {
@@ -35,7 +34,7 @@
     "eslint-import-resolver-typescript": "2.x||3.x",
     "eslint-plugin-chai-friendly": "0.x",
     "eslint-plugin-deprecation": "1.x||2.x",
-    "eslint-plugin-import": "2.x",
+    "eslint-plugin-i": "^2.29.1",
     "eslint-plugin-mocha": "10.x",
     "eslint-plugin-promise": "6.x",
     "eslint-plugin-react": "7.x",
@@ -62,7 +61,7 @@
     "eslint-plugin-promise": {
       "optional": true
     },
-    "eslint-plugin-import": {
+    "eslint-plugin-i": {
       "optional": true
     },
     "eslint-plugin-react-native": {

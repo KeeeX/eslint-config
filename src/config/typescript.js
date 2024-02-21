@@ -295,7 +295,7 @@ module.exports = {
           ? extendsBaseType
           : [];
         const importExtends = allOptions["import"]
-          ? ["plugin:import/typescript"]
+          ? ["plugin:i/typescript"]
           : [];
         return [
           ...typescriptBase,
@@ -315,8 +315,9 @@ module.exports = {
         // If this change in the future, restore full ts-resolver support from import plugin.
         const importOverride = allOptions.import
           ? {
-            "import/no-unresolved": "off",
-            "import/no-cycle": "off",
+            "i/no-unresolved": "off",
+            "i/no-cycle": "off",
+            "i/named": "off",
           }
           : undefined;
         const typesOverride = useTypes(presetOptions)
