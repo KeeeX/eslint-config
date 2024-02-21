@@ -23,7 +23,6 @@ module.exports = {
       };
     }
     const extendsBase = ["plugin:mocha/recommended"];
-    if (config.chai) extendsBase.push("plugin:chai-friendly/recommended");
     const mochaOverride = {
       files: config.fileFilter,
       env: {mocha: true},
