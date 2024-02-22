@@ -42,6 +42,7 @@ const runOn = (pkgJson, eslintConfigPath) => {
   process.env[dependencyReportKey] = "1";
   // eslint-disable-next-line global-require, i/no-dynamic-require
   const requiredDependencies = require(eslintConfigPath);
+  requiredDependencies.add("@keeex/eslint-config");
   const report = {};
   console.log("Checking dependencies status");
   for (const dep of requiredDependencies) {
