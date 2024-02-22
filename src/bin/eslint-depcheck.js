@@ -7,7 +7,7 @@ const {dependencyReportKey} = require("../consts.js");
 
 /** List of previously used dependencies that could be removed */
 const removedDependencies = [
-  "eslint-plugin-imports",
+  "eslint-plugin-import",
   "eslint-import-resolver-typescript",
   "eslint-plugin-chai-friendly",
 ];
