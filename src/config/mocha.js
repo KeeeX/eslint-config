@@ -34,6 +34,7 @@ module.exports = {
         "prefer-arrow-callback": "off",
         "mocha/prefer-arrow-callback": ["warn", {"allowUnboundThis": false}],
         "func-names": "off",
+        "no-invalid-this": "off",
       },
     };
     if (config.expectHelper) {

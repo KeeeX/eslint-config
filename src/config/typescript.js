@@ -218,6 +218,7 @@ const rulesBase = {
     },
   ],
   "no-shadow": "off",
+  "no-invalid-this": "off",
   "@typescript-eslint/no-shadow": ["warn"],
   "@typescript-eslint/no-non-null-asserted-optional-chain": ["error"],
   "@typescript-eslint/parameter-properties": ["error"],
