@@ -61,7 +61,7 @@ module.exports = {
     "react/no-unused-state": ["warn"],
     "react/no-will-update-set-state": ["error"],
     "react/prefer-es6-class": ["warn"],
-    "react/require-default-props": ["warn"],
+    "react/require-default-props": ["off"],
     "react/self-closing-comp": ["warn"],
     "react/sort-comp": [
       "warn",
