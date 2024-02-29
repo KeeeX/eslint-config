@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.12.4 2024-02-29 15:35:59 +0100
+
+### Changed
+
+- [#12] Remove `defaultProps` for JSX
+
+### Security
+
+- Update
+
 ## v1.12.3 2024-02-22 10:56:10 +0100
 
 ### Added
