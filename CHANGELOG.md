@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.12.5 2024-06-03 16:16:27 +0200
+
+### Fixed
+
+- Updated dependency
+
 ## v1.12.4 2024-02-29 15:35:59 +0100
 
 ### Changed
