@@ -1,7 +1,7 @@
 {
   "name": "@keeex/eslint-config",
   "description": "Common eslint configuration",
-  "version": "1.12.4",
+  "version": "1.12.5",
   "main": "src/index.js",
   "files": [
     "src/**/*.js"
@@ -35,7 +35,7 @@
     "@typescript-eslint/eslint-plugin": "6.x||7.x",
     "@typescript-eslint/parser": "6.x||7.x",
     "eslint": "8.x",
-    "eslint-plugin-deprecation": "1.x||2.x",
+    "eslint-plugin-deprecation": "1.x||2.x||3.x",
     "eslint-plugin-i": "^2.29.1",
     "eslint-plugin-mocha": "10.x",
     "eslint-plugin-promise": "6.x",
