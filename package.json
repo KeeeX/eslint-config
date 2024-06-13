@@ -1,11 +1,22 @@
 {
   "name": "@keeex/eslint-config",
   "description": "Common eslint configuration",
+  "tslib": {
+    "knip": {
+      "entry": [
+        "index.ts"
+      ]
+    },
+    "noDeclarations": true,
+    "testPattern": "none",
+    "typedoc": false
+  },
   "version": "1.12.5",
   "main": "src/index.js",
   "files": [
     "src/**/*.js"
   ],
+  "type": "module",
   "bin": {
     "eslint-depcheck": "src/bin/eslint-depcheck.js"
   },
@@ -27,22 +38,33 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@keeex/tslib": "^1.21.0",
+    "@types/eslint": "^8.56.10",
+    "@types/eslint__eslintrc": "^2.1.1",
+    "@types/eslint__js": "^8.42.3",
+    "@types/eslint-plugin-mocha": "^10.4.0",
     "eslint": "^8.57.0",
-    "eslint-plugin-i": "^2.29.1",
-    "eslint-plugin-promise": "^6.1.1"
+    "eslint-plugin-deprecation": "^3.0.0",
+    "eslint-plugin-import-x": "*",
+    "eslint-plugin-mocha": "10.x",
+    "eslint-plugin-promise": "^6.2.0",
+    "eslint-plugin-react": "7.x",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-tsdoc": "0.x",
+    "knip": "^5.18.2"
   },
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": "6.x||7.x",
     "@typescript-eslint/parser": "6.x||7.x",
     "eslint": "8.x",
     "eslint-plugin-deprecation": "1.x||2.x||3.x",
-    "eslint-plugin-i": "^2.29.1",
-    "eslint-plugin-mocha": "10.x",
+    "eslint-plugin-import-x": "^0.5.1",
+    "eslint-plugin-mocha": "^10.4.3",
     "eslint-plugin-promise": "6.x",
-    "eslint-plugin-react": "7.x",
+    "eslint-plugin-react": "^7.34.2",
     "eslint-plugin-react-hooks": "4.x",
     "eslint-plugin-react-native": "4.x",
-    "eslint-plugin-tsdoc": "0.x"
+    "eslint-plugin-tsdoc": "^0.3.0"
   },
   "peerDependenciesMeta": {
     "eslint": {
@@ -81,5 +103,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@eslint/compat": "^1.1.0",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.4.0",
+    "typescript-eslint": "^7.12.0"
   }
 }

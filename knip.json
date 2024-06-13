@@ -1,0 +1,21 @@
+{
+  "entry": [
+    "src/index.ts!"
+  ],
+  "project": [
+    "src/consts.ts!",
+    "src/config.ts!",
+    "src/index.ts!",
+    "src/modules/typescript.ts!",
+    "src/modules/common.ts!",
+    "src/modules/base.ts!",
+    "src/modules/deprecation.ts!",
+    "src/modules/import.ts!",
+    "src/modules/jsx.ts!"
+  ],
+  "ignoreBinaries": [],
+  "ignoreDependencies": [],
+  "rules": {
+    "duplicates": "off"
+  }
+}

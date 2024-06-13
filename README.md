@@ -104,10 +104,8 @@ Import cycle can be either `false` to disable it, `true` to enable it with a def
 any number to control the maximum depth of the scan.
 
 ### TypeScript
-If `typescript` is set to true, only basic typescript rules are enforced.
-Instead, it is advised to provide the path to the typescript configuration file
-(typically `tsconfig.json`), in which case rules that requires typing
-informations are enabled.
+If `typescript` is set to true, it will lookg for `tsconfig.json`.
+Optionally, a custom path to the TypeScript config JSON file can be provided.
 
 ### TSDoc
 For TypeScript projects, the `eslint-plugin-tsdoc` is enabled by default.

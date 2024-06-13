@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "incremental": false,
+    "composite": false,
+    "target": "es2022",
+    "lib": [
+      "es2023",
+      "dom",
+      "dom.iterable",
+      "webworker"
+    ],
+    "module": "nodenext",
+    "rootDir": "./src",
+    "moduleResolution": "nodenext",
+    "declaration": false,
+    "declarationMap": false,
+    "emitDeclarationOnly": false,
+    "sourceMap": false,
+    "outDir": "./lib",
+    "removeComments": false,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "emitBOM": false,
+    "newLine": "lf",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ]
+  },
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx"
+  ],
+  "ts-node": {
+    "swc": true,
+    "files": true
+  },
+  "files": [
+    "types/eslint-plugin-react.d.ts"
+  ]
+}
