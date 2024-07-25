@@ -29,7 +29,7 @@
   "devDependencies": {
     "eslint": "^8.57.0",
     "eslint-plugin-i": "^2.29.1",
-    "eslint-plugin-promise": "^6.1.1"
+    "eslint-plugin-promise": "^7.0.0"
   },
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": "6.x||7.x",
@@ -38,7 +38,7 @@
     "eslint-plugin-deprecation": "1.x||2.x||3.x",
     "eslint-plugin-i": "^2.29.1",
     "eslint-plugin-mocha": "10.x",
-    "eslint-plugin-promise": "6.x",
+    "eslint-plugin-promise": "6.x||7.x",
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "4.x",
     "eslint-plugin-react-native": "4.x",
