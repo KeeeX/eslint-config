@@ -71,11 +71,13 @@ const runOn = (pkgJson, eslintConfigPath) => {
   }
   if (toInstall.length > 0) {
     console.log(`Installing dependencies: ${toInstall.join(", ")}`);
-    cp.spawnSync("npm", ["install", "--save-dev", ...toInstall]);
+    const res = cp.spawnSync("npm", ["install", "--save-dev", ...toInstall]);
+    if (res.status !== 0) process.exitCode = 1;
   }
   if (toRemove.length > 0) {
     console.log(`Removing dependencies: ${toRemove.join(", ")}`);
-    cp.spawnSync("npm", ["uninstall", ...toRemove]);
+    const res = cp.spawnSync("npm", ["uninstall", ...toRemove]);
+    if (res.status !== 0) process.exitCode = 1;
   }
 };
 
