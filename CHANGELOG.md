@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.12.6 2024-07-25 16:26:28 +0200
+
+### Fixed
+
+- [#13] Failure to install dependency returns exit code 1
+
+### Security
+
+- Update
+
 ## v1.12.5 2024-06-03 16:16:27 +0200
 
 ### Fixed
