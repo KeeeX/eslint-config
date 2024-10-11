@@ -11,22 +11,23 @@
   ],
   "description": "Common eslint configuration",
   "devDependencies": {
-    "eslint": "^8.57.0",
-    "eslint-plugin-i": "^2.29.1",
+    "eslint": "^9.12.0",
+    "eslint-plugin-import-x": "*",
     "eslint-plugin-promise": "^7.0.0"
   },
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "license": "MIT",
   "main": "src/index.js",
   "name": "@keeex/eslint-config",
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": "6.x||7.x",
-    "@typescript-eslint/parser": "6.x||7.x",
-    "eslint": "8.x",
-    "eslint-plugin-deprecation": "1.x||2.x||3.x",
-    "eslint-plugin-i": "^2.29.1",
+    "@typescript-eslint/eslint-plugin": "8.x",
+    "@typescript-eslint/parser": "8.x",
+    "eslint": "9.x",
+    "eslint-plugin-import-x": "4.x",
     "eslint-plugin-mocha": "10.x",
-    "eslint-plugin-promise": "6.x||7.x",
+    "eslint-plugin-promise": "7.x",
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "4.x",
     "eslint-plugin-react-native": "4.x",
@@ -45,7 +46,7 @@
     "eslint-plugin-deprecation": {
       "optional": true
     },
-    "eslint-plugin-i": {
+    "eslint-plugin-import-x": {
       "optional": true
     },
     "eslint-plugin-mocha": {
