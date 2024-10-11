@@ -1,36 +1,24 @@
 {
-  "name": "@keeex/eslint-config",
-  "description": "Common eslint configuration",
-  "version": "1.12.6",
-  "main": "src/index.js",
-  "files": [
-    "src/**/*.js"
-  ],
+  "author": "KeeeX SAS",
   "bin": {
     "eslint-depcheck": "src/bin/eslint-depcheck.js"
   },
-  "scripts": {
-    "check": "npx eslint .",
-    "prepublishOnly": "publish_check.sh",
-    "test": "echo No test for this project"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/KeeeX/eslint-config.git"
-  },
-  "author": "KeeeX SAS",
   "contributors": [
     {
-      "name": "Gabriel Paul \"Cley Faye\" Risterucci",
-      "email": "gabriel@keeex.net"
+      "email": "gabriel@keeex.net",
+      "name": "Gabriel Paul \"Cley Faye\" Risterucci"
     }
   ],
-  "license": "MIT",
+  "description": "Common eslint configuration",
   "devDependencies": {
     "eslint": "^8.57.0",
     "eslint-plugin-i": "^2.29.1",
     "eslint-plugin-promise": "^7.0.0"
   },
+  "files": ["src"],
+  "license": "MIT",
+  "main": "src/index.js",
+  "name": "@keeex/eslint-config",
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": "6.x||7.x",
     "@typescript-eslint/parser": "6.x||7.x",
@@ -45,41 +33,51 @@
     "eslint-plugin-tsdoc": "0.x"
   },
   "peerDependenciesMeta": {
-    "eslint": {
-      "optional": false
-    },
     "@typescript-eslint/eslint-plugin": {
       "optional": true
     },
     "@typescript-eslint/parser": {
       "optional": true
     },
-    "eslint-plugin-tsdoc": {
-      "optional": true
+    "eslint": {
+      "optional": false
     },
-    "eslint-plugin-react": {
-      "optional": true
-    },
-    "eslint-plugin-promise": {
+    "eslint-plugin-deprecation": {
       "optional": true
     },
     "eslint-plugin-i": {
       "optional": true
     },
-    "eslint-plugin-react-native": {
+    "eslint-plugin-mocha": {
       "optional": true
     },
-    "eslint-plugin-deprecation": {
+    "eslint-plugin-promise": {
+      "optional": true
+    },
+    "eslint-plugin-react": {
       "optional": true
     },
     "eslint-plugin-react-hooks": {
       "optional": true
     },
-    "eslint-plugin-mocha": {
+    "eslint-plugin-react-native": {
+      "optional": true
+    },
+    "eslint-plugin-tsdoc": {
       "optional": true
     }
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KeeeX/eslint-config.git"
+  },
+  "scripts": {
+    "check": "npx eslint .",
+    "prepublishOnly": "publish_check.sh",
+    "test": "echo No test for this project"
+  },
+  "version": "1.12.6"
 }
