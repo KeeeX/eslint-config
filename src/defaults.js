@@ -1,0 +1,36 @@
+/** List of ignored patterns by default */
+export const ignores = ["lib", "web", "gen", "src/gen"];
+
+export const globals = [
+  {
+    globals: {
+      builtin: true,
+      es2025: true,
+    },
+  },
+  {
+    files: ["**/*.cjs"],
+    globals: {commonjs: true},
+  },
+  {
+    files: ["src/webapp/**/*"],
+    globals: {
+      browser: true,
+      serviceworker: true,
+    },
+  },
+  {
+    files: [
+      "src/bin/**/*",
+      "src/server/**/*",
+    ],
+    globals: {node: true},
+  },
+  {
+    files: [
+      "src/tests/**/*",
+      "src/**/*.test.*",
+    ],
+    globals: {mocha: true},
+  },
+];

@@ -1,7 +1,8 @@
 {
   "author": "KeeeX SAS",
   "bin": {
-    "eslint-depcheck": "src/bin/eslint-depcheck.js"
+    "kxeslint-setup": "src/bin/kxeslint-setup.js",
+    "kxeslint-dump": "src/bin/kxeslint-dump.js"
   },
   "contributors": [
     {
@@ -11,9 +12,11 @@
   ],
   "description": "Common eslint configuration",
   "devDependencies": {
+    "@eslint/js": "^9.12.0",
     "eslint": "^9.12.0",
     "eslint-plugin-import-x": "*",
-    "eslint-plugin-promise": "^7.0.0"
+    "eslint-plugin-promise": "^7.0.0",
+    "globals": "*"
   },
   "files": [
     "src"
@@ -22,6 +25,7 @@
   "main": "src/index.js",
   "name": "@keeex/eslint-config",
   "peerDependencies": {
+    "@eslint/js": "^9.12.0",
     "@typescript-eslint/eslint-plugin": "8.x",
     "@typescript-eslint/parser": "8.x",
     "eslint": "9.x",
@@ -31,7 +35,8 @@
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "4.x",
     "eslint-plugin-react-native": "4.x",
-    "eslint-plugin-tsdoc": "0.x"
+    "eslint-plugin-tsdoc": "0.x",
+    "globals": "^15.11.0"
   },
   "peerDependenciesMeta": {
     "@typescript-eslint/eslint-plugin": {
@@ -76,9 +81,12 @@
     "url": "https://github.com/KeeeX/eslint-config.git"
   },
   "scripts": {
+    "bin:dump": "node src/bin/kxeslint-dump.js",
+    "bin:setup": "node src/bin/kxeslint-setup.js",
     "check": "npx eslint .",
     "prepublishOnly": "publish_check.sh",
     "test": "echo No test for this project"
   },
+  "type": "module",
   "version": "1.12.6"
 }
