@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 import * as fs from "node:fs";
 import * as path from "node:path";
 import process from "node:process";
@@ -11,4 +12,5 @@ if (!fs.existsSync(eslintFile)) {
 }
 
 const eslintConfig = await import(eslintFile);
-console.log(JSON.stringify(eslintConfig, null, 2));
+const JSON_INDENT = 2;
+console.log(JSON.stringify(eslintConfig, null, JSON_INDENT));

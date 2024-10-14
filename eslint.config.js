@@ -1,3 +1,5 @@
 import eslintConfig from "./src/index.js";
 
-export default await eslintConfig({});
+export default await eslintConfig({
+  ignores: ["src_old"],
+});
