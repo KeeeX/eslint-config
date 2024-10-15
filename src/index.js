@@ -1,9 +1,9 @@
-import * as defaults from "./defaults.js";
 import * as lazy from "./config/lazy.js";
+import * as defaults from "./defaults.js";
 
-import {clearConfig} from "./sections.js";
 import {configToDependencies} from "./dependencies.js";
 import {isDepCheck} from "./environ.js";
+import {clearConfig} from "./sections.js";
 
 /** Setup all defaults in the eslintParams config */
 const configDefaults = eslintParams => ({
@@ -49,6 +49,7 @@ const eslintConfig = async eslintParams => {
   } else {
     if (!fullConfig.noBase) (await lazy.base()).apply(res, fullConfig);
     if (fullConfig.globals) (await lazy.globals()).apply(res, fullConfig);
+    if (fullConfig.typescript) (await lazy.typescript()).apply(res, fullConfig);
     if (fullConfig.import) (await lazy.importx()).apply(res, fullConfig);
     clearConfig(res);
   }

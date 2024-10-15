@@ -16,7 +16,8 @@
     "eslint": "9.x",
     "eslint-plugin-import-x": "4.x",
     "eslint-plugin-promise": "7.x",
-    "globals": "15.x"
+    "globals": "15.x",
+    "typescript-eslint": "8.x"
   },
   "files": [
     "src"
@@ -26,8 +27,6 @@
   "name": "@keeex/eslint-config",
   "peerDependencies": {
     "@eslint/js": "^9.12.0",
-    "@typescript-eslint/eslint-plugin": "8.x",
-    "@typescript-eslint/parser": "8.x",
     "eslint": "9.x",
     "eslint-plugin-import-x": "4.x",
     "eslint-plugin-mocha": "10.x",
@@ -36,15 +35,10 @@
     "eslint-plugin-react-hooks": "4.x",
     "eslint-plugin-react-native": "4.x",
     "eslint-plugin-tsdoc": "0.x",
-    "globals": "^15.11.0"
+    "globals": "^15.11.0",
+    "typescript-eslint": "^8.9.0"
   },
   "peerDependenciesMeta": {
-    "@typescript-eslint/eslint-plugin": {
-      "optional": true
-    },
-    "@typescript-eslint/parser": {
-      "optional": true
-    },
     "eslint": {
       "optional": false
     },
@@ -70,6 +64,9 @@
       "optional": true
     },
     "eslint-plugin-tsdoc": {
+      "optional": true
+    },
+    "typescript-eslint": {
       "optional": true
     }
   },

@@ -26,9 +26,9 @@ export const apply = (configResult, eslintConfig) => {
       "import-x/no-anonymous-default-export": "warn",
       "import-x/no-commonjs": "error",
       "import-x/no-empty-named-blocks": "warn",
-      "import-x/no-extraneous-dependencies": ["error", {includeTypes: true}],
       "import-x/no-named-default": "error",
       "import-x/no-self-import": "error",
+      "import-x/no-unresolved": "warn",
       "import-x/no-useless-path-segments": "warn",
       "import-x/order": [
         "warn",
@@ -65,14 +65,19 @@ export const apply = (configResult, eslintConfig) => {
       },
     );
   } else {
+    sections.configureRules(override, {"import-x/no-cycle": "error"});
+  }
+  if (eslintConfig.typescript) {
     sections.configureRules(
       override,
-      {
-        "import-x/no-cycle": "error",
-      },
+      {"import-x/no-extraneous-dependencies": ["error", {includeTypes: true}]},
     );
-  }
-  if (!eslintConfig.typescript) {
+    if (eslintConfig.react) {
+      sections.sectionAddOption(override, "settings", "import-x/extensions", [".ts", ".tsx"]);
+    } else {
+      sections.sectionAddOption(override, "settings", "import-x/extensions", [".ts"]);
+    }
+  } else {
     sections.configureRules(
       override,
       {
@@ -80,5 +85,16 @@ export const apply = (configResult, eslintConfig) => {
         "import-x/no-extraneous-dependencies": "error",
       },
     );
+    if (eslintConfig.react) {
+      sections.sectionAddOption(override, "settings", "import-x/extensions", [".js", ".jsx"]);
+    }
+  }
+  if (eslintConfig.typescript) {
+    sections.sectionAddOption(override, "settings", "import-x/resolver", "typescript");
+  }
+  if (eslintConfig.react) {
+    const webOverride = sections.getNamedSection(configResult, "importx-webpack-override");
+    webOverride.files = ["src/webapp"];
+    sections.sectionAddOption(webOverride, "settings", "import-x/resolver", "webpack");
   }
 };

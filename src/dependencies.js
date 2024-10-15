@@ -7,6 +7,8 @@ const requiredDependencies = {};
 
 /** List of dependencies no longer used and that should be removed */
 const removedDependencies = [
+  "@typescript-eslint/eslint-plugin",
+  "@typescript-eslint/parser",
   "eslint-import-resolver-typescript",
   "eslint-plugin-chai-friendly",
   "eslint-plugin-i",
@@ -134,5 +136,8 @@ export const configToDependencies = eslintConfig => {
     addDependency("eslint-plugin-import-x");
     if (eslintConfig.typescript) addDependency("eslint-import-resolver-typescript");
   }
-  addDependency("eslint-plugin-promise");
-}
+  if (eslintConfig.typescript) addDependency("typescript-eslint");
+  if (eslintConfig.react) {
+    if (eslintConfig.import) addDependency("eslint-import-resolver-webpack");
+  }
+};
