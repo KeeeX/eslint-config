@@ -21,7 +21,7 @@ const getGlobalsFromConfig = configGlobals => {
 
 export const apply = (configResult, eslintConfig) => {
   const sharedGlobals = eslintConfig.globals.find(c => c.files === undefined);
-  const sharedSection = sections.getNamedSection(configResult, "shared");
+  const sharedSection = sections.getNamedSection(configResult, "keeex/shared");
   sections.sectionAddOption(
     sharedSection,
     "languageOptions",
@@ -30,7 +30,7 @@ export const apply = (configResult, eslintConfig) => {
   );
   for (const globalConfig of eslintConfig.globals) {
     if (!globalConfig.files) continue;
-    const overrideSection = sections.getNamedSection(configResult, `override-${globalConfig.files.join(",")}`);
+    const overrideSection = sections.getNamedSection(configResult, `keeex/globals-${globalConfig.files.join(",")}`);
     overrideSection.files = [...globalConfig.files];
     sections.sectionAddOption(
       overrideSection,

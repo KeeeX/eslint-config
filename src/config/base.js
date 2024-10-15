@@ -11,21 +11,22 @@ import * as sections from "../sections.js";
 // eslint-disable-next-line max-lines-per-function
 export const apply = (configResult, eslintConfig) => {
   // Basic options
-  const sharedSection = sections.getNamedSection(configResult, "shared");
+  const sharedSection = sections.getNamedSection(configResult, "keeex/shared");
   sections.sectionAddOption(sharedSection, "linterOptions", "reportUnusedDisableDirectives", true);
   sections.sectionAddOption(sharedSection, "languageOptions", "ecmaVersion", "latest");
   sections.sectionAddOption(sharedSection, "languageOptions", "sourceType", "module");
   sections.sectionAddOption(sharedSection, "languageOptions", "parserOptions", {ecmaVersion: "latest", sourceType: "module"});
   // Global ignores
   if (eslintConfig.ignores.length > 0) {
-    const globalIgnores = sections.getNamedSection(configResult, "ignores");
+    const globalIgnores = sections.getNamedSection(configResult, "keeex/ignores");
     globalIgnores.ignores = [...eslintConfig.ignores];
   }
   // Base eslint
   configResult.push(js.configs.recommended);
-  const eslintCustom = sections.getNamedSection(configResult, "eslint-recommended-override");
+  const eslintCustom = sections.getNamedSection(configResult, "keeex/eslint-override");
   sections.configureRules(
     eslintCustom,
+    "",
     {
       "array-callback-return": "error",
       "arrow-body-style": ["error", "as-needed"],

@@ -1,9 +1,6 @@
 /**
  * Get a config section by name.
  *
- * To make things easier for me, the section are named with a "hidden" `_kxconfig` property.
- * This property is stripped before returning the configuration object to avoid any issues.
- *
  * When requesting a section that doesn't exist, it is added.
  * 
  * @param configResult - The currently built eslint config object
@@ -13,8 +10,8 @@
  * The requested section, as a new entry if needed.
  */
 export const getNamedSection = (configResult, name) => {
-  for (const section of configResult) if (section._kxconfig === name) return section;
-  const newSection = {_kxconfig: name};
+  for (const section of configResult) if (section.name === name) return section;
+  const newSection = {name};
   configResult.push(newSection);
   return newSection;
 };
@@ -43,15 +40,20 @@ export const sectionAddOption = (configSection, optionGroup, optionName, value) 
 };
 
 /** Merge/create the rules property */
-export const configureRules = (configSection, rules) => {
-  configSection.rules = {...configSection.rules, ...rules};
+export const configureRules = (configSection, prefix, rules) => {
+  let prefixed = {};
+  if (prefix) {
+    for (const [name, value] of Object.entries(rules)) prefixed[`${prefix}/${name}`] = value;
+  } else {
+    prefixed = rules;
+  }
+  configSection.rules = {...configSection.rules, ...prefixed};
 };
 
 /** Remove the `_kxconfig` property from all sections and return a suitable object. */
 export const clearConfig = configResult => {
   const emptySectionsId = [];
   for (let i = 0; i < configResult.length; i++) {
-    delete configResult[i]._kxconfig;
     // We go backwards to avoid messing up the indices on deletion
     if (Object.keys(configResult[i]).length === 0) emptySectionsId.unshift(i);
   }
