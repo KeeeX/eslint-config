@@ -35,3 +35,6 @@ export const globals = [
     globals: {mocha: true},
   },
 ];
+
+/** Import cycle max depth */
+export const cycleMaxDepth = 3;

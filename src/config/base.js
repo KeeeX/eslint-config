@@ -6,13 +6,16 @@ import * as sections from "../sections.js";
 /**
  * Apply the recommended eslint configuration plus KeeeX tweaks.
  *
- * param configResult - The eslint configuration object currently being built.
+ * @param configResult - The eslint configuration object currently being built.
  */
 // eslint-disable-next-line max-lines-per-function
 export const apply = (configResult, eslintConfig) => {
   // Basic options
   const sharedSection = sections.getNamedSection(configResult, "shared");
   sections.sectionAddOption(sharedSection, "linterOptions", "reportUnusedDisableDirectives", true);
+  sections.sectionAddOption(sharedSection, "languageOptions", "ecmaVersion", "latest");
+  sections.sectionAddOption(sharedSection, "languageOptions", "sourceType", "module");
+  sections.sectionAddOption(sharedSection, "languageOptions", "parserOptions", {ecmaVersion: "latest", sourceType: "module"});
   // Global ignores
   if (eslintConfig.ignores.length > 0) {
     const globalIgnores = sections.getNamedSection(configResult, "ignores");

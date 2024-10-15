@@ -124,3 +124,15 @@ export const installAndRemoveDeps = () => {
   }
   return true;
 };
+
+/** Add all dependencies needed by the provided config */
+export const configToDependencies = eslintConfig => {
+  addDependency("eslint");
+  if (!eslintConfig.noBase) addDependency("@eslint/js");
+  if (eslintConfig.globals) addDependency("globals");
+  if (eslintConfig.import) {
+    addDependency("eslint-plugin-import-x");
+    if (eslintConfig.typescript) addDependency("eslint-import-resolver-typescript");
+  }
+  addDependency("eslint-plugin-promise");
+}
