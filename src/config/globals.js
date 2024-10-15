@@ -1,6 +1,8 @@
 import globals from "globals";
-import {addDependency} from "../dependencies.js";
+
 import * as sections from "../sections.js";
+
+const base = {builtin: true, es2025: true};
 
 /** Create the actual eslint globals object from user input */
 const getGlobalsFromConfig = configGlobals => {
@@ -18,14 +20,13 @@ const getGlobalsFromConfig = configGlobals => {
 };
 
 export const apply = (configResult, eslintConfig) => {
-  addDependency("globals");
   const sharedGlobals = eslintConfig.globals.find(c => c.files === undefined);
   const sharedSection = sections.getNamedSection(configResult, "shared");
   sections.sectionAddOption(
     sharedSection,
     "languageOptions",
     "globals",
-    getGlobalsFromConfig(sharedGlobals.globals),
+    getGlobalsFromConfig({...base, ...sharedGlobals.globals}),
   );
   for (const globalConfig of eslintConfig.globals) {
     if (!globalConfig.files) continue;

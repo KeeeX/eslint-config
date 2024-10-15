@@ -1,5 +1,6 @@
-import * as fs from "node:fs";
+/* eslint-disable no-console */
 import * as cp from "node:child_process";
+import * as fs from "node:fs";
 
 /** name => version | true */
 const requiredDependencies = {};

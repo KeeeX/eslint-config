@@ -1,9 +1,9 @@
 /**
  * Get a config section by name.
- * 
+ *
  * To make things easier for me, the section are named with a "hidden" `_kxconfig` property.
  * This property is stripped before returning the configuration object to avoid any issues.
- * 
+ *
  * When requesting a section that doesn't exist, it is added.
  * 
  * @param configResult - The currently built eslint config object
@@ -32,13 +32,13 @@ export const getNamedSection = (configResult, name) => {
  */
 export const sectionAddOption = (configSection, optionGroup, optionName, value) => {
   if (!(optionGroup in configSection)) configSection[optionGroup] = {};
-  if (value !== undefined) {
-    configSection[optionGroup][optionName] = value;
-  } else {
+  if (value === undefined) {
     if (optionName in configSection[optionGroup]) {
       delete configSection[optionGroup][optionName];
       if (Object.keys(configSection[optionGroup]).length === 0) delete configSection[optionGroup];
     }
+  } else {
+    configSection[optionGroup][optionName] = value;
   }
 };
 

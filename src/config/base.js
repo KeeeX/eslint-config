@@ -1,8 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import js from "@eslint/js";
 
-import {addDependency} from "../dependencies.js";
-
 import * as sections from "../sections.js";
 
 /**
@@ -12,8 +10,6 @@ import * as sections from "../sections.js";
  */
 // eslint-disable-next-line max-lines-per-function
 export const apply = (configResult, eslintConfig) => {
-  addDependency("eslint");
-  addDependency("@eslint/js");
   // Basic options
   const sharedSection = sections.getNamedSection(configResult, "shared");
   sections.sectionAddOption(sharedSection, "linterOptions", "reportUnusedDisableDirectives", true);
@@ -63,6 +59,7 @@ export const apply = (configResult, eslintConfig) => {
       "no-extend-native": "error",
       "no-extra-bind": "error",
       "no-extra-label": "warn",
+      "no-global-assign": "error",
       "no-implicit-coercion": "warn",
       "no-implied-eval": "error",
       "no-invalid-this": "error",
@@ -94,23 +91,23 @@ export const apply = (configResult, eslintConfig) => {
       "no-new-func": "error",
       "no-new-wrappers": "error",
       "no-object-constructor": "error",
-      "no-promise-executor-return": "error",
-      "no-self-compare": "warn",
-      "no-unmodified-loop-condition": "warn",
-      "no-unreachable-loop": "warn",
-      "no-use-before-define": "warn",
-      "no-useless-assignment": "warn",
       "no-param-reassign": "warn",
+      "no-promise-executor-return": "error",
       "no-proto": "error",
       "no-return-assign": "error",
       "no-script-url": "error",
+      "no-self-compare": "warn",
       "no-sequences": "warn",
       "no-shadow": "warn",
+      "no-shadow-restricted-names": "error",
       "no-throw-literal": "error",
       "no-undef-init": "warn",
-      "no-undefined": "error",
+      "no-unmodified-loop-condition": "warn",
       "no-unneeded-ternary": "warn",
+      "no-unreachable-loop": "warn",
       "no-unused-expressions": "warn",
+      "no-use-before-define": "warn",
+      "no-useless-assignment": "warn",
       "no-useless-call": "error",
       "no-useless-computed-key": "warn",
       "no-useless-concat": "warn",

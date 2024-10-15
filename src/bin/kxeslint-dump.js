@@ -11,6 +11,6 @@ if (!fs.existsSync(eslintFile)) {
   );
 }
 
-const eslintConfig = await import(eslintFile);
+const eslintConfig = (await import(eslintFile)).default;
 const JSON_INDENT = 2;
 console.log(JSON.stringify(eslintConfig, null, JSON_INDENT));

@@ -1,15 +1,14 @@
-import * as lazy from "./config/lazy.js";
 import * as defaults from "./defaults.js";
+import * as lazy from "./config/lazy.js";
+
 import {clearConfig} from "./sections.js";
 
 /** Setup all defaults in the eslintParams config */
-const configDefaults = eslintParams => {
-  return {
-    noBase: eslintParams?.noBase ?? false,
-    ignores: eslintParams?.ignores ?? defaults.ignores,
+const configDefaults = eslintParams => ({
     globals: eslintParams?.globals ?? defaults.globals,
-  };
-};
+    ignores: eslintParams?.ignores ?? defaults.ignores,
+    noBase: eslintParams?.noBase ?? false,
+  });
 
 /**
  * Build the eslint configuration from the provided settings.
