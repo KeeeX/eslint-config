@@ -31,7 +31,7 @@
     "eslint-plugin-import-x": "4.x",
     "eslint-plugin-mocha": "10.x",
     "eslint-plugin-promise": "7.x",
-    "eslint-plugin-react": "7.x",
+    "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-react-hooks": "4.x",
     "eslint-plugin-react-native": "4.x",
     "eslint-plugin-tsdoc": "0.x",

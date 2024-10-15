@@ -15,7 +15,16 @@ export const apply = (configResult, eslintConfig) => {
   sections.sectionAddOption(sharedSection, "linterOptions", "reportUnusedDisableDirectives", true);
   sections.sectionAddOption(sharedSection, "languageOptions", "ecmaVersion", "latest");
   sections.sectionAddOption(sharedSection, "languageOptions", "sourceType", "module");
-  sections.sectionAddOption(sharedSection, "languageOptions", "parserOptions", {ecmaVersion: "latest", sourceType: "module"});
+  sections.sectionAddOption(
+    sharedSection,
+    "languageOptions",
+    "parserOptions",
+     {
+      ecmaFeatures: eslintConfig.react ? {jsx: true} : undefined,
+      ecmaVersion: "latest",
+      sourceType: "module",
+    },
+  );
   // Global ignores
   if (eslintConfig.ignores.length > 0) {
     const globalIgnores = sections.getNamedSection(configResult, "keeex/ignores");
