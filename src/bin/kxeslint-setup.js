@@ -60,9 +60,7 @@ const defaultConfig = `
 // ${deleteLine}
 import eslintConfig from "@keeex/eslint-config";
 
-export default await eslintConfig({
-  ignores: ["lib", "web", "apidoc", "gen"],
-});
+export default await eslintConfig({});
 `.trim();
 
 /** Return true if the flat config system is ok */

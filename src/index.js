@@ -11,7 +11,7 @@ const configDefaults = eslintParams => ({
     globals: eslintParams?.globals ?? defaults.globals,
     ignores: eslintParams?.ignores ?? defaults.ignores,
     import: eslintParams?.import ?? defaults.cycleMaxDepth,
-    mocha: eslintParams?.mocha ?? false,
+    mocha: eslintParams?.mocha ?? true,
     noBase: eslintParams?.noBase ?? false,
     react: eslintParams?.react ?? false,
     typescript: eslintParams?.typescript ?? true,
@@ -42,6 +42,7 @@ const configDefaults = eslintParams => ({
  * If a number is provided, it's the maximum cycle detection depth.
  * 
  * @param [eslintParams.react] {object|false} - If trueish, enable React support.
+ * @param [eslintParams.react.reactHooks] {boolean} - Enable react-hooks stuff.
  * @param [eslintParams.react.reactNative] {boolean} - Enable react-native stuff.
  * 
  * @param [eslintParams.mocha] {boolean} - Enable mocha plugins

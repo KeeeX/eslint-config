@@ -1,176 +1,119 @@
-Common eslint configuration
-===========================
+# Common eslint configuration for KeeeX
 
-Installation
-------------
+## Installation
+The package is available on npmjs and can be installed with any package manager that supports it.
 
 ```bash
 npm install -D @keeex/eslint-config
 ```
 
-Usage
------
-Create an eslint configuration file at the root of your project named
-`.eslintrc.js` containing the following:
+## Usage
+To prepare the configuration file, you can run `npx kxeslint-setup` to create a blank config file.
+Alternatively, you can create the file yourself.
+In both cases, it will be named `eslint.config.js`.
+
+Here is all the available options with their default values:
 
 ```JavaScript
-const eslintConfig = require("@keeex/eslint-config");
-module.exports = eslintConfig(
-  {
-    base: true,
-    promise: true,
-    jsx: true,
-    import: true,
-    reacthooks: true,
-    reactnative: true,
-    typescript: "./tsconfig.json",
-    tsdoc: true,
-    deprecation: true,
-    mocha: true,
-  },
-  {
-    env: {
-      es2021: true,
-      node: true,
-    },
-  },
-);
-```
+import eslintConfig from "@keeex/eslint-config";
 
-The first argument is the configurations to pull-in. `base` is the generic
-JavaScript options, `jsx` add rules for React and JSX, `reacthook` add rules for
-React hooks and `typescript` add rules for TypeScript.
-For TypeScript, you can specify the name of your TypeScript configuration file,
-in which case more rules will be enabled.
-
-The second argument is the base eslint configuration, to specify extra options
-that are not defined by the default configuration. It can be empty if not
-needed.
-
-The default configuration is:
-
-```JavaScript
-module.exports = {
-  parser: "@typescript-eslint/parser", // only when typescript is enabled
-  env: {
-    es2021: true,
-    node: true,
-  },
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: "./tsconfig.json", // only for typescript
-  },
-  overrides: [
+export default await eslintConfig({
+  globals: [
+    {globals: {builtin: true, es2025: true}},
     {
-      files: ["webres/**/*.js", "webres/**/*.ts"],
-      env: {
-        browser: true,
-      },
+      files: ["**/*.cjs"],
+      globals: {commonjs: true},
+    },
+    {
+      files: ["src/webapp/**/*"],
+      globals: {browser: true, serviceworker: true},
+    },
+    {
+      files: ["src/bin/**/*", "src/server/**/*"],
+      globals: {node: true},
+    },
+    {
+      files: ["src/tests/**/*", "src/**/*.test.*"],
+      globals: {mocha: true},
     },
   ],
-  extends: [ /\* enabled rule bases \*/ ],
-  rules: { /\* enabled rules \*/ },
-}
+  ignores: ["lib", "web", "gen", "src/gen"],
+  import: 3,
+  mocha: true,
+  noBase: false,
+  react: {react: false, reactHooks: false, reactNative: false},
+  typescript: true,
+});
 ```
 
-When specifying a base configuration, top-level properties will override these
-defaults, and automatic rules will in turn inject themselves in top-level.
-This mean that if you specify an `overrides` top-level property in the second
-argument of eslintConfig(), the default `overrides` value will not be used, but
-if a later rule (for typescript for example) have to populate `overrides` it
-will extend whatever the current value is.
+If any of the top-level property is not defined, it will be set to its default value.
+If you want to customize the output, instead of directly exporting the return value of the function
+you can edit it by hand.
+Good luck with that.
 
-It is also appropriate to append any local-only changes to the ouptut of the
-configuration function.
+## Configuration
 
-### Promises
-Some extra rules for promises can be used by setting `promise` to true (enabled
-by default).
+### `globals`
+The `globals` property is an array of object to define which globals are available in the code.
+Each of these objects can have two properties: `files`, which is an array of globs to match the files to
+be considered, and `globals`, which is an object that can have the following properties:
 
-### Imports
+- "builtin": generic JS built-in globals
+- "browser": globals available in the browser
+- "commonjs": globals available in CommonJS scripts
+- "es2025": globals available in ES2025 scripts
+- "mocha": globals available in Mocha tests
+- "node": globals available in Node.js
+- "serviceworker": globals available in Service Workers
+- "worker": globals available in Workers
+- "custom": an object of custom identifiers to be made available, whose keys are the identifiers and
+  the values are boolean indicating if these identifiers are read-only (false) or not (true)
+
+### `ignores`
+Array of globs to globally ignore for eslint.
+
+### `import`
 Some extra rules for formatting and ordering imports can be used by setting
-`import` to true (enabled by default).
-It is possible to pass an object with the following properties instead of `true`:
+`import` to true (enabled by default with a depth of 3).
+It is possible to pass a number instead of a boolean to limit the depth of circular imports check.
+This greatly improves performances, at the risk of missing a dependency cycle.
 
-```JavaScript
-{
-  detectImportCycle: true,
-}
-```
-
-All properties are `true` by default.
-Import cycle can be either `false` to disable it, `true` to enable it with a default depth of 3, or
-any number to control the maximum depth of the scan.
-
-### TypeScript
-If `typescript` is set to true, only basic typescript rules are enforced.
-Instead, it is advised to provide the path to the typescript configuration file
-(typically `tsconfig.json`), in which case rules that requires typing
-informations are enabled.
-
-### TSDoc
-For TypeScript projects, the `eslint-plugin-tsdoc` is enabled by default.
-To disable it, use the `tsdoc` config property set to `false`.
-
-### Deprecation
-Warn when using deprecated calls/properties.
-This only work with TypeScript enabled with project types.
-
-### React/JSX
-To improve handling of React/JSX, set `jsx` to true.
-It is also possible to pass a string indicating the expected React version.
-If not specified, will set to "detect" and use the version installed in the
-project.
-
-### React Hooks
-To enable some more rules for React Hooks, set `reacthooks` to true,
-
-### React Native
-To enable some more rules for React Native, set `reactnative` to true.
-
-### Mocha testsuite
+### `mocha`
 To enable mocha-specific rules, as well as loosen some regular rules for
 testing, set `mocha` to true.
-Fine-tuned control is possible by providing an object instead of true with
-the following properties:
 
-```JavaScript
-{
-  fileFilter: [
-    "**/*.test.ts",
-    "**/*.test.js",
-    "**/testutils.ts",
-    "**/testutils.js",
-    "tests/**/*.ts",
-    "tests/**/*.js",
-    "test/**/*.ts",
-    "test/**/*.js",
-  ],
-  expectHelper: true,
-}
-```
+### `noBase`
+The base configuration imports all eslint recommendeds rules and promises handling rules.
+Setting `noBase` to true removes that.
+There is absolutely no reason to do so.
 
-All value optional, default values are the ones specified above.
-`fileFilter` is the overrides files definition to apply the test settings to.
-`expectHelper` relax some `eslint` rules to handle the use of expect-like
-assertions in test files.
+### `react`
+To improve handling of React/JSX, set `react` to true.
+You can also pass an object with the following boolean properties:
 
-Dependencies
-------------
+- `react`: enable/disable react rules
+- `reactHooks`: enable/disable React hooks rules
+- `reactNative`: enable/disable React Native rules
 
-Depend on `eslint`.
-If typescript is enabled, `@typescript-eslint/eslint-plugin`,
-`@typescript-eslint/parser`, `eslint-plugin-tsdoc` must be installed.
-If deprecation is enabled, `eslint-plugin-deprecation` must be installed.
-If React/JSX is enabled, `eslint-plugin-react` must be installed.
-If React Hooks is enabled, `eslint-plugin-react-hooks` must be installed.
-If React Native is enabled, `eslint-plugin-react-native` must be installed.
-Promise support requires `eslint-plugin-promise`.
-If mocha is used as the testsuite, `eslint-plugin-mocha` must be installed.
-Import support requires `eslint-plugin-i`.
+You can't enable the hooks or React Native rules without enabling React.
 
-### Automatic dependency check
-You can run the binary `npx eslint-depcheck` to check if all the currently required dependencies are
-installed.
-Add the flag `auto` to automatically install missing one/remove old ones.
+### `typescript`
+Set to `true` (the default value) to enable all TypeScript rules.
+This includes tsdoc rules.
+
+## Dependencies
+This configuration depends on various packages to be available depending on the user settings for
+each individual projects.
+You can list the required dependencies for the current configuration by running
+`npx kxeslint-setup`.
+You can also automatically install missing dependencies by adding the "auto" flag to the command.
+
+All dependencies are set as peer dependencies, as they are almost all optional depending on local
+settings.
+
+The tool will also uninstall older dependencies that we used to have but are not used anymore.
+
+## Migration from .eslintrc.cjs
+When running `npx kxeslint-setup`, the tool will automatically detect an existing `.eslintrc.cjs`
+file and provides instructions for the migration.
+The migration process is manual; you have to update the new `eslint.config.js` file by hand.
