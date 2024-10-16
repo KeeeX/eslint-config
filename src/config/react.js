@@ -72,4 +72,5 @@ export const apply = async (configResult, eslintConfig) => {
     },
   );
   if (reactCfg.reactNative) (await lazy.reactNative()).apply(configResult, eslintConfig);
+  if (reactCfg.reactHooks) (await lazy.reactHooks()).apply(configResult, eslintConfig);
 };

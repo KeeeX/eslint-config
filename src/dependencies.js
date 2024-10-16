@@ -52,9 +52,10 @@ const dependencyStatus = name => {
  *
  * @param depName {string} - Name of the dependency
  * @param [version] {string} - A specific version string (or tag) to install if the dependency is missing
+ * @param [force] {boolean} - Use force flag to install
  */
-export const addDependency = (depName, version) => {
-  requiredDependencies[depName] = version ?? true;
+export const addDependency = (depName, version, force) => {
+  requiredDependencies[depName] = {version: version ?? true, force: force ?? false};
 };
 
 /**
@@ -91,7 +92,7 @@ export const listDependencies = () => {
   }
   for (const required of requiredDependencies) {
     const status = dependencyStatus(required);
-    if (status === "dev") res.push({name: required, action: "install"});
+    if (status !== "dev") res.push({name: required, action: "install"});
   }
   return res.toSorted((a, b) => a.name.localeCompare(b.name));
 };
@@ -105,6 +106,8 @@ export const listDependencies = () => {
 export const installAndRemoveDeps = () => {
   const deps = listDependencies();
   const toInstall = deps.filter(c => c.action === "install").map(c => c.name);
+  const toInstallNoForce = toInstall.filter(c => !requiredDependencies[c].force);
+  const toInstallForce = toInstall.filter(c => requiredDependencies[c].force);
   const toRemove = deps.filter(c => c.action === "remove").map(c => c.name);
   if (toRemove.length > 0) {
     console.log(`Removing dependencies: ${toRemove.join(", ")}`);
@@ -113,14 +116,26 @@ export const installAndRemoveDeps = () => {
       return false;
     }
   }
-  if (toInstall.length > 0) {
-    console.log(`Installing dependencies: ${toInstall.join(", ")}`);
-    const installNames = toInstall.map(c => {
-      const target = requiredDependencies[c];
+  if (toInstallNoForce.length > 0) {
+    console.log(`Installing dependencies: ${toInstallNoForce.join(", ")}`);
+    const installNames = toInstallNoForce.map(c => {
+      const target = requiredDependencies[c].version;
       if (typeof target === "string") return `${c}@${target}`;
       return c;
     });
     if (!runProcess("npm", ["install", "--save-dev", ...installNames])) {
+      process.exitCode = 1;
+      return false;
+    }
+  }
+  if (toInstallForce.length > 0) {
+    console.log(`Installing dependencies (forced): ${toInstallForce.join(", ")}`);
+    const installNames = toInstallForce.map(c => {
+      const target = requiredDependencies[c].version;
+      if (typeof target === "string") return `${c}@${target}`;
+      return c;
+    });
+    if (!runProcess("npm", ["install", "--force", "--save-dev", ...installNames])) {
       process.exitCode = 1;
       return false;
     }
@@ -145,7 +160,8 @@ export const configToDependencies = eslintConfig => {
   if (react.react) {
     addDependency("eslint-plugin-react");
     if (eslintConfig.import) addDependency("eslint-import-resolver-webpack");
-    if (react.reactNative) addDependency("eslint-plugin-react-native");
+    if (react.reactHooks) addDependency("eslint-plugin-react-hooks", "beta");
+    if (react.reactNative) addDependency("eslint-plugin-react-native", undefined, true);
   }
   if (eslintConfig.typescript) {
     addDependency("typescript-eslint");

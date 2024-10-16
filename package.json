@@ -33,8 +33,8 @@
     "eslint-plugin-mocha": "10.x",
     "eslint-plugin-promise": "7.x",
     "eslint-plugin-react": "^7.37.1",
-    "eslint-plugin-react-hooks": "4.x",
-    "eslint-plugin-react-native": "4.x",
+    "eslint-plugin-react-hooks": "^5.1.0-beta-26f2496093-20240514",
+    "eslint-plugin-react-native": "^4.1.0",
     "eslint-plugin-tsdoc": "0.x",
     "globals": "^15.11.0",
     "typescript-eslint": "^8.9.0"
@@ -68,6 +68,9 @@
       "optional": true
     },
     "eslint-plugin-tsdoc": {
+      "optional": true
+    },
+    "globals": {
       "optional": true
     },
     "typescript-eslint": {
