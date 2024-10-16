@@ -13,6 +13,7 @@ const removedDependencies = [
   "@typescript-eslint/parser",
   "eslint-import-resolver-typescript",
   "eslint-plugin-chai-friendly",
+  "eslint-plugin-deprecation",
   "eslint-plugin-i",
   "eslint-plugin-import",
 ];
@@ -109,7 +110,7 @@ export const installAndRemoveDeps = () => {
   const toRemove = deps.filter(c => c.action === "remove").map(c => c.name);
   if (toRemove.length > 0) {
     console.log(`Removing dependencies: ${toRemove.join(", ")}`);
-    if (!runProcess("npm", ["uninstall", "--force", ...toRemove])) {
+    if (!runProcess("npm", "uninstall", "--force", ...toRemove)) {
       process.exitCode = 1;
       return false;
     }
@@ -121,7 +122,7 @@ export const installAndRemoveDeps = () => {
       if (typeof target === "string") return `${c}@${target}`;
       return c;
     });
-    if (!runProcess("npm", ["install", "--save-dev", "--force", ...installNames])) {
+    if (!runProcess("npm", "install", "--save-dev", "--force", ...installNames)) {
       process.exitCode = 1;
       return false;
     }
