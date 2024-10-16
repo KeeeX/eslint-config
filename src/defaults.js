@@ -24,6 +24,7 @@ export const globals = [
     files: [
       "src/bin/**/*",
       "src/server/**/*",
+      "*",
     ],
     globals: {node: true},
   },
