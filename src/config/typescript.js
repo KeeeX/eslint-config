@@ -1,6 +1,7 @@
 // Uses exports
 // eslint-disable-next-line import-x/no-unresolved
 import tseslint from "typescript-eslint";
+import tsdocPlugin from "eslint-plugin-tsdoc";
 
 import * as sections from "../sections.js";
 
@@ -81,4 +82,5 @@ export const apply = (configResult, eslintConfig) => {
     overrule(baseRule);
   }
   sections.configureRules(override, "", {"no-return-await": "off"});
+  configResult.push({plugins: {"tsdoc": tsdocPlugin}, rules: {"tsdoc/syntax": "warn"}});
 };

@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import * as cp from "node:child_process";
 import * as fs from "node:fs";
+import { getReactFullConfig as getReactFullConfig } from "./config/reactfullconfig.js";
 
 /** name => version | true */
 const requiredDependencies = {};
@@ -140,9 +141,14 @@ export const configToDependencies = eslintConfig => {
     addDependency("@eslint/js");
     addDependency("eslint-plugin-promise");
   }
-  if (eslintConfig.react) {
+  const react = getReactFullConfig(eslintConfig.react);
+  if (react.react) {
     addDependency("eslint-plugin-react");
     if (eslintConfig.import) addDependency("eslint-import-resolver-webpack");
+    if (react.reactNative) addDependency("eslint-plugin-react-native");
   }
-  if (eslintConfig.typescript) addDependency("typescript-eslint");
+  if (eslintConfig.typescript) {
+    addDependency("typescript-eslint");
+    addDependency("eslint-plugin-tsdoc");
+  }
 };

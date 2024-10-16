@@ -41,6 +41,7 @@ const configDefaults = eslintParams => ({
  * If a number is provided, it's the maximum cycle detection depth.
  * 
  * @param [eslintParams.react] {object|false} - If trueish, enable React support.
+ * @param [eslintParams.react.reactNative] {boolean} - Enable react-native stuff.
  * 
  * @param [eslintParams.mocha] {boolean} - Enable mocha plugins
  * 
@@ -57,7 +58,7 @@ const eslintConfig = async eslintParams => {
     if (fullConfig.globals) (await lazy.globals()).apply(res, fullConfig);
     if (fullConfig.typescript) (await lazy.typescript()).apply(res, fullConfig);
     if (fullConfig.import) (await lazy.importx()).apply(res, fullConfig);
-    if (fullConfig.react) (await lazy.react()).apply(res, fullConfig);
+    if (fullConfig.react) await (await lazy.react()).apply(res, fullConfig);
     if (fullConfig.mocha) (await lazy.mocha()).apply(res, fullConfig);
     clearConfig(res);
   }

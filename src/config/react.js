@@ -2,10 +2,13 @@
 import reactPlugin from "eslint-plugin-react";
 
 import * as sections from "../sections.js";
+import * as lazy from "./lazy.js";
+import {getReactFullConfig} from "./reactfullconfig.js";
 
 // eslint-disable-next-line max-lines-per-function
-export const apply = (configResult, eslintConfig) => {
-  if (!eslintConfig.react) return;
+export const apply = async (configResult, eslintConfig) => {
+  const reactCfg = getReactFullConfig(eslintConfig.react);
+  if (!reactCfg.react) return;
   configResult.push(
     reactPlugin.configs.flat.recommended,
     reactPlugin.configs.flat["jsx-runtime"],
@@ -68,4 +71,5 @@ export const apply = (configResult, eslintConfig) => {
       "void-dom-elements-no-children": "error",
     },
   );
+  if (reactCfg.reactNative) (await lazy.reactNative()).apply(configResult, eslintConfig);
 };
