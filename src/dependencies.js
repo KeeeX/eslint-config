@@ -4,7 +4,7 @@ import * as fs from "node:fs";
 
 import { getReactFullConfig } from "./config/reactfullconfig.js";
 
-/** name => version | true */
+/** name => {version: string | true, force: boolean} */
 const requiredDependencies = {};
 
 /** List of dependencies no longer used and that should be removed */
@@ -90,7 +90,7 @@ export const listDependencies = () => {
   for (const removed of removedDependencies) {
     if (dependencyStatus(removed) !== "missing") res.push({name: removed, action: "remove"});
   }
-  for (const required of requiredDependencies) {
+  for (const required of Object.keys(requiredDependencies)) {
     const status = dependencyStatus(required);
     if (status !== "dev") res.push({name: required, action: "install"});
   }
