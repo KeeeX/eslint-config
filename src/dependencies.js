@@ -11,7 +11,6 @@ const requiredDependencies = {};
 const removedDependencies = [
   "@typescript-eslint/eslint-plugin",
   "@typescript-eslint/parser",
-  "eslint-import-resolver-typescript",
   "eslint-plugin-chai-friendly",
   "eslint-plugin-deprecation",
   "eslint-plugin-i",
