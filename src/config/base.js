@@ -1,5 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import js from "@eslint/js";
+import pluginPromise from "eslint-plugin-promise";
 
 import * as sections from "../sections.js";
 
@@ -149,6 +150,21 @@ export const apply = (configResult, eslintConfig) => {
       "sort-imports": ["warn", {ignoreCase: true, allowSeparatedGroups: true}],
       "sort-keys": ["warn", "asc", {caseSensitive: false, minKeys: 3, natural: true}],
       "symbol-description": "error",
+    },
+  );
+  // Promises
+  configResult.push(pluginPromise.configs["flat/recommended"]);
+  const promiseCustom = sections.getNamedSection(configResult, "keeex/promise-override");
+  sections.configureRules(
+    promiseCustom,
+    "promise",
+    {
+      "avoid-new": "warn",
+      "no-multiple-resolved": "error",
+      "no-promise-in-callback": "warn",
+      "prefer-await-to-callbacks": "warn",
+      "prefer-await-to-then": "warn",
+      "spec-only": "error",
     },
   );
 };
