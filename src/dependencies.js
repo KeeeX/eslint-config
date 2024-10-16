@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import * as cp from "node:child_process";
 import * as fs from "node:fs";
-import { getReactFullConfig as getReactFullConfig } from "./config/reactfullconfig.js";
+
+import { getReactFullConfig } from "./config/reactfullconfig.js";
 
 /** name => version | true */
 const requiredDependencies = {};
@@ -52,10 +53,9 @@ const dependencyStatus = name => {
  *
  * @param depName {string} - Name of the dependency
  * @param [version] {string} - A specific version string (or tag) to install if the dependency is missing
- * @param [force] {boolean} - Use force flag to install
  */
-export const addDependency = (depName, version, force) => {
-  requiredDependencies[depName] = {version: version ?? true, force: force ?? false};
+export const addDependency = (depName, version) => {
+  requiredDependencies[depName] = {version: version ?? true, force: false};
 };
 
 /**
@@ -160,8 +160,8 @@ export const configToDependencies = eslintConfig => {
   if (react.react) {
     addDependency("eslint-plugin-react");
     if (eslintConfig.import) addDependency("eslint-import-resolver-webpack");
-    if (react.reactHooks) addDependency("eslint-plugin-react-hooks", "beta");
-    if (react.reactNative) addDependency("eslint-plugin-react-native", undefined, true);
+    if (react.reactHooks) addDependency("eslint-plugin-react-hooks", "rc");
+    if (react.reactNative) addDependency("eslint-plugin-react-native");
   }
   if (eslintConfig.typescript) {
     addDependency("typescript-eslint");

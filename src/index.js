@@ -1,4 +1,5 @@
 import * as lazy from "./config/lazy.js";
+import { getReactFullConfig } from "./config/reactfullconfig.js";
 import * as defaults from "./defaults.js";
 
 import {configToDependencies} from "./dependencies.js";
@@ -58,7 +59,10 @@ const eslintConfig = async eslintParams => {
     if (fullConfig.globals) (await lazy.globals()).apply(res, fullConfig);
     if (fullConfig.typescript) (await lazy.typescript()).apply(res, fullConfig);
     if (fullConfig.import) (await lazy.importx()).apply(res, fullConfig);
-    if (fullConfig.react) await (await lazy.react()).apply(res, fullConfig);
+    const reactCfg = getReactFullConfig(fullConfig.react);
+    if (reactCfg.react) (await lazy.react()).apply(res, fullConfig);
+    if (reactCfg.reactNative) (await lazy.reactNative()).apply(res, fullConfig);
+    if (reactCfg.reactHooks) (await lazy.reactHooks()).apply(res, fullConfig);
     if (fullConfig.mocha) (await lazy.mocha()).apply(res, fullConfig);
     clearConfig(res);
   }

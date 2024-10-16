@@ -12,12 +12,18 @@
   ],
   "description": "Common eslint configuration",
   "devDependencies": {
-    "@eslint/js": "9.x",
+    "@eslint/compat": "^1.2.0",
+    "@eslint/js": "^9.12.0",
     "eslint": "9.x",
-    "eslint-plugin-import-x": "4.x",
-    "eslint-plugin-promise": "7.x",
-    "globals": "15.x",
-    "typescript-eslint": "8.x"
+    "eslint-plugin-import-x": "^4.3.1",
+    "eslint-plugin-mocha": "^10.5.0",
+    "eslint-plugin-promise": "^7.1.0",
+    "eslint-plugin-react": "^7.37.1",
+    "eslint-plugin-react-hooks": "^5.1.0-rc-83825814-20241015",
+    "eslint-plugin-react-native": "^4.1.0",
+    "eslint-plugin-tsdoc": "^0.3.0",
+    "globals": "^15.11.0",
+    "typescript-eslint": "^8.9.0"
   },
   "files": [
     "src"
@@ -25,17 +31,21 @@
   "license": "MIT",
   "main": "src/index.js",
   "name": "@keeex/eslint-config",
+  "overrides": {
+    "eslint": "9.x",
+    "eslint-plugin-react-native": "^4.1.0"
+  },
   "peerDependencies": {
     "@eslint/compat": "^1.2.0",
     "@eslint/js": "^9.12.0",
     "eslint": "9.x",
     "eslint-plugin-import-x": "4.x",
-    "eslint-plugin-mocha": "10.x",
+    "eslint-plugin-mocha": "^10.5.0",
     "eslint-plugin-promise": "7.x",
     "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-react-hooks": "^5.1.0-beta-26f2496093-20240514",
     "eslint-plugin-react-native": "^4.1.0",
-    "eslint-plugin-tsdoc": "0.x",
+    "eslint-plugin-tsdoc": "^0.3.0",
     "globals": "^15.11.0",
     "typescript-eslint": "^8.9.0"
   },
