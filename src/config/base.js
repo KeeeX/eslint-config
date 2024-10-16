@@ -56,7 +56,7 @@ export const apply = (configResult, eslintConfig) => {
         {IIFEs: true, max: 60, skipBlankLines: true, skipComments: true},
       ],
       "max-nested-callbacks": ["warn", 6],
-      "max-params": ["warn", 5],
+      "max-params": ["warn", {max: 5}],
       "no-alert": "error",
       "no-array-constructor": "error",
       "no-await-in-loop": "warn",
