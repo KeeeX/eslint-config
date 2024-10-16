@@ -10,7 +10,7 @@ import {setDepCheck} from "../environ.js";
 const getEslintConfig = () => path.resolve(process.cwd(), "eslint.config.js");
 
 const depsCheck = async () => {
-  console.group("eslint dependencies checking");
+  console.group("eslint dependencies checking…");
   try {
     setDepCheck();
     console.log("- loading eslint.config.js");
