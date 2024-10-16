@@ -11,6 +11,7 @@ const configDefaults = eslintParams => ({
     ignores: eslintParams?.ignores ?? defaults.ignores,
     import: eslintParams?.import ?? defaults.cycleMaxDepth,
     noBase: eslintParams?.noBase ?? false,
+    react: eslintParams?.react ?? false,
     typescript: eslintParams?.typescript ?? true,
   });
 
@@ -38,6 +39,8 @@ const configDefaults = eslintParams => ({
  * @param [eslintParams.import] {boolean|number} - Enable import linting support (defaults to true)
  * If a number is provided, it's the maximum cycle detection depth.
  * 
+ * @param [eslintParams.react] {object|false} - If trueish, enable React support.
+ * 
  * @returns
  * The eslint config object
  */
@@ -51,6 +54,7 @@ const eslintConfig = async eslintParams => {
     if (fullConfig.globals) (await lazy.globals()).apply(res, fullConfig);
     if (fullConfig.typescript) (await lazy.typescript()).apply(res, fullConfig);
     if (fullConfig.import) (await lazy.importx()).apply(res, fullConfig);
+    if (fullConfig.react) (await lazy.react()).apply(res, fullConfig);
     clearConfig(res);
   }
   return res;

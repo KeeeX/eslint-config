@@ -138,6 +138,7 @@ export const configToDependencies = eslintConfig => {
   }
   if (eslintConfig.typescript) addDependency("typescript-eslint");
   if (eslintConfig.react) {
+    addDependency("eslint-plugin-react");
     if (eslintConfig.import) addDependency("eslint-import-resolver-webpack");
   }
 };
