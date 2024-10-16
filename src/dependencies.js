@@ -130,18 +130,19 @@ export const installAndRemoveDeps = () => {
 /** Add all dependencies needed by the provided config */
 export const configToDependencies = eslintConfig => {
   addDependency("eslint");
-  if (!eslintConfig.noBase) {
-    addDependency("@eslint/js");
-    addDependency("eslint-plugin-promise");
-  }
   if (eslintConfig.globals) addDependency("globals");
   if (eslintConfig.import) {
     addDependency("eslint-plugin-import-x");
     if (eslintConfig.typescript) addDependency("eslint-import-resolver-typescript");
   }
-  if (eslintConfig.typescript) addDependency("typescript-eslint");
+  if (eslintConfig.mocha) addDependency("eslint-plugin-mocha");
+  if (!eslintConfig.noBase) {
+    addDependency("@eslint/js");
+    addDependency("eslint-plugin-promise");
+  }
   if (eslintConfig.react) {
     addDependency("eslint-plugin-react");
     if (eslintConfig.import) addDependency("eslint-import-resolver-webpack");
   }
+  if (eslintConfig.typescript) addDependency("typescript-eslint");
 };

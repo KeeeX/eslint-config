@@ -10,6 +10,7 @@ const configDefaults = eslintParams => ({
     globals: eslintParams?.globals ?? defaults.globals,
     ignores: eslintParams?.ignores ?? defaults.ignores,
     import: eslintParams?.import ?? defaults.cycleMaxDepth,
+    mocha: eslintParams?.mocha ?? false,
     noBase: eslintParams?.noBase ?? false,
     react: eslintParams?.react ?? false,
     typescript: eslintParams?.typescript ?? true,
@@ -41,6 +42,8 @@ const configDefaults = eslintParams => ({
  * 
  * @param [eslintParams.react] {object|false} - If trueish, enable React support.
  * 
+ * @param [eslintParams.mocha] {boolean} - Enable mocha plugins
+ * 
  * @returns
  * The eslint config object
  */
@@ -55,6 +58,7 @@ const eslintConfig = async eslintParams => {
     if (fullConfig.typescript) (await lazy.typescript()).apply(res, fullConfig);
     if (fullConfig.import) (await lazy.importx()).apply(res, fullConfig);
     if (fullConfig.react) (await lazy.react()).apply(res, fullConfig);
+    if (fullConfig.mocha) (await lazy.mocha()).apply(res, fullConfig);
     clearConfig(res);
   }
   return res;
