@@ -5,6 +5,8 @@ import tseslint from "typescript-eslint";
 
 import * as sections from "../sections.js";
 
+const filterForFiles = (rules, files) => rules.map(c => ({...c, files}));
+
 /**
  * Apply the recommended typescript-eslint configuration plus KeeeX tweaks.
  *
@@ -13,12 +15,19 @@ import * as sections from "../sections.js";
 // eslint-disable-next-line max-lines-per-function
 export const apply = (configResult, eslintConfig) => {
   if (!eslintConfig.typescript) return;
+  const tsExts = ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"];
   configResult.push(
-    ...tseslint.configs.recommendedTypeChecked,
-    ...tseslint.configs.stylisticTypeChecked,
+    ...filterForFiles(
+      [
+        ...tseslint.configs.recommendedTypeChecked,
+        ...tseslint.configs.stylisticTypeChecked,
+      ],
+      tsExts,
+    ),
   );
   if (!eslintConfig.noBase) configResult.push(tseslint.configs.eslintRecommended);
   const section = sections.getNamedSection(configResult, "keeex/typescript-parserOptions");
+  section.files = tsExts;
   sections.sectionAddOption(
     section,
     "languageOptions",
@@ -29,7 +38,7 @@ export const apply = (configResult, eslintConfig) => {
     },
   );
   const override = sections.getNamedSection(configResult, "keeex/typescript-override");
-  override.files = ["**/*.ts", "**/*.tsx"];
+  override.files = tsExts;
   const eslintOverride = sections.getNamedSection(configResult, "keeex/eslint-override");
   const overrule = (name, defaultValue = "error") => sections.configureRules(
     override,
@@ -82,5 +91,9 @@ export const apply = (configResult, eslintConfig) => {
     overrule(baseRule);
   }
   sections.configureRules(override, "", {"no-return-await": "off"});
-  configResult.push({plugins: {"tsdoc": tsdocPlugin}, rules: {"tsdoc/syntax": "warn"}});
+  configResult.push({
+    files: tsExts,
+    plugins: {"tsdoc": tsdocPlugin},
+    rules: {"tsdoc/syntax": "warn"},
+  });
 };
