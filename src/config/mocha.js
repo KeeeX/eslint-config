@@ -1,49 +1,34 @@
-module.exports = {
-  dependencies: ["eslint-plugin-mocha"],
-  overrides: (presetConfig, allOptions) => {
-    let config = {
-      fileFilter: [
-        "**/*.test.ts",
-        "**/*.test.js",
-        "tests/**/*.ts",
-        "tests/**/*.js",
-        "test/**/*.ts",
-        "test/**/*.js",
-        "**/tests/**/*.ts",
-        "**/tests/**/*.js",
-        "**/test/**/*.ts",
-        "**/test/**/*.js",
-      ],
-      expectHelper: true,
-      mocha: true,
-    };
-    if (typeof presetConfig === "object") {
-      config = {
-        ...config,
-        ...presetConfig,
-      };
-    }
-    const extendsBase = ["plugin:mocha/recommended"];
-    const mochaOverride = {
-      files: config.fileFilter,
-      env: {mocha: true},
-      extendsBase,
-      rules: {
-        "mocha/handle-done-callback": ["error", {"ignoreSkipped": true}],
-        "mocha/no-mocha-arrows": "off",
-        "prefer-arrow-callback": "off",
-        "mocha/prefer-arrow-callback": ["warn", {"allowUnboundThis": false}],
-        "func-names": "off",
-        "no-invalid-this": "off",
+import mochaPlugin from "eslint-plugin-mocha";
+
+import * as sections from "../sections.js";
+
+export const apply = (configResult, eslintConfig) => {
+  if (!eslintConfig.mocha) return;
+  const mochaFilter = ["src/tests/**/*", "**/*.test.*"];
+  const mochaSection = {
+    ...mochaPlugin.configs.flat.recommended,
+    files: mochaFilter,
+  };
+  sections.configureRules(
+    mochaSection,
+    "",
+    {
+      "max-classes-per-file": "off",
+      "max-lines": "off",
+      "max-lines-per-function": "off",
+      "max-params": "off",
+      "no-magic-numbers": "off",
+    },
+  );
+  if (eslintConfig.typescript) {
+    sections.configureRules(
+      mochaSection,
+      "@typescript-eslint",
+      {
+        "max-params": "off",
+        "no-magic-numbers": "off",
       },
-    };
-    if (config.expectHelper) {
-      mochaOverride.rules["no-unused-expressions"] = "off";
-      if (allOptions.typescript) {
-        mochaOverride.rules["@typescript-eslint/no-unused-expressions"] = "off";
-        mochaOverride.rules["@typescript-eslint/no-non-null-assertion"] = "off";
-      }
-    }
-    return [mochaOverride];
-  },
+    );
+  }
+  configResult.push(mochaSection);
 };

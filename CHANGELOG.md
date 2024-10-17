@@ -1,5 +1,25 @@
 # Changelog
 
+## v2.0.0 2024-10-17 17:17:18 +0200
+
+This major version changed some config and removed some styling configuration.
+This is a temporary solution that will require using prettier later on.
+
+### Changed
+
+- Automatic dependencies and setup script renamed to `kxeslint-setup`
+- Updated list of removed dependencies
+- [#15] Migration to eslint@9 with flat config
+
+### Fixed
+
+- Automatic setup now uses `--force` for package removal/installation
+- [#14] Ignore some stuff in test files
+
+### Security
+
+- Update
+
 ## v1.12.6 2024-07-25 16:26:28 +0200
 
 ### Fixed

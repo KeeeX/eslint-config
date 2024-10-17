@@ -1,85 +1,119 @@
 {
-  "name": "@keeex/eslint-config",
-  "description": "Common eslint configuration",
-  "version": "1.12.6",
-  "main": "src/index.js",
-  "files": [
-    "src/**/*.js"
-  ],
-  "bin": {
-    "eslint-depcheck": "src/bin/eslint-depcheck.js"
-  },
-  "scripts": {
-    "check": "npx eslint .",
-    "prepublishOnly": "publish_check.sh",
-    "test": "echo No test for this project"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/KeeeX/eslint-config.git"
-  },
   "author": "KeeeX SAS",
+  "bin": {
+    "kxeslint-setup": "src/bin/kxeslint-setup.js",
+    "kxeslint-dump": "src/bin/kxeslint-dump.js"
+  },
   "contributors": [
     {
-      "name": "Gabriel Paul \"Cley Faye\" Risterucci",
-      "email": "gabriel@keeex.net"
+      "email": "gabriel@keeex.net",
+      "name": "Gabriel Paul \"Cley Faye\" Risterucci"
     }
   ],
-  "license": "MIT",
+  "dependencies": {
+    "semver": "^7.6.3"
+  },
+  "description": "Common eslint configuration",
   "devDependencies": {
-    "eslint": "^8.57.0",
-    "eslint-plugin-i": "^2.29.1",
-    "eslint-plugin-promise": "^7.0.0"
+    "@eslint/compat": "^1.2.0",
+    "@eslint/js": "^9.12.0",
+    "eslint": "^9.12.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-import-resolver-webpack": "*",
+    "eslint-plugin-import-x": "^4.3.1",
+    "eslint-plugin-mocha": "^10.5.0",
+    "eslint-plugin-promise": "^7.1.0",
+    "eslint-plugin-react": "^7.37.1",
+    "eslint-plugin-react-hooks": "^5.1.0-rc-83825814-20241015",
+    "eslint-plugin-react-native": "^4.1.0",
+    "eslint-plugin-tsdoc": "^0.3.0",
+    "globals": "^15.11.0",
+    "typescript-eslint": "^8.9.0"
+  },
+  "files": [
+    "src"
+  ],
+  "license": "MIT",
+  "main": "src/index.js",
+  "name": "@keeex/eslint-config",
+  "overrides": {
+    "eslint": "^9.12.0",
+    "eslint-plugin-react-native": "^4.1.0"
   },
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": "6.x||7.x",
-    "@typescript-eslint/parser": "6.x||7.x",
-    "eslint": "8.x",
-    "eslint-plugin-deprecation": "1.x||2.x||3.x",
-    "eslint-plugin-i": "^2.29.1",
+    "@eslint/compat": "^1.2.0",
+    "@eslint/js": "9.x",
+    "eslint": "9.x",
+    "eslint-import-resolver-typescript": "3.x",
+    "eslint-import-resolver-webpack": "0.x",
+    "eslint-plugin-import-x": "4.x",
     "eslint-plugin-mocha": "10.x",
-    "eslint-plugin-promise": "6.x||7.x",
+    "eslint-plugin-promise": "7.x",
     "eslint-plugin-react": "7.x",
-    "eslint-plugin-react-hooks": "4.x",
+    "eslint-plugin-react-hooks": "5.x",
     "eslint-plugin-react-native": "4.x",
-    "eslint-plugin-tsdoc": "0.x"
+    "eslint-plugin-tsdoc": "0.x",
+    "globals": "15.x",
+    "typescript-eslint": "8.x"
   },
   "peerDependenciesMeta": {
+    "@eslint/compat": {
+      "optional": true
+    },
     "eslint": {
       "optional": false
     },
-    "@typescript-eslint/eslint-plugin": {
+    "eslint-plugin-deprecation": {
       "optional": true
     },
-    "@typescript-eslint/parser": {
+    "eslint-import-resolver-typescript": {
       "optional": true
     },
-    "eslint-plugin-tsdoc": {
+    "eslint-import-resolver-webpack": {
       "optional": true
     },
-    "eslint-plugin-react": {
+    "eslint-plugin-import-x": {
+      "optional": true
+    },
+    "eslint-plugin-mocha": {
       "optional": true
     },
     "eslint-plugin-promise": {
       "optional": true
     },
-    "eslint-plugin-i": {
-      "optional": true
-    },
-    "eslint-plugin-react-native": {
-      "optional": true
-    },
-    "eslint-plugin-deprecation": {
+    "eslint-plugin-react": {
       "optional": true
     },
     "eslint-plugin-react-hooks": {
       "optional": true
     },
-    "eslint-plugin-mocha": {
+    "eslint-plugin-react-native": {
+      "optional": true
+    },
+    "eslint-plugin-tsdoc": {
+      "optional": true
+    },
+    "globals": {
+      "optional": true
+    },
+    "typescript-eslint": {
       "optional": true
     }
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KeeeX/eslint-config.git"
+  },
+  "scripts": {
+    "bin:dump": "node src/bin/kxeslint-dump.js",
+    "bin:setup": "node src/bin/kxeslint-setup.js",
+    "check": "npx eslint --cache --cache-strategy content .",
+    "prepublishOnly": "publish_check.sh",
+    "test": "echo No test for this project"
+  },
+  "type": "module",
+  "version": "2.0.0"
 }
