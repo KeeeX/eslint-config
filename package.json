@@ -110,7 +110,7 @@
   "scripts": {
     "bin:dump": "node src/bin/kxeslint-dump.js",
     "bin:setup": "node src/bin/kxeslint-setup.js",
-    "check": "npx eslint .",
+    "check": "npx eslint --cache --cache-strategy content .",
     "prepublishOnly": "publish_check.sh",
     "test": "echo No test for this project"
   },
