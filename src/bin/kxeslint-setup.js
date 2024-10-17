@@ -88,6 +88,10 @@ const checkEslintConfig = () => {
       console.log(`- Found ${eslintConfigPath} with the delete line; configure eslint and remove that line.`);
       return false;
     }
+    if (fs.existsSync(".eslintignore")) {
+      console.log(`- Found .eslintignore; please remove it.`);
+      return false;
+    }
     return true;
   } finally {
     console.groupEnd();

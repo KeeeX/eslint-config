@@ -20,7 +20,6 @@ export const apply = (configResult, eslintConfig) => {
     override,
     "import-x",
     {
-      "extensions": ["error", "ignorePackages"],
       "first": "error",
       "newline-after-import": "warn",
       "no-amd": "error",
@@ -85,6 +84,7 @@ export const apply = (configResult, eslintConfig) => {
       override,
       "import-x",
       {
+        "extensions": ["error", "ignorePackages"],
         "no-deprecated": "warn",
         "no-extraneous-dependencies": "error",
       },
