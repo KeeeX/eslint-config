@@ -117,3 +117,7 @@ The tool will also uninstall older dependencies that we used to have but are not
 When running `npx kxeslint-setup`, the tool will automatically detect an existing `.eslintrc.cjs`
 file and provides instructions for the migration.
 The migration process is manual; you have to update the new `eslint.config.js` file by hand.
+
+## Debugging config issues
+Running `npx eslint --inspect-config` will launch a debugger interface that allows checking all the
+rules and individual file rules.
