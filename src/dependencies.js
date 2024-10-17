@@ -11,8 +11,8 @@ const requiredDependencies = {};
 const removedDependencies = [
   "@typescript-eslint/eslint-plugin",
   "@typescript-eslint/parser",
-  "eslint-import-resolver-typescript",
   "eslint-plugin-chai-friendly",
+  "eslint-plugin-deprecation",
   "eslint-plugin-i",
   "eslint-plugin-import",
 ];
@@ -106,36 +106,22 @@ export const listDependencies = () => {
 export const installAndRemoveDeps = () => {
   const deps = listDependencies();
   const toInstall = deps.filter(c => c.action === "install").map(c => c.name);
-  const toInstallNoForce = toInstall.filter(c => !requiredDependencies[c].force);
-  const toInstallForce = toInstall.filter(c => requiredDependencies[c].force);
   const toRemove = deps.filter(c => c.action === "remove").map(c => c.name);
   if (toRemove.length > 0) {
     console.log(`Removing dependencies: ${toRemove.join(", ")}`);
-    if (!runProcess("npm", ["uninstall", ...toRemove])) {
+    if (!runProcess("npm", "uninstall", "--force", ...toRemove)) {
       process.exitCode = 1;
       return false;
     }
   }
-  if (toInstallNoForce.length > 0) {
-    console.log(`Installing dependencies: ${toInstallNoForce.join(", ")}`);
-    const installNames = toInstallNoForce.map(c => {
+  if (toInstall.length > 0) {
+    console.log(`Installing dependencies: ${toInstall.join(", ")}`);
+    const installNames = toInstall.map(c => {
       const target = requiredDependencies[c].version;
       if (typeof target === "string") return `${c}@${target}`;
       return c;
     });
-    if (!runProcess("npm", ["install", "--save-dev", ...installNames])) {
-      process.exitCode = 1;
-      return false;
-    }
-  }
-  if (toInstallForce.length > 0) {
-    console.log(`Installing dependencies (forced): ${toInstallForce.join(", ")}`);
-    const installNames = toInstallForce.map(c => {
-      const target = requiredDependencies[c].version;
-      if (typeof target === "string") return `${c}@${target}`;
-      return c;
-    });
-    if (!runProcess("npm", ["install", "--force", "--save-dev", ...installNames])) {
+    if (!runProcess("npm", "install", "--save-dev", "--force", ...installNames)) {
       process.exitCode = 1;
       return false;
     }
