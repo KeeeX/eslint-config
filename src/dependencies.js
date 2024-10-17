@@ -1,10 +1,13 @@
 /* eslint-disable no-console */
 import * as cp from "node:child_process";
 import * as fs from "node:fs";
+import * as path from "node:path";
 
-import { getReactFullConfig } from "./config/reactfullconfig.js";
+import {satisfies} from "semver";
 
-/** name => {version: string | true, force: boolean} */
+import {getReactFullConfig} from "./config/reactfullconfig.js";
+
+/** name => {version: string, force: boolean} */
 const requiredDependencies = {};
 
 /** List of dependencies no longer used and that should be removed */
@@ -36,23 +39,36 @@ const getPkgJson = () => {
   return pkgJson;
 };
 
+/** Get installed package version */
+const getInstalledVersion = name => {
+  try {
+    const depsPkg = JSON.parse(fs.readFileSync(path.join("node_modules", name, "package.json"), "utf8"));
+    return depsPkg.version;
+  } catch {
+    return "<unknown>";
+  }
+};
+
 /**
  * Check if a particular dependency is installed in the project.
  *
- * @returns {"dev" | "prod" | "missing"}
+ * @returns {{installed: "prod" | "dev" | false; version: string}}
  */
 const dependencyStatus = name => {
   const pkg = getPkgJson();
-  if (pkg.devDependencies && name in pkg.devDependencies) return "dev";
-  if (pkg.dependencies && name in pkg.dependencies) return "prod";
-  return "missing";
+  let installed = "missing";
+  if (pkg.devDependencies && name in pkg.devDependencies) installed = "dev";
+  if (pkg.dependencies && name in pkg.dependencies) installed = "prod";
+  const version = installed === "missing" ? undefined : getInstalledVersion(name);
+  return {installed, version};
 };
 
 /**
  * Add an NPM dependency to the list
  *
  * @param depName {string} - Name of the dependency
- * @param [version] {string} - A specific version string (or tag) to install if the dependency is missing
+ * @param version {string} - A specific version string (or tag) to install if the dependency is
+ * missing
  */
 export const addDependency = (depName, version) => {
   requiredDependencies[depName] = {version: version ?? true, force: false};
@@ -86,15 +102,23 @@ const runProcess = (cmd, ...args) => {
  * A list of dependencies with the action to do ("install" or "remove").
  */
 export const listDependencies = () => {
-  const res = [];
-  for (const removed of removedDependencies) {
-    if (dependencyStatus(removed) !== "missing") res.push({name: removed, action: "remove"});
+  console.group();
+  try {
+    const res = [];
+    for (const removed of removedDependencies) {
+      if (dependencyStatus(removed).installed !== "missing") res.push({name: removed, action: "remove"});
+    }
+    for (const required of Object.keys(requiredDependencies)) {
+      const expectedVersion = requiredDependencies[required].version;
+      const status = dependencyStatus(required);
+      const needUpdate = status.installed !== "dev" || !satisfies(status.version, expectedVersion);
+      console.log(`dep:${required} (${status.installed}=${status.version}) (required=${expectedVersion})`);
+      if (needUpdate) res.push({name: required, action: "install"});
+    }
+    return res.toSorted((a, b) => a.name.localeCompare(b.name));
+  } finally {
+    console.groupEnd();
   }
-  for (const required of Object.keys(requiredDependencies)) {
-    const status = dependencyStatus(required);
-    if (status !== "dev") res.push({name: required, action: "install"});
-  }
-  return res.toSorted((a, b) => a.name.localeCompare(b.name));
 };
 
 /**
@@ -131,26 +155,29 @@ export const installAndRemoveDeps = () => {
 
 /** Add all dependencies needed by the provided config */
 export const configToDependencies = eslintConfig => {
-  addDependency("eslint");
-  if (eslintConfig.globals) addDependency("globals");
+  addDependency("eslint", "9.x");
+  if (eslintConfig.globals) addDependency("globals", "15.x");
   if (eslintConfig.import) {
-    addDependency("eslint-plugin-import-x");
-    if (eslintConfig.typescript) addDependency("eslint-import-resolver-typescript");
+    addDependency("eslint-plugin-import-x", "4.x");
+    if (eslintConfig.typescript) addDependency("eslint-import-resolver-typescript", "3.x");
   }
-  if (eslintConfig.mocha) addDependency("eslint-plugin-mocha");
+  if (eslintConfig.mocha) addDependency("eslint-plugin-mocha", "10.x");
   if (!eslintConfig.noBase) {
-    addDependency("@eslint/js");
-    addDependency("eslint-plugin-promise");
+    addDependency("@eslint/js", "9.x");
+    addDependency("eslint-plugin-promise", "7.x");
   }
   const react = getReactFullConfig(eslintConfig.react);
   if (react.react) {
-    addDependency("eslint-plugin-react");
-    if (eslintConfig.import) addDependency("eslint-import-resolver-webpack");
-    if (react.reactHooks) addDependency("eslint-plugin-react-hooks", "rc");
-    if (react.reactNative) addDependency("eslint-plugin-react-native");
+    addDependency("eslint-plugin-react", "7.x");
+    if (eslintConfig.import) addDependency("eslint-import-resolver-webpack", "0.x");
+    if (react.reactHooks) addDependency("eslint-plugin-react-hooks", "5.x");
+    if (react.reactNative) {
+      addDependency("eslint-plugin-react-native", "4.x");
+      addDependency("@eslint/js", "9.x");
+    }
   }
   if (eslintConfig.typescript) {
-    addDependency("typescript-eslint");
-    addDependency("eslint-plugin-tsdoc");
+    addDependency("typescript-eslint", "8.x");
+    addDependency("eslint-plugin-tsdoc", "0.x");
   }
 };
