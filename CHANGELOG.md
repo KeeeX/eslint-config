@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.1 2024-10-18 13:48:11 +0200
+
+### Fixed
+
+- Fixed error with import config at 0 cycle depth
+
 ## v2.0.0 2024-10-17 17:17:18 +0200
 
 This major version changed some config and removed some styling configuration.
