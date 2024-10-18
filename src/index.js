@@ -59,7 +59,7 @@ const eslintConfig = async eslintParams => {
     if (!fullConfig.noBase) (await lazy.base()).apply(res, fullConfig);
     if (fullConfig.globals) (await lazy.globals()).apply(res, fullConfig);
     if (fullConfig.typescript) (await lazy.typescript()).apply(res, fullConfig);
-    if (fullConfig.import) (await lazy.importx()).apply(res, fullConfig);
+    if (fullConfig.import !== false) (await lazy.importx()).apply(res, fullConfig);
     const reactCfg = getReactFullConfig(fullConfig.react);
     if (reactCfg.react) (await lazy.react()).apply(res, fullConfig);
     if (reactCfg.reactNative) (await lazy.reactNative()).apply(res, fullConfig);
