@@ -57,7 +57,7 @@ export const apply = (configResult, eslintConfig) => {
     const baseSection = sections.getNamedSection(configResult, "keeex/eslint-override");
     sections.configureRules(baseSection, "", {"sort-imports": "off"});
   }
-  if (typeof eslintConfig.import === "number") {
+  if (typeof eslintConfig.import === "number" && eslintConfig.import > 0) {
     sections.configureRules(
       override,
       "import-x",
@@ -65,7 +65,7 @@ export const apply = (configResult, eslintConfig) => {
         "no-cycle": ["error", {maxDepth: eslintConfig.import}],
       },
     );
-  } else {
+  } else if (eslintConfig.import) {
     sections.configureRules(override, "import-x", {"no-cycle": "error"});
   }
   if (eslintConfig.typescript) {
