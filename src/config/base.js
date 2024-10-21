@@ -32,7 +32,10 @@ export const apply = (configResult, eslintConfig) => {
     globalIgnores.ignores = [...eslintConfig.ignores];
   }
   // Base eslint
-  configResult.push(js.configs.recommended);
+  configResult.push({
+    name: "eslint/recommended",
+    ...js.configs.recommended,
+  });
   const eslintCustom = sections.getNamedSection(configResult, "keeex/eslint-override");
   sections.configureRules(
     eslintCustom,
@@ -162,7 +165,6 @@ export const apply = (configResult, eslintConfig) => {
       "avoid-new": "warn",
       "no-multiple-resolved": "error",
       "no-promise-in-callback": "warn",
-      "prefer-await-to-callbacks": "warn",
       "prefer-await-to-then": "warn",
       "spec-only": "error",
     },

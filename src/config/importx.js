@@ -14,7 +14,12 @@ export const apply = (configResult, eslintConfig) => {
     ...eslintPluginImportX.flatConfigs.recommended,
     languageOptions: {},
   });
-  if (eslintConfig.typescript) configResult.push(eslintPluginImportX.flatConfigs.typescript);
+  if (eslintConfig.typescript) {
+    configResult.push({
+      ...eslintPluginImportX.flatConfigs.typescript,
+      name: "import-x/recommended",
+    });
+  }
   const override = sections.getNamedSection(configResult, "keeex/importx-override");
   sections.configureRules(
     override,

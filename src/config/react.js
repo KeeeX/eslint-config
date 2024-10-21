@@ -10,8 +10,14 @@ export const apply = (configResult, eslintConfig) => {
   const reactCfg = getReactFullConfig(eslintConfig.react);
   if (!reactCfg.react) return;
   configResult.push(
-    reactPlugin.configs.flat.recommended,
-    reactPlugin.configs.flat["jsx-runtime"],
+    {
+      ...reactPlugin.configs.flat.recommended,
+      name: "react/recommended",
+    },
+    {
+      ...reactPlugin.configs.flat["jsx-runtime"],
+      name: "react/jsx-runtime",
+    },
   );
   const override = sections.getNamedSection(configResult, "keeex/react");
   sections.sectionAddOption(override, "settings", "react", {version: "detect"});

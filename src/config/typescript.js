@@ -93,6 +93,7 @@ export const apply = (configResult, eslintConfig) => {
   sections.configureRules(override, "", {"no-return-await": "off"});
   configResult.push({
     files: tsExts,
+    name: "tsdoc/recommended",
     plugins: {"tsdoc": tsdocPlugin},
     rules: {"tsdoc/syntax": "warn"},
   });
