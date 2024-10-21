@@ -17,7 +17,7 @@ export const apply = (configResult, eslintConfig) => {
   if (eslintConfig.typescript) {
     configResult.push({
       ...eslintPluginImportX.flatConfigs.typescript,
-      name: "import-x/recommended",
+      name: "import-x/typescript-recommended",
     });
   }
   const override = sections.getNamedSection(configResult, "keeex/importx-override");
@@ -106,4 +106,7 @@ export const apply = (configResult, eslintConfig) => {
     webOverride.files = ["src/webapp"];
     sections.sectionAddOption(webOverride, "settings", "import-x/resolver", "webpack");
   }
+  const overrideCjs = sections.getNamedSection(configResult, "keeex/importx-override-cjs");
+  overrideCjs.files = ["**/*.cjs"];
+  sections.configureRules(overrideCjs, "import-x", {"no-commonjs": "off"});
 };

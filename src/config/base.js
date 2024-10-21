@@ -169,4 +169,7 @@ export const apply = (configResult, eslintConfig) => {
       "spec-only": "error",
     },
   );
+  const cjsOverride = sections.getNamedSection(configResult, "keeex/files-cjs");
+  cjsOverride.files = ["**/*.cjs"];
+  sections.sectionAddOption(cjsOverride, "languageOptions", "sourceType", "commonjs");
 };

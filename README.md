@@ -33,6 +33,10 @@ export default await eslintConfig({
       globals: {node: true},
     },
     {
+      files: ["*.cjs"],
+      globals: {nodeCjs: true},
+    },
+    {
       files: ["src/tests/**/*", "src/**/*.test.*"],
       globals: {mocha: true},
     },
@@ -64,6 +68,7 @@ be considered, and `globals`, which is an object that can have the following pro
 - "es2025": globals available in ES2025 scripts
 - "mocha": globals available in Mocha tests
 - "node": globals available in Node.js
+- "nodeCjs": globals for Node.js in commonjs
 - "serviceworker": globals available in Service Workers
 - "worker": globals available in Workers
 - "custom": an object of custom identifiers to be made available, whose keys are the identifiers and

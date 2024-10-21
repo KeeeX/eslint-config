@@ -13,6 +13,7 @@ const getGlobalsFromConfig = configGlobals => {
   if (configGlobals?.es2025) Object.assign(res, globals.es2025);
   if (configGlobals?.mocha) Object.assign(res, globals.mocha);
   if (configGlobals?.node) Object.assign(res, globals.nodeBuiltin);
+  if (configGlobals?.nodeCjs) Object.assign(res, globals.node);
   if (configGlobals?.serviceworker) Object.assign(res, globals.serviceworker);
   if (configGlobals?.worker) Object.assign(res, globals.worker);
   if (configGlobals?.custom) Object.assign(res, configGlobals.custom);

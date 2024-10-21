@@ -29,6 +29,10 @@ export const globals = [
     globals: {node: true},
   },
   {
+    files: ["*.cjs"],
+    globals: {nodeCjs: true},
+  },
+  {
     files: [
       "src/tests/**/*",
       "src/**/*.test.*",
