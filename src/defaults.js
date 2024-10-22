@@ -1,3 +1,5 @@
+import {isFullCheck} from "./environ.js";
+
 /** List of ignored patterns by default */
 export const ignores = ["lib", "web", "gen", "src/gen"];
 
@@ -35,4 +37,4 @@ export const globals = [
 ];
 
 /** Import cycle max depth */
-export const cycleMaxDepth = 3;
+export const cycleMaxDepth = isFullCheck() ? true : 0;

@@ -1,5 +1,6 @@
 import eslintPluginImportX from "eslint-plugin-import-x";
 
+import {isFullCheck} from "../environ.js";
 import * as sections from "../sections.js";
 
 /**
@@ -66,18 +67,28 @@ export const apply = (configResult, eslintConfig) => {
     sections.configureRules(override, "import-x", {"no-cycle": "error"});
   }
   if (eslintConfig.typescript) {
-    sections.configureRules(override, "import-x", {
+    const tsOverride = sections.getNamedSection(configResult, "keeex/importx-override-typescript");
+    sections.configureRules(tsOverride, "import-x", {
+      "default": "off",
+      "namespace": "off",
       "no-extraneous-dependencies": ["error", {includeTypes: true}],
+      "no-named-as-default-member": "off",
+      "no-unresolved": "off",
     });
+    if (!isFullCheck()) {
+      sections.configureRules(tsOverride, "import-x", {
+        "no-named-as-default": "off",
+      });
+    }
     if (eslintConfig.react) {
-      sections.sectionAddOption(override, "settings", "import-x/extensions", [".ts", ".tsx"]);
+      sections.sectionAddOption(tsOverride, "settings", "import-x/extensions", [".ts", ".tsx"]);
     } else {
-      sections.sectionAddOption(override, "settings", "import-x/extensions", [".ts"]);
+      sections.sectionAddOption(tsOverride, "settings", "import-x/extensions", [".ts"]);
     }
   } else {
     sections.configureRules(override, "import-x", {
       "extensions": ["error", "ignorePackages"],
-      "no-deprecated": "warn",
+      "no-deprecated": isFullCheck() ? "warn" : "off",
       "no-extraneous-dependencies": "error",
     });
     if (eslintConfig.react) {

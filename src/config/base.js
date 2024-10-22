@@ -63,6 +63,7 @@ export const apply = (configResult, eslintConfig) => {
     "no-div-regex": "warn",
     "no-duplicate-imports": "error",
     "no-else-return": "warn",
+    "no-empty": ["error", {allowEmptyCatch: true}],
     "no-eq-null": "error",
     "no-eval": "error",
     "no-extend-native": "error",
