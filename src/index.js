@@ -3,11 +3,12 @@ import {getReactFullConfig} from "./config/reactfullconfig.js";
 import * as defaults from "./defaults.js";
 
 import {configToDependencies} from "./dependencies.js";
-import {isDepCheck} from "./environ.js";
+import * as environ from "./environ.js";
 import {clearConfig} from "./sections.js";
 
 /** Setup all defaults in the eslintParams config */
 const configDefaults = (eslintParams) => ({
+  full: eslintParams?.full ?? false,
   globals: eslintParams?.globals ?? defaults.globals,
   ignores: eslintParams?.ignores ?? defaults.ignores,
   import: eslintParams?.import ?? defaults.cycleMaxDepth,
@@ -47,13 +48,16 @@ const configDefaults = (eslintParams) => ({
  *
  * @param [eslintParams.mocha] {boolean} - Enable mocha plugins
  *
+ * @param [eslintParams.full] {boolean} - Enable full check mode
+ *
  * @returns
  * The eslint config object
  */
 const eslintConfig = async (eslintParams) => {
   const fullConfig = configDefaults(eslintParams);
   const res = [];
-  if (isDepCheck()) {
+  if (fullConfig.full) environ.setFullCheck();
+  if (environ.isDepCheck()) {
     configToDependencies(fullConfig);
   } else {
     if (!fullConfig.noBase) (await lazy.base()).apply(res, fullConfig);
