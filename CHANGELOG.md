@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.1.2 2024-10-22 18:13:07 +0200
+
+### Fixed
+
+- [#20] Fixed some costly rules, added full check env var
+- Fixed error with no-empty
+
 ## v2.1.1 2024-10-22 16:01:16 +0200
 
 ### Fixed
