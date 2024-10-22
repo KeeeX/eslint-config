@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.1.0 2024-10-22 15:41:44 +0200
+
+### Added
+
+- [#18] Added prettier
+
+### Fixed
+
+- [#19] Added name to all eslint config sections
+- Better handling of .cjs files
+- Added a check for TypeScript
+- Fixed dependency issue
+
+### Security
+
+- Update
+
 ## v2.0.2 2024-10-18 16:09:59 +0200
 
 ### Fixed
