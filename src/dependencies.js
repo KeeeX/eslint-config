@@ -13,7 +13,6 @@ const requiredDependencies = {};
 /** List of dependencies no longer used and that should be removed */
 const removedDependencies = [
   "@typescript-eslint/eslint-plugin",
-  "@typescript-eslint/parser",
   "eslint-plugin-chai-friendly",
   "eslint-plugin-deprecation",
   "eslint-plugin-i",
