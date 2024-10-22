@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.1.1 2024-10-22 16:01:16 +0200
+
+### Fixed
+
+- Missing config file in package
+
 ## v2.1.0 2024-10-22 15:41:44 +0200
 
 ### Added
