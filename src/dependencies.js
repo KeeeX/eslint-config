@@ -13,6 +13,7 @@ const requiredDependencies = {};
 /** List of dependencies no longer used and that should be removed */
 const removedDependencies = [
   "@typescript-eslint/eslint-plugin",
+  "@typescript-eslint/parser",
   "eslint-plugin-chai-friendly",
   "eslint-plugin-deprecation",
   "eslint-plugin-i",
@@ -186,7 +187,6 @@ export const configToDependencies = (eslintConfig) => {
   }
   if (eslintConfig.typescript) {
     addDependency("typescript-eslint", "8.x");
-    addDependency("@typescript-eslint/parser", "8.x");
     addDependency("eslint-plugin-tsdoc", "0.x");
   }
 };
