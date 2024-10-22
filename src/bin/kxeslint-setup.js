@@ -129,6 +129,19 @@ export default config;
   }
 };
 
+const checkTsConfig = () => {
+  const needTsConfig = deps.needDependencies("typescript-eslint");
+  if (!needTsConfig) return;
+  console.group("Checking tsconfig");
+  try {
+    if (!fs.existsSync("tsconfig.json")) {
+      console.log("tsconfig.json missing, this will *considerably* slow down eslint");
+    }
+  } finally {
+    console.groupEnd();
+  }
+};
+
 const main = async () => {
   console.group("KeeeX eslint and prettier configuration setup");
   try {
@@ -136,6 +149,7 @@ const main = async () => {
     if (!configOk) return;
     await prettierSetup();
     await depsCheck();
+    checkTsConfig();
   } finally {
     console.groupEnd();
   }

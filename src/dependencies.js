@@ -22,6 +22,8 @@ const removedDependencies = [
 
 let pkgJson;
 
+export const needDependencies = (name) => name in requiredDependencies;
+
 /**
  * Retrieve the current project's "package.json".
  *
