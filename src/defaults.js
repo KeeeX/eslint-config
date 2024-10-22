@@ -21,18 +21,15 @@ export const globals = [
     },
   },
   {
-    files: [
-      "src/bin/**/*",
-      "src/server/**/*",
-      "*",
-    ],
+    files: ["src/bin/**/*", "src/server/**/*", "*"],
     globals: {node: true},
   },
   {
-    files: [
-      "src/tests/**/*",
-      "src/**/*.test.*",
-    ],
+    files: ["*.cjs"],
+    globals: {nodeCjs: true},
+  },
+  {
+    files: ["src/tests/**/*", "src/**/*.test.*"],
     globals: {mocha: true},
   },
 ];

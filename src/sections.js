@@ -2,10 +2,10 @@
  * Get a config section by name.
  *
  * When requesting a section that doesn't exist, it is added.
- * 
+ *
  * @param configResult - The currently built eslint config object
  * @param name {string} - The name of the section to get
- * 
+ *
  * @returns
  * The requested section, as a new entry if needed.
  */
@@ -18,10 +18,10 @@ export const getNamedSection = (configResult, name) => {
 
 /**
  * Add a property in an object on the provided section.
- * 
+ *
  * This basically sets `configSection[optionGroup][optionName] = value`.
  * It also takes care of creating/deleting new/empty objects.
- * 
+ *
  * @param configSection - A single "section" (an entry) from the eslint config array
  * @param optionGroup {string} - The name of the properties in the section to add a property to
  * @param optionName {string} - The name of the property to add
@@ -51,7 +51,7 @@ export const configureRules = (configSection, prefix, rules) => {
 };
 
 /** Remove the `_kxconfig` property from all sections and return a suitable object. */
-export const clearConfig = configResult => {
+export const clearConfig = (configResult) => {
   const emptySectionsId = [];
   for (let i = 0; i < configResult.length; i++) {
     // We go backwards to avoid messing up the indices on deletion

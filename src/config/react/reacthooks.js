@@ -8,5 +8,6 @@ export const apply = (configResult, eslintConfig) => {
   configResult.push({
     ...eslintPluginReactHooks.configs.recommended,
     files: ["src/webapp/**/*.js", "**/*.jsx", "**/*.tsx"],
+    name: "react-hooks/recommended",
   });
-}
+};

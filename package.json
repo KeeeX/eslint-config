@@ -15,11 +15,11 @@
   },
   "description": "Common eslint configuration",
   "devDependencies": {
-    "@eslint/compat": "^1.2.0",
+    "@eslint/compat": "^1.2.1",
     "@eslint/js": "^9.12.0",
-    "eslint": "^9.12.0",
+    "eslint": "9.x",
     "eslint-import-resolver-typescript": "^3.6.3",
-    "eslint-import-resolver-webpack": "*",
+    "eslint-import-resolver-webpack": "^0.13.9",
     "eslint-plugin-import-x": "^4.3.1",
     "eslint-plugin-mocha": "^10.5.0",
     "eslint-plugin-promise": "^7.1.0",
@@ -28,7 +28,8 @@
     "eslint-plugin-react-native": "^4.1.0",
     "eslint-plugin-tsdoc": "^0.3.0",
     "globals": "^15.11.0",
-    "typescript-eslint": "^8.9.0"
+    "prettier": "^3.3.3",
+    "typescript-eslint": "^8.11.0"
   },
   "files": [
     "src"
@@ -37,7 +38,7 @@
   "main": "src/index.js",
   "name": "@keeex/eslint-config",
   "overrides": {
-    "eslint": "^9.12.0",
+    "eslint": "9.x",
     "eslint-plugin-react-native": "^4.1.0"
   },
   "peerDependencies": {
@@ -54,6 +55,7 @@
     "eslint-plugin-react-native": "4.x",
     "eslint-plugin-tsdoc": "0.x",
     "globals": "15.x",
+    "prettier": "3.x",
     "typescript-eslint": "8.x"
   },
   "peerDependenciesMeta": {
@@ -96,6 +98,9 @@
     "globals": {
       "optional": true
     },
+    "prettier": {
+      "optional": true
+    },
     "typescript-eslint": {
       "optional": true
     }
@@ -115,5 +120,5 @@
     "test": "echo No test for this project"
   },
   "type": "module",
-  "version": "2.0.2"
+  "version": "2.1.0"
 }

@@ -1,5 +1,16 @@
 # Common eslint configuration for KeeeX
 
+## Description
+Manage the eslint and prettier configuration used through all KeeeX projects.
+
+### tl;dr
+
+- install the package
+- run `npx kxeslint-setup` to run some check
+- configure eslint in `eslint.config.js`
+- run `npx kxeslint-setup auto` to install all required dependencies
+- enable eslint and prettier in whatever you use
+
 ## Installation
 The package is available on npmjs and can be installed with any package manager that supports it.
 
@@ -33,6 +44,10 @@ export default await eslintConfig({
       globals: {node: true},
     },
     {
+      files: ["*.cjs"],
+      globals: {nodeCjs: true},
+    },
+    {
       files: ["src/tests/**/*", "src/**/*.test.*"],
       globals: {mocha: true},
     },
@@ -64,6 +79,7 @@ be considered, and `globals`, which is an object that can have the following pro
 - "es2025": globals available in ES2025 scripts
 - "mocha": globals available in Mocha tests
 - "node": globals available in Node.js
+- "nodeCjs": globals for Node.js in commonjs
 - "serviceworker": globals available in Service Workers
 - "worker": globals available in Workers
 - "custom": an object of custom identifiers to be made available, whose keys are the identifiers and

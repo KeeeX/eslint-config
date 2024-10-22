@@ -4,4 +4,4 @@ export const setDepCheck = () => {
 };
 
 /** Check the depcheck flag */
-export const isDepCheck = () => process.env.KEEEX_DEPCHECK === "true"
+export const isDepCheck = () => process.env.KEEEX_DEPCHECK === "true";

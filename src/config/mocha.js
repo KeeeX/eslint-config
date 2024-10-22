@@ -9,26 +9,18 @@ export const apply = (configResult, eslintConfig) => {
     ...mochaPlugin.configs.flat.recommended,
     files: mochaFilter,
   };
-  sections.configureRules(
-    mochaSection,
-    "",
-    {
-      "max-classes-per-file": "off",
-      "max-lines": "off",
-      "max-lines-per-function": "off",
+  sections.configureRules(mochaSection, "", {
+    "max-classes-per-file": "off",
+    "max-lines": "off",
+    "max-lines-per-function": "off",
+    "max-params": "off",
+    "no-magic-numbers": "off",
+  });
+  if (eslintConfig.typescript) {
+    sections.configureRules(mochaSection, "@typescript-eslint", {
       "max-params": "off",
       "no-magic-numbers": "off",
-    },
-  );
-  if (eslintConfig.typescript) {
-    sections.configureRules(
-      mochaSection,
-      "@typescript-eslint",
-      {
-        "max-params": "off",
-        "no-magic-numbers": "off",
-      },
-    );
+    });
   }
   configResult.push(mochaSection);
 };
