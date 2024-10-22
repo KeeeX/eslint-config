@@ -187,6 +187,7 @@ export const configToDependencies = (eslintConfig) => {
   }
   if (eslintConfig.typescript) {
     addDependency("typescript-eslint", "8.x");
+    addDependency("@typescript-eslint/parser", "8.x");
     addDependency("eslint-plugin-tsdoc", "0.x");
   }
 };
