@@ -10,4 +10,4 @@ export const apply = (configResult, eslintConfig) => {
     files: ["src/webapp/**/*.js", "**/*.jsx", "**/*.tsx"],
     name: "react-hooks/recommended",
   });
-}
+};

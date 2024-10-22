@@ -27,7 +27,7 @@ let pkgJson;
  *
  * This assumes that the command is run at the root of the project.
  */
-const getPkgJson = () => {
+export const getPkgJson = () => {
   if (!pkgJson) {
     try {
       const data = fs.readFileSync("./package.json", "utf8");
@@ -40,9 +40,11 @@ const getPkgJson = () => {
 };
 
 /** Get installed package version */
-const getInstalledVersion = name => {
+const getInstalledVersion = (name) => {
   try {
-    const depsPkg = JSON.parse(fs.readFileSync(path.join("node_modules", name, "package.json"), "utf8"));
+    const depsPkg = JSON.parse(
+      fs.readFileSync(path.join("node_modules", name, "package.json"), "utf8"),
+    );
     return depsPkg.version;
   } catch {
     return "<unknown>";
@@ -54,7 +56,7 @@ const getInstalledVersion = name => {
  *
  * @returns {{installed: "prod" | "dev" | false; version: string}}
  */
-const dependencyStatus = name => {
+const dependencyStatus = (name) => {
   const pkg = getPkgJson();
   let installed = "missing";
   if (pkg.devDependencies && name in pkg.devDependencies) installed = "dev";
@@ -97,7 +99,7 @@ const runProcess = (cmd, ...args) => {
 
 /**
  * List all missing/extra dependencies.
- * 
+ *
  * @returns {{name:string;action:"install"|"remove"}[]}
  * A list of dependencies with the action to do ("install" or "remove").
  */
@@ -106,13 +108,17 @@ export const listDependencies = () => {
   try {
     const res = [];
     for (const removed of removedDependencies) {
-      if (dependencyStatus(removed).installed !== "missing") res.push({name: removed, action: "remove"});
+      if (dependencyStatus(removed).installed !== "missing") {
+        res.push({name: removed, action: "remove"});
+      }
     }
     for (const required of Object.keys(requiredDependencies)) {
       const expectedVersion = requiredDependencies[required].version;
       const status = dependencyStatus(required);
       const needUpdate = status.installed !== "dev" || !satisfies(status.version, expectedVersion);
-      console.log(`dep:${required} (${status.installed}=${status.version}) (required=${expectedVersion})`);
+      console.log(
+        `dep:${required} (${status.installed}=${status.version}) (required=${expectedVersion})`,
+      );
       if (needUpdate) res.push({name: required, action: "install"});
     }
     return res.toSorted((a, b) => a.name.localeCompare(b.name));
@@ -129,8 +135,8 @@ export const listDependencies = () => {
  */
 export const installAndRemoveDeps = () => {
   const deps = listDependencies();
-  const toInstall = deps.filter(c => c.action === "install").map(c => c.name);
-  const toRemove = deps.filter(c => c.action === "remove").map(c => c.name);
+  const toInstall = deps.filter((c) => c.action === "install").map((c) => c.name);
+  const toRemove = deps.filter((c) => c.action === "remove").map((c) => c.name);
   if (toRemove.length > 0) {
     console.log(`Removing dependencies: ${toRemove.join(", ")}`);
     if (!runProcess("npm", "uninstall", "--force", ...toRemove)) {
@@ -140,7 +146,7 @@ export const installAndRemoveDeps = () => {
   }
   if (toInstall.length > 0) {
     console.log(`Installing dependencies: ${toInstall.join(", ")}`);
-    const installNames = toInstall.map(c => {
+    const installNames = toInstall.map((c) => {
       const target = requiredDependencies[c].version;
       if (typeof target === "string") return `${c}@${target}`;
       return c;
@@ -154,8 +160,9 @@ export const installAndRemoveDeps = () => {
 };
 
 /** Add all dependencies needed by the provided config */
-export const configToDependencies = eslintConfig => {
+export const configToDependencies = (eslintConfig) => {
   addDependency("eslint", "9.x");
+  addDependency("prettier", "3.x");
   if (eslintConfig.globals) addDependency("globals", "15.x");
   if (eslintConfig.import) {
     addDependency("eslint-plugin-import-x", "4.x");

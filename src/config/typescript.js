@@ -5,7 +5,7 @@ import tseslint from "typescript-eslint";
 
 import * as sections from "../sections.js";
 
-const filterForFiles = (rules, files) => rules.map(c => ({...c, files}));
+const filterForFiles = (rules, files) => rules.map((c) => ({...c, files}));
 
 /**
  * Apply the recommended typescript-eslint configuration plus KeeeX tweaks.
@@ -18,57 +18,42 @@ export const apply = (configResult, eslintConfig) => {
   const tsExts = ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"];
   configResult.push(
     ...filterForFiles(
-      [
-        ...tseslint.configs.recommendedTypeChecked,
-        ...tseslint.configs.stylisticTypeChecked,
-      ],
+      [...tseslint.configs.recommendedTypeChecked, ...tseslint.configs.stylisticTypeChecked],
       tsExts,
     ),
   );
   if (!eslintConfig.noBase) configResult.push(tseslint.configs.eslintRecommended);
   const section = sections.getNamedSection(configResult, "keeex/typescript-parserOptions");
   section.files = tsExts;
-  sections.sectionAddOption(
-    section,
-    "languageOptions",
-    "parserOptions",
-    {
-      projectService: true,
-      tsConfigRootDir: import.meta.dirname,
-    },
-  );
+  sections.sectionAddOption(section, "languageOptions", "parserOptions", {
+    projectService: true,
+    tsConfigRootDir: import.meta.dirname,
+  });
   const override = sections.getNamedSection(configResult, "keeex/typescript-override");
   override.files = tsExts;
   const eslintOverride = sections.getNamedSection(configResult, "keeex/eslint-override");
-  const overrule = (name, defaultValue = "error") => sections.configureRules(
-    override,
-    "",
-    {
+  const overrule = (name, defaultValue = "error") =>
+    sections.configureRules(override, "", {
       [name]: "off",
       [`@typescript-eslint/${name}`]: eslintOverride.rules?.[name] ?? defaultValue,
-    },
-  );
-  sections.configureRules(
-    override,
-    "@typescript-eslint",
-    {
-      "array-type": ["error", {default: "generic", readonly: "generic"}],
-      "explicit-function-return-type": "warn",
-      "explicit-member-accessibility": "error",
-      "explicit-module-boundary-types": "error",
-      "naming-convention": "error",
-      "no-deprecated": "warn",
-      "no-dynamic-delete": "warn",
-      "no-unnecessary-boolean-literal-compare": "warn",
-      "no-unnecessary-condition": ["warn", {allowConstantLoopConditions: true}],
-      "no-unnecessary-template-expression": "warn",
-      "parameter-properties": "error",
-      "prefer-readonly": "warn",
-      "prefer-return-this-type": "warn",
-      "return-await": "error",
-      "unified-signatures": "error",
-    },
-  );
+    });
+  sections.configureRules(override, "@typescript-eslint", {
+    "array-type": ["error", {default: "generic", readonly: "generic"}],
+    "explicit-function-return-type": "warn",
+    "explicit-member-accessibility": "error",
+    "explicit-module-boundary-types": "error",
+    "naming-convention": "error",
+    "no-deprecated": "warn",
+    "no-dynamic-delete": "warn",
+    "no-unnecessary-boolean-literal-compare": "warn",
+    "no-unnecessary-condition": ["warn", {allowConstantLoopConditions: true}],
+    "no-unnecessary-template-expression": "warn",
+    "parameter-properties": "error",
+    "prefer-readonly": "warn",
+    "prefer-return-this-type": "warn",
+    "return-await": "error",
+    "unified-signatures": "error",
+  });
   for (const baseRule of [
     "class-methods-use-this",
     "default-param-last",
@@ -94,7 +79,7 @@ export const apply = (configResult, eslintConfig) => {
   configResult.push({
     files: tsExts,
     name: "tsdoc/recommended",
-    plugins: {"tsdoc": tsdocPlugin},
+    plugins: {tsdoc: tsdocPlugin},
     rules: {"tsdoc/syntax": "warn"},
   });
 };

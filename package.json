@@ -28,6 +28,7 @@
     "eslint-plugin-react-native": "^4.1.0",
     "eslint-plugin-tsdoc": "^0.3.0",
     "globals": "^15.11.0",
+    "prettier": "*",
     "typescript-eslint": "^8.9.0"
   },
   "files": [
@@ -54,6 +55,7 @@
     "eslint-plugin-react-native": "4.x",
     "eslint-plugin-tsdoc": "0.x",
     "globals": "15.x",
+    "prettier": "3.x",
     "typescript-eslint": "8.x"
   },
   "peerDependenciesMeta": {
@@ -94,6 +96,9 @@
       "optional": true
     },
     "globals": {
+      "optional": true
+    },
+    "prettier": {
       "optional": true
     },
     "typescript-eslint": {

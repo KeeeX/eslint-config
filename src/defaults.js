@@ -21,11 +21,7 @@ export const globals = [
     },
   },
   {
-    files: [
-      "src/bin/**/*",
-      "src/server/**/*",
-      "*",
-    ],
+    files: ["src/bin/**/*", "src/server/**/*", "*"],
     globals: {node: true},
   },
   {
@@ -33,10 +29,7 @@ export const globals = [
     globals: {nodeCjs: true},
   },
   {
-    files: [
-      "src/tests/**/*",
-      "src/**/*.test.*",
-    ],
+    files: ["src/tests/**/*", "src/**/*.test.*"],
     globals: {mocha: true},
   },
 ];

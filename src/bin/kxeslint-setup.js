@@ -21,25 +21,25 @@ const depsCheck = async () => {
     if (dependencies.length === 0) {
       console.log("- All eslint dependencies installed");
     } else {
-      const toRemove = dependencies.filter(c => c.action === "remove");
-      const toInstall = dependencies.filter(c => c.action === "install");
+      const toRemove = dependencies.filter((c) => c.action === "remove");
+      const toInstall = dependencies.filter((c) => c.action === "install");
       if (toRemove.length > 0) {
         console.group("- Dependencies to remove:");
-        toRemove.forEach(c => console.log(`- ${c.name}`));
+        toRemove.forEach((c) => console.log(`- ${c.name}`));
         console.groupEnd();
       }
       if (toInstall.length > 0) {
         console.group("Dependencies to install:");
-        toInstall.forEach(c => console.log(`- ${c.name}`));
+        toInstall.forEach((c) => console.log(`- ${c.name}`));
         console.groupEnd();
       }
       if (process.argv.includes("auto")) {
         console.log("Auto mode enabled, installing dependencies");
         deps.installAndRemoveDeps();
       } else if (dependencies.length > 0) {
-        console.log("To enable auto mode, run this command with the \"auto\" flag");
+        console.log('To enable auto mode, run this command with the "auto" flag');
       }
-    };
+    }
   } finally {
     console.groupEnd();
   }
@@ -71,21 +71,29 @@ const checkEslintConfig = () => {
     const eslintConfigPath = getEslintConfig();
     if (eslintrcPath) {
       if (fs.existsSync(eslintConfigPath)) {
-        console.log(`- Found ${eslintrcPath} but ${eslintConfigPath} already exists; remove ${eslintrcPath} when the configuration migration is complete.`);
+        console.log(
+          `- Found ${eslintrcPath} but ${eslintConfigPath} already exists; remove ${eslintrcPath} when the configuration migration is complete.`,
+        );
       } else {
-        console.log(`- Found ${eslintrcPath} but no ${eslintConfigPath}; generating empty config. Please migrate from the old config then delete the old file.`);
+        console.log(
+          `- Found ${eslintrcPath} but no ${eslintConfigPath}; generating empty config. Please migrate from the old config then delete the old file.`,
+        );
         fs.writeFileSync(eslintConfigPath, `${defaultConfig}\n`);
       }
       return false;
     }
     if (!fs.existsSync(eslintConfigPath)) {
-      console.log(`- No ${eslintConfigPath} found. Generating empty config. Please configure it appropriately.`);
+      console.log(
+        `- No ${eslintConfigPath} found. Generating empty config. Please configure it appropriately.`,
+      );
       fs.writeFileSync(eslintConfigPath, `${defaultConfig}\n`);
       return false;
     }
     const configContent = fs.readFileSync(eslintConfigPath, "utf8");
     if (configContent.indexOf(deleteLine) !== -1) {
-      console.log(`- Found ${eslintConfigPath} with the delete line; configure eslint and remove that line.`);
+      console.log(
+        `- Found ${eslintConfigPath} with the delete line; configure eslint and remove that line.`,
+      );
       return false;
     }
     if (fs.existsSync(".eslintignore")) {
@@ -98,11 +106,36 @@ const checkEslintConfig = () => {
   }
 };
 
+const PRETTIER_CONFIG = "prettier.config.js";
+
+const prettierSetup = () => {
+  console.group("Checking prettier config");
+  try {
+    if (fs.existsSync(PRETTIER_CONFIG)) {
+      console.log("Configuration file already exist");
+      return;
+    }
+    console.log("Writting prettier configuration file");
+    fs.writeFileSync(
+      PRETTIER_CONFIG,
+      `
+import config from "@keeex/eslint-config/prettier.config.js";
+
+export default config;
+`.trimStart(),
+    );
+  } finally {
+    console.groupEnd();
+  }
+};
+
 const main = async () => {
-  console.group("KeeeX eslint configuration setup");
+  console.group("KeeeX eslint and prettier configuration setup");
   try {
     const configOk = checkEslintConfig();
-    if (configOk) await depsCheck();
+    if (!configOk) return;
+    await prettierSetup();
+    await depsCheck();
   } finally {
     console.groupEnd();
   }
