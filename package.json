@@ -32,6 +32,7 @@
     "typescript-eslint": "^8.11.0"
   },
   "files": [
+    "prettier.config.js",
     "src"
   ],
   "license": "MIT",
