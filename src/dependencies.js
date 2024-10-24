@@ -18,6 +18,7 @@ const removedDependencies = [
   "eslint-plugin-deprecation",
   "eslint-plugin-i",
   "eslint-plugin-import",
+  "eslint-plugin-react-native",
 ];
 
 let pkgJson;
