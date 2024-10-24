@@ -3,11 +3,12 @@ import {getReactFullConfig} from "./config/reactfullconfig.js";
 import * as defaults from "./defaults.js";
 
 import {configToDependencies} from "./dependencies.js";
-import {isDepCheck} from "./environ.js";
+import * as environ from "./environ.js";
 import {clearConfig} from "./sections.js";
 
 /** Setup all defaults in the eslintParams config */
 const configDefaults = (eslintParams) => ({
+  full: eslintParams?.full ?? false,
   globals: eslintParams?.globals ?? defaults.globals,
   ignores: eslintParams?.ignores ?? defaults.ignores,
   import: eslintParams?.import ?? defaults.cycleMaxDepth,
@@ -43,9 +44,10 @@ const configDefaults = (eslintParams) => ({
  *
  * @param [eslintParams.react] {object|false} - If trueish, enable React support.
  * @param [eslintParams.react.reactHooks] {boolean} - Enable react-hooks stuff.
- * @param [eslintParams.react.reactNative] {boolean} - Enable react-native stuff.
  *
  * @param [eslintParams.mocha] {boolean} - Enable mocha plugins
+ *
+ * @param [eslintParams.full] {boolean} - Enable full check mode
  *
  * @returns
  * The eslint config object
@@ -53,7 +55,8 @@ const configDefaults = (eslintParams) => ({
 const eslintConfig = async (eslintParams) => {
   const fullConfig = configDefaults(eslintParams);
   const res = [];
-  if (isDepCheck()) {
+  if (fullConfig.full) environ.setFullCheck();
+  if (environ.isDepCheck()) {
     configToDependencies(fullConfig);
   } else {
     if (!fullConfig.noBase) (await lazy.base()).apply(res, fullConfig);
@@ -62,7 +65,6 @@ const eslintConfig = async (eslintParams) => {
     if (fullConfig.import !== false) (await lazy.importx()).apply(res, fullConfig);
     const reactCfg = getReactFullConfig(fullConfig.react);
     if (reactCfg.react) (await lazy.react()).apply(res, fullConfig);
-    if (reactCfg.reactNative) (await lazy.reactNative()).apply(res, fullConfig);
     if (reactCfg.reactHooks) (await lazy.reactHooks()).apply(res, fullConfig);
     if (fullConfig.mocha) (await lazy.mocha()).apply(res, fullConfig);
     clearConfig(res);

@@ -18,6 +18,7 @@ const removedDependencies = [
   "eslint-plugin-deprecation",
   "eslint-plugin-i",
   "eslint-plugin-import",
+  "eslint-plugin-react-native",
 ];
 
 let pkgJson;
@@ -166,7 +167,7 @@ export const configToDependencies = (eslintConfig) => {
   addDependency("eslint", "9.x");
   addDependency("prettier", "3.x");
   if (eslintConfig.globals) addDependency("globals", "15.x");
-  if (eslintConfig.import) {
+  if (eslintConfig.import !== false) {
     addDependency("eslint-plugin-import-x", "4.x");
     if (eslintConfig.typescript) addDependency("eslint-import-resolver-typescript", "3.x");
   }
@@ -187,7 +188,6 @@ export const configToDependencies = (eslintConfig) => {
   }
   if (eslintConfig.typescript) {
     addDependency("typescript-eslint", "8.x");
-    addDependency("@typescript-eslint/parser", "8.x");
     addDependency("eslint-plugin-tsdoc", "0.x");
   }
 };

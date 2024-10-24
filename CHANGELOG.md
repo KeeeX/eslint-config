@@ -1,5 +1,31 @@
 # Changelog
 
+## v2.1.3 2024-10-24 17:26:53 +0200
+
+### Added
+
+- Added full parameter in config object
+
+### Changed
+
+- [#23] Non-filtered default "globals" entry not mandatory
+
+### Removed
+
+- [#22] Removed react-native plugins
+
+### Fixed
+
+- Added missing react-native from removed dependencies
+- Fixed mishandled old dependency in setup script
+- [#25] Automatically install import-x
+- [#24] Fixed config object for React
+- [#26] Fixed react-hooks plugin
+
+### Security
+
+- Update
+
 ## v2.1.2 2024-10-22 18:13:07 +0200
 
 ### Fixed
