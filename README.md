@@ -73,8 +73,8 @@ by hand. Good luck with that.
 ### `full`
 
 Enable some deeper, more costly checks. This is enabled automatically if the environment variable
-"KXESLINT" is set to "full", or if "GIT_HOOK_NAME" is set to "pre-push". You can enable it manually
-by passing `full: true` to the eslint config function.
+"KXESLINT" is set to "full", or if "GIT\_HOOK\_NAME" is set to "pre-push". You can enable it
+manually by passing `full: true` to the eslint config function.
 
 ### `globals`
 
