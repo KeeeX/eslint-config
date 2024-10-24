@@ -166,7 +166,7 @@ export const configToDependencies = (eslintConfig) => {
   addDependency("eslint", "9.x");
   addDependency("prettier", "3.x");
   if (eslintConfig.globals) addDependency("globals", "15.x");
-  if (eslintConfig.import) {
+  if (eslintConfig.import !== false) {
     addDependency("eslint-plugin-import-x", "4.x");
     if (eslintConfig.typescript) addDependency("eslint-import-resolver-typescript", "3.x");
   }
