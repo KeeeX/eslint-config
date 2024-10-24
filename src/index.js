@@ -44,7 +44,6 @@ const configDefaults = (eslintParams) => ({
  *
  * @param [eslintParams.react] {object|false} - If trueish, enable React support.
  * @param [eslintParams.react.reactHooks] {boolean} - Enable react-hooks stuff.
- * @param [eslintParams.react.reactNative] {boolean} - Enable react-native stuff.
  *
  * @param [eslintParams.mocha] {boolean} - Enable mocha plugins
  *
@@ -66,7 +65,6 @@ const eslintConfig = async (eslintParams) => {
     if (fullConfig.import !== false) (await lazy.importx()).apply(res, fullConfig);
     const reactCfg = getReactFullConfig(fullConfig.react);
     if (reactCfg.react) (await lazy.react()).apply(res, fullConfig);
-    if (reactCfg.reactNative) (await lazy.reactNative()).apply(res, fullConfig);
     if (reactCfg.reactHooks) (await lazy.reactHooks()).apply(res, fullConfig);
     if (fullConfig.mocha) (await lazy.mocha()).apply(res, fullConfig);
     clearConfig(res);

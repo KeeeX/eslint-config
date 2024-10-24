@@ -25,7 +25,6 @@
     "eslint-plugin-promise": "^7.1.0",
     "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-native": "^4.1.0",
     "eslint-plugin-tsdoc": "^0.3.0",
     "globals": "^15.11.0",
     "prettier": "^3.3.3",
@@ -38,10 +37,6 @@
   "license": "MIT",
   "main": "src/index.js",
   "name": "@keeex/eslint-config",
-  "overrides": {
-    "eslint": "9.x",
-    "eslint-plugin-react-native": "^4.1.0"
-  },
   "peerDependencies": {
     "@eslint/compat": "^1.2.0",
     "@eslint/js": "9.x",
@@ -53,7 +48,6 @@
     "eslint-plugin-promise": "7.x",
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "5.x",
-    "eslint-plugin-react-native": "4.x",
     "eslint-plugin-tsdoc": "0.x",
     "globals": "15.x",
     "prettier": "3.x",
@@ -88,9 +82,6 @@
       "optional": true
     },
     "eslint-plugin-react-hooks": {
-      "optional": true
-    },
-    "eslint-plugin-react-native": {
       "optional": true
     },
     "eslint-plugin-tsdoc": {

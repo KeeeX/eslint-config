@@ -121,10 +121,9 @@ To improve handling of React/JSX, set `react` to true. You can also pass an obje
 following boolean properties:
 
 - `reactHooks`: enable/disable React hooks rules
-- `reactNative`: enable/disable React Native rules
 
-You can't enable the hooks or React Native rules without enabling React, so if an object is provided
-React support is automatically enabled.
+You can't enable the hooks rules without enabling React, so if an object is provided React support
+is automatically enabled.
 
 ### `typescript`
 
