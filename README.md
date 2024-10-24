@@ -59,7 +59,7 @@ export default await eslintConfig({
   import: 3,
   mocha: true,
   noBase: false,
-  react: {react: false, reactHooks: false, reactNative: false},
+  react: false,
   typescript: true,
 });
 ```
@@ -73,8 +73,8 @@ by hand. Good luck with that.
 ### `full`
 
 Enable some deeper, more costly checks. This is enabled automatically if the environment variable
-"KXESLINT" is set to "full", or if "GIT\_HOOK\_NAME" is set to "pre-push". You can enable it
-manually by passing `full: true` to the eslint config function.
+"KXESLINT" is set to "full", or if "GIT_HOOK_NAME" is set to "pre-push". You can enable it manually
+by passing `full: true` to the eslint config function.
 
 ### `globals`
 
@@ -120,11 +120,11 @@ The base configuration imports all eslint recommendeds rules and promises handli
 To improve handling of React/JSX, set `react` to true. You can also pass an object with the
 following boolean properties:
 
-- `react`: enable/disable react rules
 - `reactHooks`: enable/disable React hooks rules
 - `reactNative`: enable/disable React Native rules
 
-You can't enable the hooks or React Native rules without enabling React.
+You can't enable the hooks or React Native rules without enabling React, so if an object is provided
+React support is automatically enabled.
 
 ### `typescript`
 
