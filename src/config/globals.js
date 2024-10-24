@@ -21,7 +21,7 @@ const getGlobalsFromConfig = (configGlobals) => {
 };
 
 export const apply = (configResult, eslintConfig) => {
-  const sharedGlobals = eslintConfig.globals.find((c) => c.files === undefined);
+  const sharedGlobals = eslintConfig.globals.find((c) => c.files === undefined) ?? {globals: {}};
   const sharedSection = sections.getNamedSection(configResult, "keeex/shared");
   sections.sectionAddOption(
     sharedSection,
