@@ -24,7 +24,7 @@
     "eslint-plugin-mocha": "^10.5.0",
     "eslint-plugin-promise": "^7.1.0",
     "eslint-plugin-react": "^7.37.1",
-    "eslint-plugin-react-hooks": "^5.1.0-rc-83825814-20241015",
+    "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-native": "^4.1.0",
     "eslint-plugin-tsdoc": "^0.3.0",
     "globals": "^15.11.0",
