@@ -34,7 +34,9 @@ export const apply = (configResult, eslintConfig) => {
     "max-lines": "off",
     "max-lines-per-function": "off",
     "max-params": "off",
+    "no-invalid-this": "off",
     "no-magic-numbers": "off",
+    "no-setup-in-describe": "off",
     "prefer-arrow-callback": "off",
   });
   if (eslintConfig.typescript) {
