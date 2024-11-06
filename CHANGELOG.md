@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.1.4 2024-11-06 18:04:04 +0100
+
+### Changed
+
+- [#28] Removed `prefer-arrow-callback` from mocha test files
+- [#27] Removed deconstruction rule
+- More tuning for mocha
+
+### Security
+
+- Update
+
 ## v2.1.3 2024-10-24 17:26:53 +0200
 
 ### Added

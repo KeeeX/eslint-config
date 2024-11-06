@@ -69,7 +69,6 @@ export const apply = (configResult, eslintConfig) => {
     "no-unused-vars",
     "no-use-before-define",
     "no-useless-constructor",
-    "prefer-destructuring",
     "prefer-promise-reject-errors",
     "require-await",
   ]) {
