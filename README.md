@@ -31,7 +31,6 @@ Here is all the available options with their default values:
 import eslintConfig from "@keeex/eslint-config";
 
 export default await eslintConfig({
-  full: false,
   globals: [
     {globals: {builtin: true, es2025: true}},
     {
@@ -69,12 +68,6 @@ customize the output, instead of directly exporting the return value of the func
 by hand. Good luck with that.
 
 ## Configuration
-
-### `full`
-
-Enable some deeper, more costly checks. This is enabled automatically if the environment variable
-"KXESLINT" is set to "full", or if "GIT_HOOK_NAME" is set to "pre-push". You can enable it manually
-by passing `full: true` to the eslint config function.
 
 ### `globals`
 

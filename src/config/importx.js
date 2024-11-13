@@ -1,6 +1,5 @@
 import eslintPluginImportX from "eslint-plugin-import-x";
 
-import {isFullCheck} from "../environ.js";
 import * as sections from "../sections.js";
 
 /**
@@ -75,11 +74,6 @@ export const apply = (configResult, eslintConfig) => {
       "no-named-as-default-member": "off",
       "no-unresolved": "off",
     });
-    if (!isFullCheck()) {
-      sections.configureRules(tsOverride, "import-x", {
-        "no-named-as-default": "off",
-      });
-    }
     if (eslintConfig.react) {
       sections.sectionAddOption(tsOverride, "settings", "import-x/extensions", [".ts", ".tsx"]);
     } else {
@@ -88,7 +82,7 @@ export const apply = (configResult, eslintConfig) => {
   } else {
     sections.configureRules(override, "import-x", {
       "extensions": ["error", "ignorePackages"],
-      "no-deprecated": isFullCheck() ? "warn" : "off",
+      "no-deprecated": "warn",
       "no-extraneous-dependencies": "error",
     });
     if (eslintConfig.react) {

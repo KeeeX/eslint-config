@@ -8,7 +8,6 @@ import {clearConfig} from "./sections.js";
 
 /** Setup all defaults in the eslintParams config */
 const configDefaults = (eslintParams) => ({
-  full: eslintParams?.full ?? false,
   globals: eslintParams?.globals ?? defaults.globals,
   ignores: eslintParams?.ignores ?? defaults.ignores,
   import: eslintParams?.import ?? defaults.cycleMaxDepth,
@@ -47,15 +46,12 @@ const configDefaults = (eslintParams) => ({
  *
  * @param [eslintParams.mocha] {boolean} - Enable mocha plugins
  *
- * @param [eslintParams.full] {boolean} - Enable full check mode
- *
  * @returns
  * The eslint config object
  */
 const eslintConfig = async (eslintParams) => {
   const fullConfig = configDefaults(eslintParams);
   const res = [];
-  if (fullConfig.full) environ.setFullCheck();
   if (environ.isDepCheck()) {
     configToDependencies(fullConfig);
   } else {
