@@ -1,5 +1,19 @@
 # Changelog
 
+## v2.2.0 2024-11-15 13:57:59 +0100
+
+### Added
+
+- [#21] Added support for "environment" directories
+
+### Removed
+
+- [#31] Removed "full" check mechanism
+
+### Security
+
+- Update
+
 ## v2.1.4 2024-11-06 18:04:04 +0100
 
 ### Changed
