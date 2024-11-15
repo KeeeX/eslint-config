@@ -8,7 +8,6 @@ import * as deps from "../dependencies.js";
 import {setDepCheck} from "../environ.js";
 
 const getEslintConfig = () => path.resolve(process.cwd(), "eslint.config.js");
-
 const depsCheck = async () => {
   console.group("eslint dependencies checking…");
   try {
@@ -44,25 +43,20 @@ const depsCheck = async () => {
     console.groupEnd();
   }
 };
-
 const eslintRcCandidates = [".js", ".cjs", ".json"];
-
 const getEslintrcPath = () => {
   for (const candidate of eslintRcCandidates) {
     const eslintrcPath = path.join(process.cwd(), `.eslintrc${candidate}`);
     if (fs.existsSync(eslintrcPath)) return eslintrcPath;
   }
 };
-
 const deleteLine = "DELETE THIS LINE WHEN CONFIGURED";
-
 const defaultConfig = `
 // ${deleteLine}
 import eslintConfig from "@keeex/eslint-config";
 
 export default await eslintConfig({});
 `.trim();
-
 /** Return true if the flat config system is ok */
 const checkEslintConfig = () => {
   console.group("Checking eslint config file…");
@@ -105,9 +99,7 @@ const checkEslintConfig = () => {
     console.groupEnd();
   }
 };
-
 const PRETTIER_CONFIG = "prettier.config.js";
-
 const prettierSetup = () => {
   console.group("Checking prettier config");
   try {
@@ -128,7 +120,6 @@ export default config;
     console.groupEnd();
   }
 };
-
 const checkTsConfig = () => {
   const needTsConfig = deps.needDependencies("typescript-eslint");
   if (!needTsConfig) return;
@@ -141,7 +132,6 @@ const checkTsConfig = () => {
     console.groupEnd();
   }
 };
-
 const main = async () => {
   console.group("KeeeX eslint and prettier configuration setup");
   try {
@@ -154,5 +144,4 @@ const main = async () => {
     console.groupEnd();
   }
 };
-
 await main();

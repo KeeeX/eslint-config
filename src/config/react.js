@@ -5,7 +5,6 @@ import {getFilesEnv} from "../pathutils.js";
 import * as sections from "../sections.js";
 
 import {getReactFullConfig} from "./reactfullconfig.js";
-
 // eslint-disable-next-line max-lines-per-function
 export const apply = (configResult, eslintConfig) => {
   const reactCfg = getReactFullConfig(eslintConfig.react);
@@ -18,16 +17,8 @@ export const apply = (configResult, eslintConfig) => {
     typescript: Boolean(eslintConfig.typescript),
   });
   configResult.push(
-    {
-      ...reactPlugin.configs.flat.recommended,
-      files,
-      name: "react/recommended",
-    },
-    {
-      ...reactPlugin.configs.flat["jsx-runtime"],
-      files,
-      name: "react/jsx-runtime",
-    },
+    {...reactPlugin.configs.flat.recommended, files, name: "react/recommended"},
+    {...reactPlugin.configs.flat["jsx-runtime"], files, name: "react/jsx-runtime"},
   );
   const override = sections.getNamedSection(configResult, "keeex/react");
   override.files = files;
@@ -42,11 +33,7 @@ export const apply = (configResult, eslintConfig) => {
     "jsx-child-element-spacing": "warn",
     "jsx-curly-brace-presence": [
       "error",
-      {
-        children: "never",
-        propElementValues: "always",
-        props: "never",
-      },
+      {children: "never", propElementValues: "always", props: "never"},
     ],
     "jsx-curly-newline": "warn",
     "jsx-curly-spacing": "warn",

@@ -15,7 +15,6 @@ export const getNamedSection = (configResult, name) => {
   configResult.push(newSection);
   return newSection;
 };
-
 /**
  * Add a property in an object on the provided section.
  *
@@ -38,7 +37,6 @@ export const sectionAddOption = (configSection, optionGroup, optionName, value) 
     configSection[optionGroup][optionName] = value;
   }
 };
-
 /** Merge/create the rules property */
 export const configureRules = (configSection, prefix, rules) => {
   let prefixed = {};
@@ -49,7 +47,6 @@ export const configureRules = (configSection, prefix, rules) => {
   }
   configSection.rules = {...configSection.rules, ...prefixed};
 };
-
 /** Remove the `_kxconfig` property from all sections and return a suitable object. */
 export const clearConfig = (configResult) => {
   const emptySectionsId = [];

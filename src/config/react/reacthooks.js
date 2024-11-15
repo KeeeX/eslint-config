@@ -10,9 +10,6 @@ export const apply = (configResult, eslintConfig) => {
     files: ["src/webapp/**/*.js", "**/*.jsx", "**/*.tsx"],
     name: "react-hooks/recommended",
     plugins: {"react-hooks": fixupPluginRules(eslintPluginReactHooks)},
-    rules: {
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn",
-    },
+    rules: {"react-hooks/rules-of-hooks": "error", "react-hooks/exhaustive-deps": "warn"},
   });
 };

@@ -4,7 +4,6 @@ import pluginPromise from "eslint-plugin-promise";
 
 import {getFiles} from "../pathutils.js";
 import * as sections from "../sections.js";
-
 /**
  * Apply the recommended eslint configuration plus KeeeX tweaks.
  *
@@ -28,10 +27,7 @@ export const apply = (configResult, eslintConfig) => {
     globalIgnores.ignores = [...eslintConfig.ignores];
   }
   // Base eslint
-  configResult.push({
-    name: "eslint/recommended",
-    ...js.configs.recommended,
-  });
+  configResult.push({name: "eslint/recommended", ...js.configs.recommended});
   const eslintCustom = sections.getNamedSection(configResult, "keeex/eslint-override");
   sections.configureRules(eslintCustom, "", {
     "array-callback-return": "error",
@@ -161,11 +157,7 @@ export const apply = (configResult, eslintConfig) => {
   const cjsOverride = sections.getNamedSection(configResult, "keeex/files-cjs");
   cjsOverride.files = getFiles({
     recursiveDirectories: "",
-    fileTypes: {
-      cjs: true,
-      esm: false,
-      javascript: true,
-    },
+    fileTypes: {cjs: true, esm: false, javascript: true},
   });
   sections.sectionAddOption(cjsOverride, "languageOptions", "sourceType", "commonjs");
 };

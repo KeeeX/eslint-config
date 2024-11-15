@@ -2,33 +2,21 @@ const asArray = (value) => {
   if (Array.isArray(value)) return value;
   return [value];
 };
-
 const envShorthands = {
-  library: {
-    mocha: "src/tests/**",
-  },
-  mobile: {
-    mobile: "src/**",
-  },
-  node: {
-    node: ["", "src/**"],
-    mocha: "src/tests/**",
-  },
-  webapp: {
-    webapp: ["src/**", "webres/*/js/**"],
-  },
+  library: {mocha: "src/tests/**"},
+  mobile: {mobile: "src/**"},
+  node: {node: ["", "src/**"], mocha: "src/tests/**"},
+  webapp: {webapp: ["src/**", "webres/*/js/**"]},
   webservice: {
     mocha: "src/tests/**",
     node: ["", "bin/**", "src/bin/**", "src/server/**"],
     webapp: ["src/webapp/**", "webres/*/js/**"],
   },
 };
-
 const getEffectiveEnv = (configEnv) => {
   if (typeof configEnv !== "string") return configEnv;
   return envShorthands[configEnv];
 };
-
 /**
  * @param {Array<string>|string} environments - List of environments to pull
  * @param {Array<string>|string} configEnv - List of configured environments
@@ -42,7 +30,6 @@ export const getEnvDirectories = (environments, configEnv, defaultDir) => {
   if (dirs.length === 0 && defaultDir) return [defaultDir];
   return dirs;
 };
-
 export const getExtensions = (fileTypes) => {
   const result = [];
   const esm = fileTypes.esm ?? true;
@@ -61,7 +48,6 @@ export const getExtensions = (fileTypes) => {
   }
   return result;
 };
-
 /** Configuration to build a filter list */
 // interface FilesDefinition {
 //   /** Directories where the files are; no recursion */
@@ -87,9 +73,7 @@ export const getExtensions = (fileTypes) => {
 //     cjs: boolean;
 //   };
 // }
-
 const extPlaceholder = ".ext";
-
 export const getFiles = (definitions) => {
   const result = new Set();
   for (const definition of asArray(definitions)) {
@@ -120,17 +104,11 @@ export const getFiles = (definitions) => {
   }
   return Array.from(result);
 };
-
 /** Get a list of file glob depending on config and requested file types */
 export const getFilesEnv = (eslintConfig, environments, filePatterns, fileTypes, defaultDir) => {
   const effectiveFileTypes = fileTypes
     ? {...fileTypes}
-    : {
-        cjs: true,
-        esm: true,
-        javascript: true,
-        typescript: Boolean(eslintConfig.typescript),
-      };
+    : {cjs: true, esm: true, javascript: true, typescript: Boolean(eslintConfig.typescript)};
   return getFiles({
     exactDirectories: getEnvDirectories(environments, eslintConfig.environments, defaultDir),
     filePatterns,

@@ -15,10 +15,7 @@ export const apply = (configResult, eslintConfig) => {
   const mochaFilter1 = getFilesEnv(eslintConfig, "mocha", undefined, fileTypes, "src/tests");
   const mochaFilter2 = getFilesEnv(eslintConfig, "mocha", "*.test.ext", fileTypes, "src");
   const files = [...mochaFilter1, ...mochaFilter2];
-  const mochaSection = {
-    ...mochaPlugin.configs.flat.recommended,
-    files,
-  };
+  const mochaSection = {...mochaPlugin.configs.flat.recommended, files};
   configResult.push(mochaSection);
   const override = sections.getNamedSection(configResult, "keeex/mocha");
   override.files = files;

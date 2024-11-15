@@ -10,7 +10,6 @@ if (!fs.existsSync(eslintFile)) {
     "This command must be run in the root of the project and contain an eslint.config.js file.",
   );
 }
-
 const eslintConfig = (await import(eslintFile)).default;
 const JSON_INDENT = 2;
 console.log(JSON.stringify(eslintConfig, null, JSON_INDENT));

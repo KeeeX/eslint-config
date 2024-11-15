@@ -2,7 +2,6 @@ import eslintPluginImportX from "eslint-plugin-import-x";
 
 import * as pathutils from "../pathutils.js";
 import * as sections from "../sections.js";
-
 /**
  * Apply the import-x configs
  *
@@ -11,10 +10,7 @@ import * as sections from "../sections.js";
 // eslint-disable-next-line max-lines-per-function
 export const apply = (configResult, eslintConfig) => {
   if (eslintConfig.import === false) return;
-  configResult.push({
-    ...eslintPluginImportX.flatConfigs.recommended,
-    languageOptions: {},
-  });
+  configResult.push({...eslintPluginImportX.flatConfigs.recommended, languageOptions: {}});
   if (eslintConfig.typescript) {
     configResult.push({
       ...eslintPluginImportX.flatConfigs.typescript,
@@ -36,10 +32,7 @@ export const apply = (configResult, eslintConfig) => {
     "order": [
       "warn",
       {
-        "alphabetize": {
-          order: "asc",
-          caseInsensitive: true,
-        },
+        "alphabetize": {order: "asc", caseInsensitive: true},
         "groups": [
           "builtin",
           "external",
