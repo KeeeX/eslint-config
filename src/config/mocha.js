@@ -1,34 +1,24 @@
 import mochaPlugin from "eslint-plugin-mocha";
 
-import {getFiles} from "../pathutils.js";
+import {getFilesEnv} from "../pathutils.js";
 import * as sections from "../sections.js";
 
 export const apply = (configResult, eslintConfig) => {
   if (!eslintConfig.mocha) return;
   const fileTypes = {
+    cjs: true,
+    esm: true,
     javascript: true,
     jsx: Boolean(eslintConfig.react),
     typescript: eslintConfig.typescript,
   };
-  const mochaFilter = getFiles([
-    {
-      filePatterns: "*.ext",
-      fileTypes,
-      recursiveDirectories: "src/tests",
-    },
-    {
-      filePatterns: "*.test.ext",
-      fileTypes,
-      recursiveDirectories: "src",
-    },
-  ]);
-  const mochaSection = {
-    ...mochaPlugin.configs.flat.recommended,
-    files: mochaFilter,
-  };
+  const mochaFilter1 = getFilesEnv(eslintConfig, "mocha", undefined, fileTypes, "src/tests");
+  const mochaFilter2 = getFilesEnv(eslintConfig, "mocha", "*.test.ext", fileTypes, "src");
+  const files = [...mochaFilter1, ...mochaFilter2];
+  const mochaSection = {...mochaPlugin.configs.flat.recommended, files};
   configResult.push(mochaSection);
   const override = sections.getNamedSection(configResult, "keeex/mocha");
-  override.files = mochaFilter;
+  override.files = files;
   sections.configureRules(override, "", {
     "max-classes-per-file": "off",
     "max-lines": "off",

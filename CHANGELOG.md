@@ -1,5 +1,19 @@
 # Changelog
 
+## v2.2.0 2024-11-15 13:57:59 +0100
+
+### Added
+
+- [#21] Added support for "environment" directories
+
+### Removed
+
+- [#31] Removed "full" check mechanism
+
+### Security
+
+- Update
+
 ## v2.1.4 2024-11-06 18:04:04 +0100
 
 ### Changed
@@ -82,8 +96,8 @@
 
 ## v2.0.0 2024-10-17 17:17:18 +0200
 
-This major version changed some config and removed some styling configuration.
-This is a temporary solution that will require using prettier later on.
+This major version changed some config and removed some styling configuration. This is a temporary
+solution that will require using prettier later on.
 
 ### Changed
 
@@ -560,7 +574,7 @@ This is a temporary solution that will require using prettier later on.
 
 ## v0.3.4 2020-06-19 11:21:05 +0200
 
-### Changes:
+### Changes
 
 - Relaxed some rules
 
@@ -593,9 +607,7 @@ This is a temporary solution that will require using prettier later on.
 - Automatic override of files in /webres using the browser env. If you need this behavior you can
   either provide the override yourself when calling
 
-
-### eslintConfig() or set it on a per-file basis.
-
+### eslintConfig() or set it on a per-file basis
 
 ## v0.2.13 2020-03-18 17:09:52 +0100
 
@@ -637,7 +649,7 @@ This is a temporary solution that will require using prettier later on.
 
 ### Changed
 
-- Generator use syntax "function* name()" instead of "function *name()"
+- Generator use syntax "function\* name()" instead of "function \*name()"
 
 ## v0.2.7 2020-02-20 15:00:57 +0100
 

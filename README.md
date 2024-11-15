@@ -31,7 +31,6 @@ Here is all the available options with their default values:
 import eslintConfig from "@keeex/eslint-config";
 
 export default await eslintConfig({
-  full: false,
   globals: [
     {globals: {builtin: true, es2025: true}},
     {
@@ -55,6 +54,10 @@ export default await eslintConfig({
       globals: {mocha: true},
     },
   ],
+  environments: {
+    node: ["", "src/**"],
+    mocha: "src/tests/**",
+  },
   ignores: ["lib", "web", "gen", "src/gen"],
   import: 3,
   mocha: true,
@@ -69,12 +72,6 @@ customize the output, instead of directly exporting the return value of the func
 by hand. Good luck with that.
 
 ## Configuration
-
-### `full`
-
-Enable some deeper, more costly checks. This is enabled automatically if the environment variable
-"KXESLINT" is set to "full", or if "GIT_HOOK_NAME" is set to "pre-push". You can enable it manually
-by passing `full: true` to the eslint config function.
 
 ### `globals`
 
@@ -93,6 +90,64 @@ be considered, and `globals`, which is an object that can have the following pro
 - "worker": globals available in Workers
 - "custom": an object of custom identifiers to be made available, whose keys are the identifiers and
   the values are boolean indicating if these identifiers are read-only (false) or not (true)
+
+### `environments`
+
+Allows you to define general environments for specific directory. The full configuration is:
+
+```javascript
+{
+  environments: {
+    node: ["", "src/bin/**", "src/server/**"],
+    webapp: ["src/webapp/**", "webres/*/js/**"],
+    mobile: ["src/mobile/**"],
+    mocha: ["src/tests/**"],
+  },
+}
+```
+
+The four type of environments are: "node", "webapp", "mobile" and "mocha". They set-up some globals
+for the source files in the given directories, as well as restrict some rules (for example, if
+"webapp" or "mobile" are defined, react will only apply to these directories).
+
+As a shorthand, it is possible to set the `environments` property to a string, matching the
+following options:
+
+```javascript
+// "environments": "webservice"
+{
+  "environments": {
+    "node": ["", "src/bin/**", "src/server/**"],
+    "webapp": ["src/webapp/**", "webres/*/js/**"],
+    "mocha": "src/tests/**"
+  }
+}
+// "environments": "webapp"
+{
+  "environments": {
+    "webapp": ["src/**", "webres/*/js/**"]
+  }
+}
+// "environments": "mobile"
+{
+  "environments": {
+    "mobile": "src/**"
+  }
+}
+// "environments": "library"
+{
+  "environments": {
+    "mocha": "src/tests/**"
+  }
+}
+// "environments": "node"
+{
+  "environments": {
+    "node": ["", "src/**"],
+    "mocha": "src/tests/**"
+  }
+}
+```
 
 ### `ignores`
 

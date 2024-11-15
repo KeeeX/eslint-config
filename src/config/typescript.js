@@ -6,7 +6,6 @@ import tseslint from "typescript-eslint";
 import * as sections from "../sections.js";
 
 const filterForFiles = (rules, files) => rules.map((c) => ({...c, files}));
-
 /**
  * Apply the recommended typescript-eslint configuration plus KeeeX tweaks.
  *

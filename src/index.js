@@ -1,14 +1,12 @@
 import * as lazy from "./config/lazy.js";
 import {getReactFullConfig} from "./config/reactfullconfig.js";
 import * as defaults from "./defaults.js";
-
 import {configToDependencies} from "./dependencies.js";
 import * as environ from "./environ.js";
 import {clearConfig} from "./sections.js";
-
 /** Setup all defaults in the eslintParams config */
 const configDefaults = (eslintParams) => ({
-  full: eslintParams?.full ?? false,
+  environments: eslintParams?.environments ?? "node",
   globals: eslintParams?.globals ?? defaults.globals,
   ignores: eslintParams?.ignores ?? defaults.ignores,
   import: eslintParams?.import ?? defaults.cycleMaxDepth,
@@ -17,7 +15,6 @@ const configDefaults = (eslintParams) => ({
   react: eslintParams?.react ?? false,
   typescript: eslintParams?.typescript ?? true,
 });
-
 /**
  * Build the eslint configuration from the provided settings.
  *
@@ -47,7 +44,8 @@ const configDefaults = (eslintParams) => ({
  *
  * @param [eslintParams.mocha] {boolean} - Enable mocha plugins
  *
- * @param [eslintParams.full] {boolean} - Enable full check mode
+ * @param [eslintParams.environments] {object} - Directory for various environments.
+ * Known environments are "node", "webapp", "mobile", "library", "mocha".
  *
  * @returns
  * The eslint config object
@@ -55,7 +53,6 @@ const configDefaults = (eslintParams) => ({
 const eslintConfig = async (eslintParams) => {
   const fullConfig = configDefaults(eslintParams);
   const res = [];
-  if (fullConfig.full) environ.setFullCheck();
   if (environ.isDepCheck()) {
     configToDependencies(fullConfig);
   } else {
@@ -71,5 +68,4 @@ const eslintConfig = async (eslintParams) => {
   }
   return res;
 };
-
 export default eslintConfig;
