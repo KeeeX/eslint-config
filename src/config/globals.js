@@ -1,5 +1,6 @@
 import globals from "globals";
 
+import * as pathutils from "../pathutils.js";
 import * as sections from "../sections.js";
 
 const base = {builtin: true, es2025: true};
@@ -18,6 +19,81 @@ const getGlobalsFromConfig = (configGlobals) => {
   if (configGlobals?.worker) Object.assign(res, globals.worker);
   if (configGlobals?.custom) Object.assign(res, configGlobals.custom);
   return res;
+};
+
+const addEnv = ({configResult, eslintConfig}, name, fileTypes, globalsEsm, globalsCjs) => {
+  const envDirs = pathutils.getEnvDirectories(name, eslintConfig.environments);
+  if (envDirs.length === 0) return;
+  const esmSection = sections.getNamedSection(configResult, `keeex/${name}-env-esm`);
+  esmSection.files = pathutils.getFiles({
+    exactDirectories: envDirs,
+    fileTypes: {
+      javascript: true,
+      typescript: eslintConfig.typescript,
+      ...fileTypes,
+      cjs: false,
+      esm: true,
+    },
+  });
+  const cjsSection = sections.getNamedSection(configResult, `keeex/${name}-env-cjs`);
+  cjsSection.files = pathutils.getFiles({
+    exactDirectories: envDirs,
+    fileTypes: {
+      javascript: true,
+      typescript: eslintConfig.typescript,
+      ...fileTypes,
+      cjs: true,
+      esm: false,
+    },
+  });
+  sections.sectionAddOption(
+    esmSection,
+    "languageOptions",
+    "globals",
+    getGlobalsFromConfig(globalsEsm),
+  );
+  sections.sectionAddOption(
+    cjsSection,
+    "languageOptions",
+    "globals",
+    getGlobalsFromConfig({...(globalsCjs ?? globalsEsm), commonjs: true}),
+  );
+};
+
+const addNodeEnv = (configResult, eslintConfig) => {
+  addEnv(
+    {
+      configResult,
+      eslintConfig,
+    },
+    "node",
+    {},
+    {node: true, worker: true},
+    {nodeCjs: true, worker: true},
+  );
+};
+
+const addWebappEnv = (configResult, eslintConfig) => {
+  addEnv(
+    {
+      configResult,
+      eslintConfig,
+    },
+    "webapp",
+    {jsx: true},
+    {
+      browser: true,
+      serviceworker: true,
+    },
+  );
+};
+
+const addMobileEnv = (configResult, eslintConfig) => {
+  addEnv({configResult, eslintConfig}, "mobile", {jsx: true}, {browser: true});
+};
+
+const addMochaEnv = (configResult, eslintConfig) => {
+  addEnv({configResult, eslintConfig}, "mocha", {}, {mocha: true});
 };
 
 export const apply = (configResult, eslintConfig) => {
@@ -43,4 +119,8 @@ export const apply = (configResult, eslintConfig) => {
       getGlobalsFromConfig(globalConfig.globals),
     );
   }
+  addNodeEnv(configResult, eslintConfig);
+  addWebappEnv(configResult, eslintConfig);
+  addMobileEnv(configResult, eslintConfig);
+  addMochaEnv(configResult, eslintConfig);
 };

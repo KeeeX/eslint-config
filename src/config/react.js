@@ -1,6 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import reactPlugin from "eslint-plugin-react";
 
+import {getFilesEnv} from "../pathutils.js";
 import * as sections from "../sections.js";
 
 import {getReactFullConfig} from "./reactfullconfig.js";
@@ -9,17 +10,27 @@ import {getReactFullConfig} from "./reactfullconfig.js";
 export const apply = (configResult, eslintConfig) => {
   const reactCfg = getReactFullConfig(eslintConfig.react);
   if (!reactCfg.react) return;
+  const files = getFilesEnv(eslintConfig, ["webapp", "mobile"], undefined, {
+    cjs: true,
+    esm: true,
+    javascript: true,
+    jsx: true,
+    typescript: Boolean(eslintConfig.typescript),
+  });
   configResult.push(
     {
       ...reactPlugin.configs.flat.recommended,
+      files,
       name: "react/recommended",
     },
     {
       ...reactPlugin.configs.flat["jsx-runtime"],
+      files,
       name: "react/jsx-runtime",
     },
   );
   const override = sections.getNamedSection(configResult, "keeex/react");
+  override.files = files;
   sections.sectionAddOption(override, "settings", "react", {version: "detect"});
   sections.configureRules(override, "react", {
     "button-has-type": "warn",

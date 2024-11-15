@@ -1,5 +1,6 @@
 import eslintPluginImportX from "eslint-plugin-import-x";
 
+import * as pathutils from "../pathutils.js";
 import * as sections from "../sections.js";
 
 /**
@@ -94,10 +95,31 @@ export const apply = (configResult, eslintConfig) => {
   }
   if (eslintConfig.react) {
     const webOverride = sections.getNamedSection(configResult, "keeex/importx-override-webapp");
-    webOverride.files = ["src/webapp"];
+    webOverride.files = pathutils.getFilesEnv(
+      eslintConfig,
+      ["webapp", "mobile"],
+      undefined,
+      {
+        cjs: true,
+        esm: true,
+        javascript: true,
+        jsx: true,
+        typescript: Boolean(eslintConfig.typescript),
+      },
+      "src/webapp",
+    );
     sections.sectionAddOption(webOverride, "settings", "import-x/resolver", "webpack");
   }
   const overrideCjs = sections.getNamedSection(configResult, "keeex/importx-override-cjs");
-  overrideCjs.files = ["**/*.cjs"];
+  overrideCjs.files = pathutils.getFiles({
+    recursiveDirectories: "",
+    fileTypes: {
+      cjs: true,
+      esm: false,
+      javascript: true,
+      jsx: Boolean(eslintConfig.react),
+      typescript: Boolean(eslintConfig.typescript),
+    },
+  });
   sections.configureRules(overrideCjs, "import-x", {"no-commonjs": "off"});
 };

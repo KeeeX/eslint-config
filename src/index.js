@@ -8,6 +8,7 @@ import {clearConfig} from "./sections.js";
 
 /** Setup all defaults in the eslintParams config */
 const configDefaults = (eslintParams) => ({
+  environments: eslintParams?.environments ?? "node",
   globals: eslintParams?.globals ?? defaults.globals,
   ignores: eslintParams?.ignores ?? defaults.ignores,
   import: eslintParams?.import ?? defaults.cycleMaxDepth,
@@ -45,6 +46,9 @@ const configDefaults = (eslintParams) => ({
  * @param [eslintParams.react.reactHooks] {boolean} - Enable react-hooks stuff.
  *
  * @param [eslintParams.mocha] {boolean} - Enable mocha plugins
+ *
+ * @param [eslintParams.environments] {object} - Directory for various environments.
+ * Known environments are "node", "webapp", "mobile", "library", "mocha".
  *
  * @returns
  * The eslint config object

@@ -2,6 +2,7 @@
 import js from "@eslint/js";
 import pluginPromise from "eslint-plugin-promise";
 
+import {getFiles} from "../pathutils.js";
 import * as sections from "../sections.js";
 
 /**
@@ -158,6 +159,13 @@ export const apply = (configResult, eslintConfig) => {
     "spec-only": "error",
   });
   const cjsOverride = sections.getNamedSection(configResult, "keeex/files-cjs");
-  cjsOverride.files = ["**/*.cjs"];
+  cjsOverride.files = getFiles({
+    recursiveDirectories: "",
+    fileTypes: {
+      cjs: true,
+      esm: false,
+      javascript: true,
+    },
+  });
   sections.sectionAddOption(cjsOverride, "languageOptions", "sourceType", "commonjs");
 };
