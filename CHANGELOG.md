@@ -1,5 +1,16 @@
 # Changelog
 
+## v2.2.1 2024-11-21 13:30:52 +0100
+
+### Changed
+
+- [#33] Added root of project as node environment for library preset
+- [#32] Changed jsx-no-leaked-render config
+
+### Security
+
+- Update
+
 ## v2.2.0 2024-11-15 13:57:59 +0100
 
 ### Added
