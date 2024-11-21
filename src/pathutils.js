@@ -3,7 +3,7 @@ const asArray = (value) => {
   return [value];
 };
 const envShorthands = {
-  library: {mocha: "src/tests/**"},
+  library: {mocha: "src/tests/**", node: ""},
   mobile: {mobile: "src/**"},
   node: {node: ["", "src/**"], mocha: "src/tests/**"},
   webapp: {webapp: ["src/**", "webres/*/js/**"]},

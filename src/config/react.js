@@ -46,7 +46,7 @@ export const apply = (configResult, eslintConfig) => {
     "jsx-max-depth": ["warn", {max: 8}],
     "jsx-no-bind": "error",
     "jsx-no-constructed-context-values": "error",
-    "jsx-no-leaked-render": "warn",
+    "jsx-no-leaked-render": ["warn", {validStrategies: ["coerce"]}],
     "jsx-no-script-url": "error",
     "jsx-no-useless-fragment": "warn",
     "jsx-pascal-case": ["warn", {allowNamespace: true}],
