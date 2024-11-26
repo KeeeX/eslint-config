@@ -56,7 +56,7 @@ export default await eslintConfig({
   ],
   environments: {
     node: ["", "src/**"],
-    mocha: "src/tests/**",
+    mocha: "src/tests/**/*",
   },
   ignores: ["lib", "web", "gen", "src/gen"],
   import: 3,
@@ -101,7 +101,7 @@ Allows you to define general environments for specific directory. The full confi
     node: ["", "src/bin/**", "src/server/**"],
     webapp: ["src/webapp/**", "webres/*/js/**"],
     mobile: ["src/mobile/**"],
-    mocha: ["src/tests/**"],
+    mocha: ["src/**/*.test.*", "src/tests/**/*"],
   },
 }
 ```
@@ -109,6 +109,9 @@ Allows you to define general environments for specific directory. The full confi
 The four type of environments are: "node", "webapp", "mobile" and "mocha". They set-up some globals
 for the source files in the given directories, as well as restrict some rules (for example, if
 "webapp" or "mobile" are defined, react will only apply to these directories).
+
+The "mocha" environment expects a full file specification, where other environments will be applied
+to directories.
 
 As a shorthand, it is possible to set the `environments` property to a string, matching the
 following options:
@@ -119,7 +122,7 @@ following options:
   "environments": {
     "node": ["", "src/bin/**", "src/server/**"],
     "webapp": ["src/webapp/**", "webres/*/js/**"],
-    "mocha": "src/tests/**"
+    "mocha": ["src/**/*.test.*", "src/tests/**/*"]
   }
 }
 // "environments": "webapp"
@@ -137,14 +140,14 @@ following options:
 // "environments": "library"
 {
   "environments": {
-    "mocha": "src/tests/**"
+    "mocha": ["src/**/*.test.*", "src/tests/**/*"]
   }
 }
 // "environments": "node"
 {
   "environments": {
     "node": ["", "src/**"],
-    "mocha": "src/tests/**"
+    "mocha": ["src/**/*.test.*", "src/tests/**/*"]
   }
 }
 ```

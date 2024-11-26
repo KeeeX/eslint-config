@@ -1,20 +1,12 @@
 import mochaPlugin from "eslint-plugin-mocha";
 
-import {getFilesEnv} from "../pathutils.js";
+import {getEnvDirectories} from "../pathutils.js";
 import * as sections from "../sections.js";
 
 export const apply = (configResult, eslintConfig) => {
   if (!eslintConfig.mocha) return;
-  const fileTypes = {
-    cjs: true,
-    esm: true,
-    javascript: true,
-    jsx: Boolean(eslintConfig.react),
-    typescript: eslintConfig.typescript,
-  };
-  const mochaFilter1 = getFilesEnv(eslintConfig, "mocha", undefined, fileTypes, "src/tests");
-  const mochaFilter2 = getFilesEnv(eslintConfig, "mocha", "*.test.ext", fileTypes, "src");
-  const files = [...mochaFilter1, ...mochaFilter2];
+  let files = getEnvDirectories("mocha", eslintConfig.environments);
+  if (!files || files.length === 0) files = ["src/**/*.test.*", "src/tests/**/*"];
   const mochaSection = {...mochaPlugin.configs.flat.recommended, files};
   configResult.push(mochaSection);
   const override = sections.getNamedSection(configResult, "keeex/mocha");
