@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.2.2 2024-11-26 17:01:57 +0100
+
+### Fixed
+
+- [#34] Fixed mocha environments
+
+### Security
+
+- Update
+
 ## v2.2.1 2024-11-21 13:30:52 +0100
 
 ### Changed
