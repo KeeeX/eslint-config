@@ -5,7 +5,8 @@ import * as sections from "../sections.js";
 
 export const apply = (configResult, eslintConfig) => {
   if (!eslintConfig.mocha) return;
-  const files = getEnvDirectories(eslintConfig.environments, "mocha");
+  let files = getEnvDirectories("mocha", eslintConfig.environments);
+  if (!files || files.length === 0) files = ["src/**/*.test.*", "src/tests/**/*"];
   const mochaSection = {...mochaPlugin.configs.flat.recommended, files};
   configResult.push(mochaSection);
   const override = sections.getNamedSection(configResult, "keeex/mocha");
