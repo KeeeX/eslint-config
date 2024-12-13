@@ -141,7 +141,11 @@ export const apply = (configResult, eslintConfig) => {
     "require-await": "warn",
     "require-unicode-regexp": "warn",
     "sort-imports": ["warn", {ignoreCase: true, allowSeparatedGroups: true}],
-    "sort-keys": ["warn", "asc", {caseSensitive: false, minKeys: 3, natural: true}],
+    "sort-keys": [
+      "warn",
+      "asc",
+      {caseSensitive: false, ignoreComputedKeys: true, minKeys: 3, natural: true},
+    ],
     "symbol-description": "error",
   });
   // Promises

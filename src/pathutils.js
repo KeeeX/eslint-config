@@ -80,12 +80,14 @@ export const getFiles = (definitions) => {
     const extensions = getExtensions(definition.fileTypes);
     const directories = new Set();
     if (definition.exactDirectories !== undefined) {
-      directories.add(...asArray(definition.exactDirectories));
+      for (const dir of asArray(definition.exactDirectories)) directories.add(dir);
     }
     if (definition.recursiveDirectories !== undefined) {
-      directories.add(
-        ...asArray(definition.recursiveDirectories).map((c) => (c === "" ? "**" : `${c}/**`)),
-      );
+      for (const dir of asArray(definition.recursiveDirectories).map((c) =>
+        c === "" ? "**" : `${c}/**`,
+      )) {
+        directories.add(dir);
+      }
     }
     const filePatterns = new Set(
       definition.filePatterns ? asArray(definition.filePatterns) : [`*${extPlaceholder}`],
