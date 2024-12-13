@@ -1,5 +1,19 @@
 # Changelog
 
+## v2.2.3 2024-12-13 14:52:59 +0100
+
+### Changed
+
+- [#35] Updated config for sort-keys regarding computed key names
+
+### Fixed
+
+- [#37] Providing directories for different environments was broken
+
+### Security
+
+- Update
+
 ## v2.2.2 2024-11-26 17:01:57 +0100
 
 ### Fixed
