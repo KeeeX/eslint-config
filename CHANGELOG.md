@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.2.4 2025-01-03 14:26:01 +0100
+
+### Changed
+
+- Revert "[fix #32] Changed jsx-no-leaked-render config"
+
 ## v2.2.3 2024-12-13 14:52:59 +0100
 
 ### Changed
