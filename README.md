@@ -179,6 +179,7 @@ To improve handling of React/JSX, set `react` to true. You can also pass an obje
 following boolean properties:
 
 - `reactHooks`: enable/disable React hooks rules
+- `newJsxRuntime`: enable/disable new JSX runtime rules
 
 You can't enable the hooks rules without enabling React, so if an object is provided React support
 is automatically enabled.
