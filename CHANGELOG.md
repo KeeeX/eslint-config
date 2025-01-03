@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.2.5 2025-01-03 16:43:57 +0100
+
+### Changed
+
+- [#38] "react/jsx-runtime" not enabled by default in React enabled projects
+
+### Security
+
+- Update
+
 ## v2.2.4 2025-01-03 14:26:01 +0100
 
 ### Changed
