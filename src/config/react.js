@@ -16,10 +16,14 @@ export const apply = (configResult, eslintConfig) => {
     jsx: true,
     typescript: Boolean(eslintConfig.typescript),
   });
-  configResult.push(
-    {...reactPlugin.configs.flat.recommended, files, name: "react/recommended"},
-    {...reactPlugin.configs.flat["jsx-runtime"], files, name: "react/jsx-runtime"},
-  );
+  configResult.push({...reactPlugin.configs.flat.recommended, files, name: "react/recommended"});
+  if (reactCfg.newJsxRuntime) {
+    configResult.push({
+      ...reactPlugin.configs.flat["jsx-runtime"],
+      files,
+      name: "react/jsx-runtime",
+    });
+  }
   const override = sections.getNamedSection(configResult, "keeex/react");
   override.files = files;
   sections.sectionAddOption(override, "settings", "react", {version: "detect"});
