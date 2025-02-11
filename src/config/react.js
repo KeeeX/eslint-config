@@ -5,6 +5,7 @@ import {getFilesEnv} from "../pathutils.js";
 import * as sections from "../sections.js";
 
 import {getReactFullConfig} from "./reactfullconfig.js";
+
 // eslint-disable-next-line max-lines-per-function
 export const apply = (configResult, eslintConfig) => {
   const reactCfg = getReactFullConfig(eslintConfig.react);
