@@ -113,5 +113,5 @@
     "test": "echo No test for this project"
   },
   "type": "module",
-  "version": "2.2.5"
+  "version": "2.3.0"
 }
