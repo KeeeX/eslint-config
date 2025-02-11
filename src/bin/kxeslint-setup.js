@@ -132,10 +132,22 @@ const checkTsConfig = () => {
     console.groupEnd();
   }
 };
+
+const checkProjectType = () => {
+  const packageContent = JSON.parse(fs.readFileSync("package.json", "utf8"));
+  if (packageContent.type !== "module") {
+    console.error("package.json type is not module.");
+    return false;
+  }
+  return true;
+};
+
 const main = async () => {
   console.group("KeeeX eslint and prettier configuration setup");
   try {
-    const configOk = checkEslintConfig();
+    const typeOk = checkProjectType();
+    if (!typeOk) return;
+    const configOk = await checkEslintConfig();
     if (!configOk) return;
     await prettierSetup();
     await depsCheck();
