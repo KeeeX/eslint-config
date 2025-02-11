@@ -131,6 +131,13 @@ following options:
     "webapp": ["src/**", "webres/*/js/**"]
   }
 }
+// "environment": "weblibrary"
+{
+  "environments": {
+    "webapp": ["src/**"],
+    "mocha": ["src/**/*.test.*", "src/tests/**/*"]
+  }
+}
 // "environments": "mobile"
 {
   "environments": {

@@ -7,6 +7,7 @@ const envShorthands = {
   mobile: {mobile: "src/**"},
   node: {node: ["", "src/**"], mocha: ["src/**/*.test.*", "src/tests/**/*"]},
   webapp: {webapp: ["src/**", "webres/*/js/**"]},
+  weblibrary: {webapp: "src/**", mocha: ["src/**/*.test.*", "src/tests/**/*"]},
   webservice: {
     mocha: ["src/**/*.test.*", "src/tests/**/*"],
     node: ["", "bin/**", "src/bin/**", "src/server/**"],
