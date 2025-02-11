@@ -2,6 +2,7 @@ import eslintPluginImportX from "eslint-plugin-import-x";
 
 import * as pathutils from "../pathutils.js";
 import * as sections from "../sections.js";
+
 /**
  * Apply the import-x configs
  *

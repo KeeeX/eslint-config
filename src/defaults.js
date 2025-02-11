@@ -1,5 +1,6 @@
 /** List of ignored patterns by default */
 export const ignores = ["lib", "web", "gen", "src/gen"];
+
 /** Default globals affected to all projects */
 export const globals = [
   {globals: {builtin: true, es2025: true}},
@@ -9,5 +10,6 @@ export const globals = [
   {files: ["*.cjs"], globals: {nodeCjs: true}},
   {files: ["src/tests/**/*", "src/**/*.test.*"], globals: {mocha: true}},
 ];
+
 /** Import cycle max depth */
 export const cycleMaxDepth = true;

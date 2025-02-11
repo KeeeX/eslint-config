@@ -4,6 +4,7 @@ import * as defaults from "./defaults.js";
 import {configToDependencies} from "./dependencies.js";
 import * as environ from "./environ.js";
 import {clearConfig} from "./sections.js";
+
 /** Setup all defaults in the eslintParams config */
 const configDefaults = (eslintParams) => ({
   environments: eslintParams?.environments ?? "node",
@@ -15,6 +16,7 @@ const configDefaults = (eslintParams) => ({
   react: eslintParams?.react ?? false,
   typescript: eslintParams?.typescript ?? true,
 });
+
 /**
  * Build the eslint configuration from the provided settings.
  *

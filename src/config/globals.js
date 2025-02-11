@@ -4,6 +4,7 @@ import * as pathutils from "../pathutils.js";
 import * as sections from "../sections.js";
 
 const base = {builtin: true, es2025: true};
+
 /** Create the actual eslint globals object from user input */
 const getGlobalsFromConfig = (configGlobals) => {
   const res = {};
@@ -19,6 +20,7 @@ const getGlobalsFromConfig = (configGlobals) => {
   if (configGlobals?.custom) Object.assign(res, configGlobals.custom);
   return res;
 };
+
 const addEnv = ({configResult, eslintConfig}, name, fileTypes, globalsEsm, globalsCjs) => {
   const envDirs = pathutils.getEnvDirectories(name, eslintConfig.environments);
   if (envDirs.length === 0) return;
@@ -57,6 +59,7 @@ const addEnv = ({configResult, eslintConfig}, name, fileTypes, globalsEsm, globa
     getGlobalsFromConfig({...(globalsCjs ?? globalsEsm), commonjs: true}),
   );
 };
+
 const addNodeEnv = (configResult, eslintConfig) => {
   addEnv(
     {configResult, eslintConfig},
@@ -66,15 +69,19 @@ const addNodeEnv = (configResult, eslintConfig) => {
     {nodeCjs: true, worker: true},
   );
 };
+
 const addWebappEnv = (configResult, eslintConfig) => {
   addEnv({configResult, eslintConfig}, "webapp", {jsx: true}, {browser: true, serviceworker: true});
 };
+
 const addMobileEnv = (configResult, eslintConfig) => {
   addEnv({configResult, eslintConfig}, "mobile", {jsx: true}, {browser: true});
 };
+
 const addMochaEnv = (configResult, eslintConfig) => {
   addEnv({configResult, eslintConfig}, "mocha", {}, {mocha: true});
 };
+
 export const apply = (configResult, eslintConfig) => {
   const sharedGlobals = eslintConfig.globals.find((c) => c.files === undefined) ?? {globals: {}};
   const sharedSection = sections.getNamedSection(configResult, "keeex/shared");

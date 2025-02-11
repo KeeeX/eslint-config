@@ -6,8 +6,10 @@ import * as path from "node:path";
 import {satisfies} from "semver";
 
 import {getReactFullConfig} from "./config/reactfullconfig.js";
+
 /** name => {version: string, force: boolean} */
 const requiredDependencies = {};
+
 /** List of dependencies no longer used and that should be removed */
 const removedDependencies = [
   "@typescript-eslint/eslint-plugin",
@@ -18,8 +20,11 @@ const removedDependencies = [
   "eslint-plugin-import",
   "eslint-plugin-react-native",
 ];
+
 let pkgJson;
+
 export const needDependencies = (name) => name in requiredDependencies;
+
 /**
  * Retrieve the current project's "package.json".
  *
@@ -36,6 +41,7 @@ export const getPkgJson = () => {
   }
   return pkgJson;
 };
+
 /** Get installed package version */
 const getInstalledVersion = (name) => {
   try {
@@ -47,6 +53,7 @@ const getInstalledVersion = (name) => {
     return "<unknown>";
   }
 };
+
 /**
  * Check if a particular dependency is installed in the project.
  *
@@ -60,6 +67,7 @@ const dependencyStatus = (name) => {
   const version = installed === "missing" ? undefined : getInstalledVersion(name);
   return {installed, version};
 };
+
 /**
  * Add an NPM dependency to the list
  *
@@ -70,6 +78,7 @@ const dependencyStatus = (name) => {
 export const addDependency = (depName, version) => {
   requiredDependencies[depName] = {version: version ?? true, force: false};
 };
+
 /**
  * Run a process, and display the output if an error occured.
  *
@@ -90,6 +99,7 @@ const runProcess = (cmd, ...args) => {
   }
   return true;
 };
+
 /**
  * List all missing/extra dependencies.
  *
@@ -119,6 +129,7 @@ export const listDependencies = () => {
     console.groupEnd();
   }
 };
+
 /**
  * Run the required installation/removal.
  *
@@ -150,6 +161,7 @@ export const installAndRemoveDeps = () => {
   }
   return true;
 };
+
 /** Add all dependencies needed by the provided config */
 export const configToDependencies = (eslintConfig) => {
   addDependency("eslint", "9.x");

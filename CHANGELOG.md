@@ -1,5 +1,23 @@
 # Changelog
 
+## v2.3.0 2025-02-11 15:13:17 +0100
+
+### Added
+
+- [#39] Added weblibrary environment setting
+
+### Changed
+
+- [#40] Added some prompts to kxeslint-setup
+
+### Fixed
+
+- [#41] Detect incorrect package type
+
+### Security
+
+- Update
+
 ## v2.2.5 2025-01-03 16:43:57 +0100
 
 ### Changed
