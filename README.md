@@ -23,7 +23,8 @@ npm install -D @keeex/eslint-config
 ## Usage
 
 To prepare the configuration file, you can run `npx kxeslint-setup` to create a blank config file.
-Alternatively, you can create the file yourself. In both cases, it will be named `eslint.config.js`.
+Alternatively, you can create the file yourself.
+In both cases, it will be named `eslint.config.js`.
 
 Here is all the available options with their default values:
 
@@ -67,17 +68,18 @@ export default await eslintConfig({
 });
 ```
 
-If any of the top-level property is not defined, it will be set to its default value. If you want to
-customize the output, instead of directly exporting the return value of the function you can edit it
-by hand. Good luck with that.
+If any of the top-level property is not defined, it will be set to its default value.
+If you want to customize the output, instead of directly exporting the return value of the function
+you can edit it by hand.
+Good luck with that.
 
 ## Configuration
 
 ### `globals`
 
-The `globals` property is an array of object to define which globals are available in the code. Each
-of these objects can have two properties: `files`, which is an array of globs to match the files to
-be considered, and `globals`, which is an object that can have the following properties:
+The `globals` property is an array of object to define which globals are available in the code.
+Each of these objects can have two properties: `files`, which is an array of globs to match the
+files to be considered, and `globals`, which is an object that can have the following properties:
 
 - "builtin": generic JS built-in globals
 - "browser": globals available in the browser
@@ -93,7 +95,8 @@ be considered, and `globals`, which is an object that can have the following pro
 
 ### `environments`
 
-Allows you to define general environments for specific directory. The full configuration is:
+Allows you to define general environments for specific directory.
+The full configuration is:
 
 ```javascript
 {
@@ -106,9 +109,10 @@ Allows you to define general environments for specific directory. The full confi
 }
 ```
 
-The four type of environments are: "node", "webapp", "mobile" and "mocha". They set-up some globals
-for the source files in the given directories, as well as restrict some rules (for example, if
-"webapp" or "mobile" are defined, react will only apply to these directories).
+The four type of environments are: "node", "webapp", "mobile" and "mocha".
+They set-up some globals for the source files in the given directories, as well as restrict some
+rules (for example, if "webapp" or "mobile" are defined, react will only apply to these
+directories).
 
 The "mocha" environment expects a full file specification, where other environments will be applied
 to directories.
@@ -166,9 +170,9 @@ Array of globs to globally ignore for eslint.
 ### `import`
 
 Some extra rules for formatting and ordering imports can be used by setting `import` to true
-(enabled by default with a depth of 3). It is possible to pass a number instead of a boolean to
-limit the depth of circular imports check. This greatly improves performances, at the risk of
-missing a dependency cycle.
+(enabled by default with a depth of 3).
+It is possible to pass a number instead of a boolean to limit the depth of circular imports check.
+This greatly improves performances, at the risk of missing a dependency cycle.
 
 ### `mocha`
 
@@ -177,13 +181,14 @@ true.
 
 ### `noBase`
 
-The base configuration imports all eslint recommendeds rules and promises handling rules. Setting
-`noBase` to true removes that. There is absolutely no reason to do so.
+The base configuration imports all eslint recommendeds rules and promises handling rules.
+Setting `noBase` to true removes that.
+There is absolutely no reason to do so.
 
 ### `react`
 
-To improve handling of React/JSX, set `react` to true. You can also pass an object with the
-following boolean properties:
+To improve handling of React/JSX, set `react` to true.
+You can also pass an object with the following boolean properties:
 
 - `reactHooks`: enable/disable React hooks rules
 - `newJsxRuntime`: enable/disable new JSX runtime rules
@@ -193,14 +198,16 @@ is automatically enabled.
 
 ### `typescript`
 
-Set to `true` (the default value) to enable all TypeScript rules. This includes tsdoc rules.
+Set to `true` (the default value) to enable all TypeScript rules.
+This includes tsdoc rules.
 
 ## Dependencies
 
 This configuration depends on various packages to be available depending on the user settings for
-each individual projects. You can list the required dependencies for the current configuration by
-running `npx kxeslint-setup`. You can also automatically install missing dependencies by adding the
-"auto" flag to the command.
+each individual projects.
+You can list the required dependencies for the current configuration by running
+`npx kxeslint-setup`.
+You can also automatically install missing dependencies by adding the "auto" flag to the command.
 
 All dependencies are set as peer dependencies, as they are almost all optional depending on local
 settings.
@@ -210,8 +217,8 @@ The tool will also uninstall older dependencies that we used to have but are not
 ## Migration from .eslintrc.cjs
 
 When running `npx kxeslint-setup`, the tool will automatically detect an existing `.eslintrc.cjs`
-file and provides instructions for the migration. The migration process is manual; you have to
-update the new `eslint.config.js` file by hand.
+file and provides instructions for the migration.
+The migration process is manual; you have to update the new `eslint.config.js` file by hand.
 
 ## Debugging config issues
 

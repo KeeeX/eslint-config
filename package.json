@@ -18,8 +18,8 @@
   "devDependencies": {
     "@eslint/compat": "^1.2.6",
     "@eslint/js": "^9.12.0",
-    "eslint": "^9.20.0",
-    "eslint-import-resolver-typescript": "^3.7.0",
+    "eslint": "^9.20.1",
+    "eslint-import-resolver-typescript": "^3.8.2",
     "eslint-import-resolver-webpack": "^0.13.10",
     "eslint-plugin-import-x": "^4.6.1",
     "eslint-plugin-mocha": "^10.5.0",
@@ -27,16 +27,19 @@
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-tsdoc": "^0.4.0",
-    "globals": "^15.14.0",
-    "prettier": "^3.5.0",
-    "typescript-eslint": "^8.24.0"
+    "globals": "^15.15.0",
+    "prettier": "^3.5.1",
+    "typescript-eslint": "^8.24.1"
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./prettier.config.js": "./prettier.config.js"
   },
   "files": [
     "prettier.config.js",
     "src"
   ],
   "license": "MIT",
-  "main": "src/index.js",
   "name": "@keeex/eslint-config",
   "peerDependencies": {
     "@eslint/compat": "^1.2.0",
@@ -113,5 +116,5 @@
     "test": "echo No test for this project"
   },
   "type": "module",
-  "version": "2.3.0"
+  "version": "2.4.0"
 }
