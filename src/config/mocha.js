@@ -21,8 +21,15 @@ export const apply = (configResult, eslintConfig) => {
     "no-setup-in-describe": "off",
     "prefer-arrow-callback": "off",
   });
+  sections.configureRules(override, "mocha", {
+    "no-exports": "off",
+    "no-setup-in-describe": "off",
+    "no-top-level-hooks": "off",
+  });
   if (eslintConfig.typescript) {
     sections.configureRules(override, "@typescript-eslint", {
+      "explicit-function-return-type": "off",
+      "init-declarations": "off",
       "max-params": "off",
       "no-magic-numbers": "off",
     });
