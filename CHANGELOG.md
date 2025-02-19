@@ -1,5 +1,20 @@
 # Changelog
 
+## v2.4.0 2025-02-19 10:38:53 +0100
+
+### Changed
+
+- [#36] Relaxed some rules for testing
+- Package exports
+
+### Fixed
+
+- [#42] Fixed markdown formatting issue with prettier
+
+### Security
+
+- Update
+
 ## v2.3.0 2025-02-11 15:13:17 +0100
 
 ### Added
