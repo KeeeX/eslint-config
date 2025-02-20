@@ -19,7 +19,7 @@
     "@eslint/compat": "^1.2.6",
     "@eslint/js": "^9.12.0",
     "eslint": "^9.20.1",
-    "eslint-import-resolver-typescript": "^3.8.2",
+    "eslint-import-resolver-typescript": "^3.8.3",
     "eslint-import-resolver-webpack": "^0.13.10",
     "eslint-plugin-import-x": "^4.6.1",
     "eslint-plugin-mocha": "^10.5.0",
@@ -27,7 +27,7 @@
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-tsdoc": "^0.4.0",
-    "globals": "^15.15.0",
+    "globals": "^16.0.0",
     "prettier": "^3.5.1",
     "typescript-eslint": "^8.24.1"
   },
@@ -53,7 +53,7 @@
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "5.x",
     "eslint-plugin-tsdoc": "0.x",
-    "globals": "15.x",
+    "globals": "15.x || 16.x",
     "prettier": "3.x",
     "typescript-eslint": "8.x"
   },
@@ -116,5 +116,5 @@
     "test": "echo No test for this project"
   },
   "type": "module",
-  "version": "2.4.0"
+  "version": "2.4.1"
 }
