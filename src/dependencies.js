@@ -166,10 +166,10 @@ export const installAndRemoveDeps = () => {
 export const configToDependencies = (eslintConfig) => {
   addDependency("eslint", "9.x");
   addDependency("prettier", "3.x");
-  if (eslintConfig.globals) addDependency("globals", "15.x");
+  if (eslintConfig.globals) addDependency("globals", "16.x");
   if (eslintConfig.import !== false) {
     addDependency("eslint-plugin-import-x", "4.x");
-    if (eslintConfig.typescript) addDependency("eslint-import-resolver-typescript", "3.x");
+    if (eslintConfig.typescript) addDependency("eslint-import-resolver-typescript", "4.x");
   }
   if (eslintConfig.mocha) addDependency("eslint-plugin-mocha", "10.x");
   if (!eslintConfig.noBase) {
@@ -182,7 +182,6 @@ export const configToDependencies = (eslintConfig) => {
     if (eslintConfig.import) addDependency("eslint-import-resolver-webpack", "0.x");
     if (react.reactHooks) addDependency("eslint-plugin-react-hooks", "5.x");
     if (react.reactNative) {
-      addDependency("eslint-plugin-react-native", "4.x");
       addDependency("@eslint/js", "9.x");
     }
   }
