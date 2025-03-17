@@ -16,20 +16,20 @@
   },
   "description": "Common eslint configuration",
   "devDependencies": {
-    "@eslint/compat": "^1.2.6",
+    "@eslint/compat": "^1.2.7",
     "@eslint/js": "^9.12.0",
-    "eslint": "^9.20.1",
-    "eslint-import-resolver-typescript": "^3.8.3",
+    "eslint": "^9.22.0",
+    "eslint-import-resolver-typescript": "^4.0.0",
     "eslint-import-resolver-webpack": "^0.13.10",
-    "eslint-plugin-import-x": "^4.6.1",
+    "eslint-plugin-import-x": "^4.8.0",
     "eslint-plugin-mocha": "^10.5.0",
     "eslint-plugin-promise": "^7.2.1",
     "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-tsdoc": "^0.4.0",
     "globals": "^16.0.0",
-    "prettier": "^3.5.1",
-    "typescript-eslint": "^8.24.1"
+    "prettier": "^3.5.3",
+    "typescript-eslint": "^8.26.1"
   },
   "exports": {
     ".": "./src/index.js",
@@ -45,7 +45,7 @@
     "@eslint/compat": "^1.2.0",
     "@eslint/js": "9.x",
     "eslint": "9.x",
-    "eslint-import-resolver-typescript": "3.x",
+    "eslint-import-resolver-typescript": "3.X || 4.x",
     "eslint-import-resolver-webpack": "0.x",
     "eslint-plugin-import-x": "4.x",
     "eslint-plugin-mocha": "10.x",
@@ -116,5 +116,5 @@
     "test": "echo No test for this project"
   },
   "type": "module",
-  "version": "2.4.1"
+  "version": "2.4.2"
 }
