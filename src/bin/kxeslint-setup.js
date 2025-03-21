@@ -9,6 +9,22 @@ import prompts from "prompts";
 import * as deps from "../dependencies.js";
 import {setDepCheck} from "../environ.js";
 
+let cliInit;
+
+const getCliInit = () => {
+  if (cliInit) return cliInit;
+  for (const arg of process.argv) {
+    try {
+      const parsed = JSON.parse(arg);
+      if (parsed.type === "cliInit") {
+        cliInit = parsed;
+        return cliInit;
+      }
+    } catch {}
+  }
+  cliInit = {};
+};
+
 const getEslintConfig = () => path.resolve(process.cwd(), "eslint.config.js");
 
 const depsCheck = async () => {
@@ -104,7 +120,14 @@ const getBooleanPrompt = async (message) => {
 const getOptionsFromTarget = async (target) => {
   let {haveMocha, haveReact} = await getOptionsFromTargetFilter(target);
   if (haveReact === "maybe") haveReact = await getBooleanPrompt("Use React?");
-  if (haveMocha === "maybe") haveMocha = await getBooleanPrompt("Use Mocha?");
+  if (haveMocha === "maybe") {
+    const cliHaveTest = getCliInit().haveTests;
+    if (cliHaveTest === undefined) {
+      haveMocha = await getBooleanPrompt("Use Mocha?");
+    } else {
+      haveMocha = cliHaveTest;
+    }
+  }
   return {haveReact, haveMocha};
 };
 
@@ -177,13 +200,19 @@ ${configRows.map((c) => `  ${c},`).join("\n")}
 
 /** Generate a new base config based on a few questions. */
 const getNewConfig = async () => {
-  const generalTarget = await prompts({
-    choices: [
-      {title: "Generic JavaScript", value: "js"},
-      {title: "NodeJS", value: "node"},
+  const choices = [
+    {title: "Generic JavaScript", value: "js"},
+    {title: "NodeJS", value: "node"},
+  ];
+  const cliWeb = getCliInit().haveWeb;
+  if (cliWeb === undefined || cliWeb === true) {
+    choices.push(
       {title: "Browser", value: "browser"},
       {title: "React Native", value: "react-native"},
-    ],
+    );
+  }
+  const generalTarget = await prompts({
+    choices,
     message: "General target environment",
     name: "value",
     type: "select",
