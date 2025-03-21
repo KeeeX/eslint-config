@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.5.0 2025-03-21 15:31:23 +0100
+
+### Added
+
+- Allow customizing setup CLI
+
+### Security
+
+- Update
+
 ## v2.4.2 2025-03-17 10:32:21 +0100
 
 ### Security
