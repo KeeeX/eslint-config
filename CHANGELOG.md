@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.5.1 2025-03-27 14:51:05 +0100
+
+### Changed
+
+- Made NPM output to terminal instead of being silent
+
+### Fixed
+
+- Fixed tests not having globals in webservice environment
+
 ## v2.5.0 2025-03-21 15:31:23 +0100
 
 ### Added
