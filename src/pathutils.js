@@ -11,8 +11,8 @@ const envShorthands = {
   weblibrary: {webapp: "src/**", mocha: ["src/**/*.test.*", "src/tests/**/*"]},
   webservice: {
     mocha: ["src/**/*.test.*", "src/tests/**/*"],
-    node: ["", "bin/**", "src/bin/**", "src/server/**"],
-    webapp: ["src/webapp/**", "webres/*/js/**"],
+    node: ["", "bin/**", "src/bin/**", "src/server/**", "src/tests/server/**"],
+    webapp: ["src/webapp/**", "webres/*/js/**", "src/tests/webapp/**"],
   },
 };
 
