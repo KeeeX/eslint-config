@@ -88,13 +88,9 @@ export const addDependency = (depName, version) => {
  * Returns false if the process ended with another status than 0.
  */
 const runProcess = (cmd, ...args) => {
-  const res = cp.spawnSync(cmd, args, {encoding: "utf8"});
+  const res = cp.spawnSync(cmd, args, {encoding: "utf8", stdio: "inherit"});
   if (res.status !== 0) {
     console.log(`Command ${cmd} failed with exit code ${res.status}`);
-    console.log("stdout:");
-    console.log(res.stdout);
-    console.log("stderr:");
-    console.log(res.stderr);
     return false;
   }
   return true;

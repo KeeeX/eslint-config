@@ -124,8 +124,8 @@ following options:
 // "environments": "webservice"
 {
   "environments": {
-    "node": ["", "src/bin/**", "src/server/**"],
-    "webapp": ["src/webapp/**", "webres/*/js/**"],
+    "node": ["", "src/bin/**", "src/server/**", "src/tests/server/**"],
+    "webapp": ["src/webapp/**", "webres/*/js/**", "src/tests/webapp/**"],
     "mocha": ["src/**/*.test.*", "src/tests/**/*"]
   }
 }
