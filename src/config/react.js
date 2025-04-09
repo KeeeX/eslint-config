@@ -40,7 +40,7 @@ export const apply = (configResult, eslintConfig) => {
       "error",
       {children: "never", propElementValues: "always", props: "never"},
     ],
-    "jsx-curly-newline": "warn",
+    "jsx-curly-newline": "off",
     "jsx-curly-spacing": "warn",
     "jsx-equals-spacing": "warn",
     "jsx-filename-extension": ["error", {extensions: [".js", ".tsx"]}],
