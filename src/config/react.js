@@ -10,7 +10,7 @@ import {getReactFullConfig} from "./reactfullconfig.js";
 export const apply = (configResult, eslintConfig) => {
   const reactCfg = getReactFullConfig(eslintConfig.react);
   if (!reactCfg.react) return;
-  const files = getFilesEnv(eslintConfig, ["webapp", "mobile"], undefined, {
+  const files = getFilesEnv(eslintConfig, ["node", "webapp", "mobile"], undefined, {
     cjs: true,
     esm: true,
     javascript: true,
