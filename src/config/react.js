@@ -66,6 +66,7 @@ export const apply = (configResult, eslintConfig) => {
     "no-redundant-should-component-update": "error",
     "no-this-in-sfc": "error",
     "no-typos": "error",
+    "no-unescaped-entities": "off",
     "no-unsafe": "error",
     "no-unstable-nested-components": "error",
     "no-unused-class-component-methods": "warn",
