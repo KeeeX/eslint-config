@@ -10,7 +10,7 @@ import {getReactFullConfig} from "./reactfullconfig.js";
 export const apply = (configResult, eslintConfig) => {
   const reactCfg = getReactFullConfig(eslintConfig.react);
   if (!reactCfg.react) return;
-  const files = getFilesEnv(eslintConfig, ["webapp", "mobile"], undefined, {
+  const files = getFilesEnv(eslintConfig, ["node", "webapp", "mobile"], undefined, {
     cjs: true,
     esm: true,
     javascript: true,
@@ -40,7 +40,7 @@ export const apply = (configResult, eslintConfig) => {
       "error",
       {children: "never", propElementValues: "always", props: "never"},
     ],
-    "jsx-curly-newline": "warn",
+    "jsx-curly-newline": "off",
     "jsx-curly-spacing": "warn",
     "jsx-equals-spacing": "warn",
     "jsx-filename-extension": ["error", {extensions: [".js", ".tsx"]}],
@@ -66,6 +66,7 @@ export const apply = (configResult, eslintConfig) => {
     "no-redundant-should-component-update": "error",
     "no-this-in-sfc": "error",
     "no-typos": "error",
+    "no-unescaped-entities": "off",
     "no-unsafe": "error",
     "no-unstable-nested-components": "error",
     "no-unused-class-component-methods": "warn",

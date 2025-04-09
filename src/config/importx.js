@@ -1,4 +1,4 @@
-import eslintPluginImportX from "eslint-plugin-import-x";
+import {flatConfigs} from "eslint-plugin-import-x";
 
 import * as pathutils from "../pathutils.js";
 import * as sections from "../sections.js";
@@ -11,10 +11,10 @@ import * as sections from "../sections.js";
 // eslint-disable-next-line max-lines-per-function
 export const apply = (configResult, eslintConfig) => {
   if (eslintConfig.import === false) return;
-  configResult.push({...eslintPluginImportX.flatConfigs.recommended, languageOptions: {}});
+  configResult.push({...flatConfigs.recommended, languageOptions: {}});
   if (eslintConfig.typescript) {
     configResult.push({
-      ...eslintPluginImportX.flatConfigs.typescript,
+      ...flatConfigs.typescript,
       name: "import-x/typescript-recommended",
     });
   }

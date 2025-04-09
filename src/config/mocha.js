@@ -20,6 +20,7 @@ export const apply = (configResult, eslintConfig) => {
     "no-magic-numbers": "off",
     "no-setup-in-describe": "off",
     "prefer-arrow-callback": "off",
+    "sort-keys": "off",
   });
   sections.configureRules(override, "mocha", {
     "no-exports": "off",
@@ -28,6 +29,7 @@ export const apply = (configResult, eslintConfig) => {
   });
   if (eslintConfig.typescript) {
     sections.configureRules(override, "@typescript-eslint", {
+      "class-methods-use-this": "off",
       "explicit-function-return-type": "off",
       "init-declarations": "off",
       "max-params": "off",
