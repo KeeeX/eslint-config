@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.5.2 2025-04-09 15:33:00 +0200
+
+### Changed
+
+- [#44] Removed annoying rules
+- [#43] Relaxed tests rules
+
+### Fixed
+
+- [#45] Fixed conflict between prettier and eslint
+- Fixed react config not applying to node files
+- Removed old config
+
+### Security
+
+- Update
+
 ## v2.5.1 2025-03-27 14:51:05 +0100
 
 ### Changed
