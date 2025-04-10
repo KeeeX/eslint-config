@@ -23,6 +23,7 @@ const getCliInit = () => {
     } catch {}
   }
   cliInit = {};
+  return cliInit;
 };
 
 const getEslintConfig = () => path.resolve(process.cwd(), "eslint.config.js");

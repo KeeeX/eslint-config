@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.5.3 2025-04-10 13:54:25 +0200
+
+### Fixed
+
+- [#46] Broken CLI call for setup
+
 ## v2.5.2 2025-04-09 15:33:00 +0200
 
 ### Changed
