@@ -29,7 +29,7 @@
     "eslint-plugin-tsdoc": "^0.4.0",
     "globals": "^16.0.0",
     "prettier": "^3.5.3",
-    "typescript-eslint": "^8.31.0"
+    "typescript-eslint": "^8.31.1"
   },
   "exports": {
     ".": "./src/index.js",
@@ -116,5 +116,5 @@
     "test": "echo No test for this project"
   },
   "type": "module",
-  "version": "2.5.4"
+  "version": "2.5.5"
 }

@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.5.5 2025-04-29 12:01:30 +0200
+
+### Fixed
+
+- [#47] Fixed mocha compatibility
+
+### Security
+
+- Update
+
 ## v2.5.4 2025-04-28 17:38:00 +0200
 
 ### Security
