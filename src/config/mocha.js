@@ -7,7 +7,7 @@ export const apply = (configResult, eslintConfig) => {
   if (!eslintConfig.mocha) return;
   let files = getEnvDirectories("mocha", eslintConfig.environments);
   if (!files || files.length === 0) files = ["src/**/*.test.*", "src/tests/**/*"];
-  const mochaBase = mochaPlugin.configs.recommended ?? mochaPlugin.configs.flat?.recommended;
+  const mochaBase = mochaPlugin.configs.flat?.recommended ?? mochaPlugin.configs.recommended;
   const mochaSection = {...mochaBase, files};
   configResult.push(mochaSection);
   const override = sections.getNamedSection(configResult, "keeex/mocha");
