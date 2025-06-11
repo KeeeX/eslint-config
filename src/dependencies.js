@@ -167,7 +167,7 @@ export const configToDependencies = (eslintConfig) => {
     addDependency("eslint-plugin-import-x", "4.x");
     if (eslintConfig.typescript) addDependency("eslint-import-resolver-typescript", "4.x");
   }
-  if (eslintConfig.mocha) addDependency("eslint-plugin-mocha", "10.x");
+  if (eslintConfig.mocha) addDependency("eslint-plugin-mocha", "11.x");
   if (!eslintConfig.noBase) {
     addDependency("@eslint/js", "9.x");
     addDependency("eslint-plugin-promise", "7.x");
