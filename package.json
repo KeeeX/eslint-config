@@ -18,6 +18,7 @@
   "devDependencies": {
     "@eslint/compat": "^1.3.2",
     "@eslint/js": "^9.12.0",
+    "@keeex/clean-publish": "^1.3.0",
     "eslint": "^9.33.0",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-import-resolver-webpack": "^0.13.10",
@@ -113,9 +114,70 @@
     "bin:dump": "node src/bin/kxeslint-dump.js",
     "bin:setup": "node src/bin/kxeslint-setup.js",
     "check": "npx eslint --cache --cache-strategy content .",
-    "prepublishOnly": "publish_check.sh",
-    "test": "echo No test for this project"
+    "prepublishOnly": "publish_check",
+    "test": "echo No test for this project",
+    "prepack": "clean-publish cleanPublish",
+    "postpack": "clean-publish restore"
   },
   "type": "module",
-  "version": "2.6.0"
+  "version": "2.6.0",
+  "cleanPublish": {
+    "behavior": {
+      "cleanPublish": {
+        "package.json": {
+          "package": true,
+          "remove": [
+            "repository"
+          ],
+          "type": "json"
+        }
+      },
+      "cleanPrepack": {
+        "package.json": {
+          "add": {
+            "homepage": "https://keeex.me/oss"
+          },
+          "remove": [
+            "repository"
+          ],
+          "type": "json"
+        },
+        "README.md": {
+          "remove": [
+            "https://devtools.keeex.me",
+            "https://docs.keeex.me"
+          ],
+          "type": "text"
+        },
+        "sonar-project.properties": "remove"
+      },
+      "cleanSource": {
+        "package.json": {
+          "add": {
+            "homepage": "https://keeex.me/oss",
+            "scripts": {
+              "build": "tslib build",
+              "check": "tslib check",
+              "clean": "tslib clean",
+              "prepack": "npm run clean && npm run build",
+              "test": "tslib test"
+            }
+          },
+          "remove": [
+            "repository",
+            "cleanPublish"
+          ],
+          "type": "json"
+        },
+        "README.md": {
+          "remove": [
+            "https://devtools.keeex.me",
+            "https://docs.keeex.me"
+          ],
+          "type": "text"
+        },
+        "sonar-project.properties": "remove"
+      }
+    }
+  }
 }
