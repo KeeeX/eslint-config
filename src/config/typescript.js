@@ -1,6 +1,4 @@
 import tsdocPlugin from "eslint-plugin-tsdoc";
-// Uses exports
-// eslint-disable-next-line import-x/no-unresolved
 import tseslint from "typescript-eslint";
 
 import * as sections from "../sections.js";
