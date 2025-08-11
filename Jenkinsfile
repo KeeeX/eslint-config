@@ -9,7 +9,7 @@ pipeline {
         stage("Publish") {
             steps {
                 withNPM(npmrcConfig: 'npmjs_publish') {
-                    sh("npm publish")
+                    sh("npx publish_npmjs")
                 }
             }
         }
