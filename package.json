@@ -114,6 +114,7 @@
     "bin:dump": "node src/bin/kxeslint-dump.js",
     "bin:setup": "node src/bin/kxeslint-setup.js",
     "check": "npx eslint --cache --cache-strategy content .",
+    "clean": "echo Nothing to clean",
     "prepublishOnly": "publish_check",
     "test": "echo No test for this project",
     "prepack": "clean-publish cleanPublish",
