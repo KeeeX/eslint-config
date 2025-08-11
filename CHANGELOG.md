@@ -1,5 +1,28 @@
 # Changelog
 
+## v2.6.0 2025-08-11 16:57:09 +0200
+
+### Added
+
+- [#50] Import type consistency
+
+### Changed
+
+- [#48] Can use React in generic JavaScript setups
+- Updated mocha auto install
+
+### Removed
+
+- [#52] Mocha formatting rule removed
+
+### Fixed
+
+- [#51] Missing dependency for import-x
+
+### Security
+
+- Update
+
 ## v2.5.6 2025-05-20 17:42:55 +0200
 
 ### Fixed

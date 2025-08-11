@@ -87,7 +87,7 @@ const getOptionsFromTargetFilter = (target) => {
     case "js":
       return {
         haveMocha: "maybe",
-        haveReact: false,
+        haveReact: "maybe",
       };
     case "node":
       return {

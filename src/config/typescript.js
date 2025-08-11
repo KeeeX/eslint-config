@@ -39,6 +39,7 @@ export const apply = (configResult, eslintConfig) => {
     });
   sections.configureRules(override, "@typescript-eslint", {
     "array-type": ["error", {default: "generic", readonly: "generic"}],
+    "consistent-type-imports": ["error", {fixStyle: "inline-type-imports"}],
     "explicit-function-return-type": "warn",
     "explicit-member-accessibility": "error",
     "explicit-module-boundary-types": "error",

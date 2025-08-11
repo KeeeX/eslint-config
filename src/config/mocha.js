@@ -24,6 +24,7 @@ export const apply = (configResult, eslintConfig) => {
     "sort-keys": "off",
   });
   sections.configureRules(override, "mocha", {
+    "consistent-spacing-between-blocks": "off",
     "no-exports": "off",
     "no-setup-in-describe": "off",
     "no-top-level-hooks": "off",
