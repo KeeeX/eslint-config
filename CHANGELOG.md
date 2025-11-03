@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.6.1 2025-11-03 16:36:17 +0100
+
+### Changed
+
+- [refs #53] Update, restrict eslint to 9.38
+
 ## v2.6.0 2025-08-11 16:57:09 +0200
 
 ### Added
