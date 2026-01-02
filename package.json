@@ -121,7 +121,7 @@
     "postpack": "clean-publish restore"
   },
   "type": "module",
-  "version": "2.6.1",
+  "version": "2.6.2",
   "cleanPublish": {
     "behavior": {
       "cleanPublish": {
