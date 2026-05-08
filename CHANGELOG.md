@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.6.3 2026-05-08 22:54:08 +0200
+
+### Changed
+
+- [#55] Update, remain on eslint9
+
 ## v2.6.2 2026-01-02 16:52:05 +0100
 
 ### Security
