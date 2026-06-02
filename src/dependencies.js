@@ -162,7 +162,7 @@ export const installAndRemoveDeps = () => {
 export const configToDependencies = (eslintConfig) => {
   addDependency("eslint", "9.x");
   addDependency("prettier", "3.x");
-  if (eslintConfig.globals) addDependency("globals", "16.x");
+  if (eslintConfig.globals) addDependency("globals", "17.x");
   if (eslintConfig.import !== false) {
     addDependency("eslint-plugin-import-x", "4.x");
     if (eslintConfig.typescript) addDependency("eslint-import-resolver-typescript", "4.x");
