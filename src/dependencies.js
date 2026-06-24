@@ -135,7 +135,7 @@ const isKxNpmPresent = () => {
 
 const runNpmInstall = (pkgNames) => {
   if (isKxNpmPresent()) {
-    return runProcess("kxnpm", "-a", "install", "--save-dev", "--force", ...pkgNames, "--");
+    return runProcess("kxnpm", "-a", "install", "--save-dev", "--force", "--", ...pkgNames);
   }
   console.warn("kxnpm not found, you might have issues when installing packages automatically");
   return runProcess("npm", "install", "--save-dev", "--force", ...pkgNames);

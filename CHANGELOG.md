@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.7.1 2026-06-24 18:24:03 +0200
+
+### Fixed
+
+- Fixed misplaced separator
+
 ## v2.7.0 2026-06-24 18:11:38 +0200
 
 ### Changed
