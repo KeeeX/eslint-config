@@ -35,7 +35,7 @@ export const getEnvDirectories = (environments, configEnv, defaultDir) => {
   return dirs;
 };
 
-export const getExtensions = (fileTypes) => {
+const getExtensions = (fileTypes) => {
   const result = [];
   const esm = fileTypes.esm ?? true;
   const cjs = fileTypes.cjs ?? false;

@@ -30,7 +30,7 @@ export const needDependencies = (name) => name in requiredDependencies;
  *
  * This assumes that the command is run at the root of the project.
  */
-export const getPkgJson = () => {
+const getPkgJson = () => {
   if (!pkgJson) {
     try {
       const data = fs.readFileSync("./package.json", "utf8");
@@ -75,7 +75,7 @@ const dependencyStatus = (name) => {
  * @param version {string} - A specific version string (or tag) to install if the dependency is
  * missing
  */
-export const addDependency = (depName, version) => {
+const addDependency = (depName, version) => {
   requiredDependencies[depName] = {version: version ?? true, force: false};
 };
 
