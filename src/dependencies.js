@@ -126,6 +126,21 @@ export const listDependencies = () => {
   }
 };
 
+let kxNpmPresent = null;
+
+const isKxNpmPresent = () => {
+  kxNpmPresent ??= runProcess("which", ["kxnpm"]);
+  return kxNpmPresent;
+};
+
+const runNpmInstall = (pkgNames) => {
+  if (isKxNpmPresent()) {
+    return runProcess("kxnpm", "-a", "install", "--save-dev", "--force", ...pkgNames, "--");
+  }
+  console.warn("kxnpm not found, you might have issues when installing packages automatically");
+  return runProcess("npm", "install", "--save-dev", "--force", ...pkgNames);
+};
+
 /**
  * Run the required installation/removal.
  *
@@ -150,7 +165,7 @@ export const installAndRemoveDeps = () => {
       if (typeof target === "string") return `${c}@${target}`;
       return c;
     });
-    if (!runProcess("npm", "install", "--save-dev", "--force", ...installNames)) {
+    if (!runNpmInstall(installNames)) {
       process.exitCode = 1;
       return false;
     }
