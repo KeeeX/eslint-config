@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.7.0 2026-06-24 18:11:38 +0200
+
+### Changed
+
+- [#58] Uses `kxnpm` to install dependencies if available
+- Updated globals dependency
+- Maintenance
+
 ## v2.6.3 2026-05-08 22:54:08 +0200
 
 ### Changed
