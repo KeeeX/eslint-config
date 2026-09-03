@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.7.2 2026-09-03 11:50:22 +0200
+
+### Added
+
+- Added libreactnative to default exclusion list
+
 ## v2.7.1 2026-06-24 18:24:03 +0200
 
 ### Fixed
