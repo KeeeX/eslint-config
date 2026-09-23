@@ -12,6 +12,10 @@ Manage the eslint and prettier configuration used through all KeeeX projects.
 - run `npx kxeslint-setup auto` to install all required dependencies
 - enable eslint and prettier in whatever you use
 
+## Migration
+
+When a release changes some underlying dependencies' versions, it is advised to run `npx kxeslint-setup auto`.
+
 ## Installation
 
 The package is available on npmjs and can be installed with any package manager that supports it.
