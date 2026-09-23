@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.8.0 2026-09-23 18:12:13 +0200
+
+### Changed
+
+- [#55] Update react support for eslint 10
+
+### Security
+
+- [#55] Update (eslint 10)
+
 ## v2.7.2 2026-09-03 11:50:22 +0200
 
 ### Added
