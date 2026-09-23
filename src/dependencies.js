@@ -17,7 +17,6 @@ const removedDependencies = [
   "eslint-plugin-chai-friendly",
   "eslint-plugin-deprecation",
   "eslint-plugin-i",
-  "eslint-plugin-import",
   "eslint-plugin-react-native",
 ];
 
@@ -57,7 +56,7 @@ const getInstalledVersion = (name) => {
 /**
  * Check if a particular dependency is installed in the project.
  *
- * @returns {{installed: "prod" | "dev" | false; version: string}}
+ * @returns {{installed: "prod" | "dev" | false; version: string; keeex: boolean}}
  */
 const dependencyStatus = (name) => {
   const pkg = getPkgJson();
@@ -65,7 +64,8 @@ const dependencyStatus = (name) => {
   if (pkg.devDependencies && name in pkg.devDependencies) installed = "dev";
   if (pkg.dependencies && name in pkg.dependencies) installed = "prod";
   const version = installed === "missing" ? undefined : getInstalledVersion(name);
-  return {installed, version};
+  const keeex = pkg.name.startsWith("@keeex/");
+  return {installed, keeex, version};
 };
 
 /**
@@ -97,6 +97,39 @@ const runProcess = (cmd, ...args) => {
 };
 
 /**
+ * @param version {string} - Either the version as-is, or "KEEEX@<version>".
+ *
+ * @returns {{version: string; keeex: boolean}}
+ */
+const getExpectedVersion = (version) => {
+  if (version.startsWith("KEEEX")) {
+    const split = version.split("@");
+    return {version: split[1], keeex: true};
+  }
+  return {version, keeex: false};
+};
+
+/**
+ * Check if a dependency is properly installed
+ * 
+ * @param installedStatus - output of `dependencyStatus()`
+ * @param expectedVersion - output of `getExpectedVersion()`
+ *
+ * @returns {boolean}
+ * `true` if the package must be installed/updated
+ */
+const checkNeedUpdate = (installedStatus, expectedVersion) => {
+  if (
+    installedStatus.installed !== "dev"
+    || (expectedVersion.keeex && !installedStatus.keeex)
+    || !satisfies(installedStatus.version, expectedVersion)
+  ) {
+    return true;
+  }
+  return false;
+};
+
+/**
  * List all missing/extra dependencies.
  *
  * @returns {{name:string;action:"install"|"remove"}[]}
@@ -112,13 +145,22 @@ export const listDependencies = () => {
       }
     }
     for (const required of Object.keys(requiredDependencies)) {
-      const expectedVersion = requiredDependencies[required].version;
+      const expectedVersion = getExpectedVersion(requiredDependencies[required].version);
       const status = dependencyStatus(required);
-      const needUpdate = status.installed !== "dev" || !satisfies(status.version, expectedVersion);
+      const needUpdate = checkNeedUpdate(status, expectedVersion);
       console.log(
-        `dep:${required} (${status.installed}=${status.version}) (required=${expectedVersion})`,
+        `dep:${required} (${status.installed}=${status.version}) (required=${JSON.stringify(expectedVersion)})`,
       );
-      if (needUpdate) res.push({name: required, action: "install"});
+      if (needUpdate) {
+        if (expectedVersion.keeex) {
+          if (status.installed !== "missing") {
+            res.push({name: required, action: "remove"});
+          }
+          res.push({name: required, action: "keeex-install"});
+        } else {
+          res.push({name: required, action: "install"});
+        }
+      }
     }
     return res.toSorted((a, b) => a.name.localeCompare(b.name));
   } finally {
@@ -150,6 +192,7 @@ const runNpmInstall = (pkgNames) => {
 export const installAndRemoveDeps = () => {
   const deps = listDependencies();
   const toInstall = deps.filter((c) => c.action === "install").map((c) => c.name);
+  const toInstallKeeex = deps.filter((c) => c.action === "keeex-install").map((c) => c.name);
   const toRemove = deps.filter((c) => c.action === "remove").map((c) => c.name);
   if (toRemove.length > 0) {
     console.log(`Removing dependencies: ${toRemove.join(", ")}`);
@@ -170,12 +213,24 @@ export const installAndRemoveDeps = () => {
       return false;
     }
   }
+  if (toInstallKeeex.length > 0) {
+    console.log(`Installing @keeex dependencies: ${toInstallKeeex.join(", ")}`);
+    const installNames = toInstallKeeex.map((c) => {
+      const {version: target} = getExpectedVersion(requiredDependencies[c].version);
+      if (typeof target === "string") return `${c}@npm:@keeex/${c}@${target}`;
+      return c;
+    });
+    if (!runNpmInstall(installNames)) {
+      process.exitCode = 1;
+      return false;
+    }
+  }
   return true;
 };
 
 /** Add all dependencies needed by the provided config */
 export const configToDependencies = (eslintConfig) => {
-  addDependency("eslint", "9.x");
+  addDependency("eslint", "10.x");
   addDependency("prettier", "3.x");
   if (eslintConfig.globals) addDependency("globals", "17.x");
   if (eslintConfig.import !== false) {
@@ -184,16 +239,17 @@ export const configToDependencies = (eslintConfig) => {
   }
   if (eslintConfig.mocha) addDependency("eslint-plugin-mocha", "11.x");
   if (!eslintConfig.noBase) {
-    addDependency("@eslint/js", "9.x");
+    addDependency("@eslint/js", "10.x");
     addDependency("eslint-plugin-promise", "7.x");
   }
   const react = getReactFullConfig(eslintConfig.react);
   if (react.react) {
-    addDependency("eslint-plugin-react", "7.x");
+    addDependency("eslint-plugin-react", "KEEEX@7.x");
+    addDependency("eslint-plugin-import", "KEEEX@2.x");
     if (eslintConfig.import) addDependency("eslint-import-resolver-webpack", "0.x");
     if (react.reactHooks) addDependency("eslint-plugin-react-hooks", "5.x");
     if (react.reactNative) {
-      addDependency("@eslint/js", "9.x");
+      addDependency("@eslint/js", "10.x");
     }
   }
   if (eslintConfig.typescript) {
