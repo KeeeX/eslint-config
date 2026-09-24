@@ -113,9 +113,9 @@
   "name": "@keeex/eslint-config",
   "peerDependencies": {
     "@eslint/compat": "^2.0.0",
-    "@eslint/js": "^10.0.1",
+    "@eslint/js": "9.x||10.x",
     "@typescript-eslint/parser": "^8.70.0",
-    "eslint": "^10.11.0",
+    "eslint": "9.x||10.x",
     "eslint-import-resolver-typescript": "3.x || 4.x",
     "eslint-plugin-import-x": "4.x",
     "eslint-plugin-mocha": "10.x || >11.0.0",
@@ -189,5 +189,5 @@
     "test": "echo No test for this project"
   },
   "type": "module",
-  "version": "2.8.0"
+  "version": "2.8.1"
 }

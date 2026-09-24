@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.8.1 2026-09-24 11:16:55 +0200
+
+### Added
+
+- Added note for migration in readme
+
+### Changed
+
+- [#61] Allow eslint 9 as a peer dependency
+
 ## v2.8.0 2026-09-23 18:12:13 +0200
 
 ### Changed
