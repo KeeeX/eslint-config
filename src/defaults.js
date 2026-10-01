@@ -1,5 +1,5 @@
 /** List of ignored patterns by default */
-export const ignores = ["lib", "libreactnative", "web", "gen", "src/gen"];
+export const ignores = ["lib", "libreactnative", "web", "gen", "src/gen", "pkg/dist"];
 
 /** Default globals affected to all projects */
 export const globals = [
