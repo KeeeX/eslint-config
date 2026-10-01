@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.8.2 2026-10-01 16:34:02 +0200
+
+### Changed
+
+- [#63] Ignore pkg/dist
+
+### Security
+
+- Update
+
 ## v2.8.1 2026-09-24 11:16:55 +0200
 
 ### Added
